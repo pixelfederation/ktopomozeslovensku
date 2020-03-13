@@ -50,7 +50,7 @@ final class HelpRequestController extends AbstractController
             $helpRequest = $form->getData();
             $this->service->save($helpRequest);
 
-            $this->redirectToRoute('help_request_success');
+            return $this->redirectToRoute('help_request_success');
         }
 
         return $this->render(
