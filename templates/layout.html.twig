@@ -45,6 +45,9 @@
 <main>
   {% block main %}{% endblock %}
 </main>
+<footer>
+  {% embed "footer.html.twig" %}{% endembed %}
+</footer>
 
 <script type="text/javascript" src="{{ asset('static/js/jquery-3.1.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('static/js/bootstrap.min.js') }}"></script>
