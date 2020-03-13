@@ -8,6 +8,11 @@ help_request:
   path: /ziadost-o-pomoc
   controller: App\Controller\HelpRequestController::index
 
+help_request_success:
+  methods: GET
+  path: /ziadost-o-pomoc/dakujeme
+  controller: App\Controller\HelpRequestController::success
+
 recipients:
   methods: GET
   path: /komu-sme-pomohli

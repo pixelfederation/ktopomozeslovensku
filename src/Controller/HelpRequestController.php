@@ -48,8 +48,9 @@ final class HelpRequestController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var HelpRequest $helpRequest */
             $helpRequest = $form->getData();
-
             $this->service->save($helpRequest);
+
+            $this->redirectToRoute('help_request_success');
         }
 
         return $this->render(
@@ -58,5 +59,13 @@ final class HelpRequestController extends AbstractController
                 'form' => $form->createView()
             ]
         );
+    }
+
+    /**
+     * @return Response
+     */
+    public function success(): Response
+    {
+        return $this->render('help-request-success.twig');
     }
 }
