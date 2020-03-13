@@ -9,9 +9,11 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt update
+      - run: sudo apt update && sudo apt install -y openssh-client sshpass
       - run: sudo docker-php-ext-install zip
       - run: touch .env
       - run: composer install -n --prefer-dist
 
-      - run: env
+      - run: sshpass -p "${SFTP_PASS}" scp . ${SFTP_USER}@${SFTP_HOST}:22/ktopomozeslovensku.sk/
+      - run: sshpass -p "${SFTP_PASS}" sftp rm ktopomozeslovensku.sk/var/cache/prod/*
+#      - run: curl -k "sftp://${SFTP_HOST}:22/ktopomozeslovensku.sk/" --user "${SFTP_USER}:${SFTP_PASS}" -T . --ftp-create-dirs
