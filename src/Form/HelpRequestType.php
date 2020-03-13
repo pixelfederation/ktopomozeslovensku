@@ -93,7 +93,7 @@ final class HelpRequestType extends AbstractType
             'attr' => [
                 'rows' => 7
             ],
-            'label' => 'Potreba',
+            'label' => 'Potrebujeme',
             'constraints' => [
                 new NotBlank()
             ],
