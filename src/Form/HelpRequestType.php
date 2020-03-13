@@ -96,7 +96,10 @@ final class HelpRequestType extends AbstractType
             ]
         ]);
 
-        $builder->add('submit', SubmitType::class, ['label' => 'ODOSLAť žiadosť o pomoc']);
+        $builder->add('submit', SubmitType::class, [
+                'label' => 'ODOSLAť žiadosť', 'attr' => ['class' => 'btn-default']
+            ]
+        );
     }
 
     /**
