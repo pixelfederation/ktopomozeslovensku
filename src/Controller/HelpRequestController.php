@@ -15,10 +15,6 @@ use App\Service\HelpRequestService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment as Twig;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 /**
  *
@@ -31,30 +27,30 @@ final class HelpRequestController extends AbstractController
     private $service;
 
     /**
-     * @var Twig
+     * @param HelpRequestService $service
      */
-    private $twig;
-
-    /**
-     * @param Twig $twig
-     */
-    public function __construct(HelpRequestService $service, Twig $twig)
+    public function __construct(HelpRequestService $service)
     {
         $this->service = $service;
-        $this->twig = $twig;
     }
 
     /**
-     * @return Response
+     * @param Request $request
      *
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
+     * @return Response
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $helpRequest = new HelpRequest();
         $form = $this->createForm(HelpRequestType::class, $helpRequest);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var HelpRequest $helpRequest */
+            $helpRequest = $form->getData();
+
+            $this->service->save($helpRequest);
+        }
 
         return $this->render(
             'help-request.html.twig',
@@ -62,14 +58,5 @@ final class HelpRequestController extends AbstractController
                 'form' => $form->createView()
             ]
         );
-    }
-
-    /**
-     * @return Response
-     */
-    public function submit(Request $request): Response
-    {
-        dump($request);
-        exit;
     }
 }

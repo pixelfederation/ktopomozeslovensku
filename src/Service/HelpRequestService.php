@@ -37,6 +37,8 @@ final class HelpRequestService
      */
     public function save(HelpRequest $request): void
     {
-
+        $this->entityManager->persist($request);
+        $this->entityManager->flush();
+        $this->entityManager->clear();
     }
 }

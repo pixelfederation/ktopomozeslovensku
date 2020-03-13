@@ -14,10 +14,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  *
@@ -37,6 +41,9 @@ final class HelpRequestType extends AbstractType
             'label' => 'Názov nemocnice / zariadenia / organizácie',
             'attr' => [
                 'placeholder' => 'Názov'
+            ],
+            'constraints' => [
+                new NotBlank()
             ]
         ]);
 
@@ -45,12 +52,18 @@ final class HelpRequestType extends AbstractType
             'label' => 'Meno konktaktnej osoby',
             'attr' => [
                 'placeholder' => 'Meno a priezvisko'
+            ],
+            'constraints' => [
+                new NotBlank()
             ]
         ]);
 
-        $builder->add('telephone', TextType::class, [
+        $builder->add('telephone', TelType::class, [
             'required' => true,
-            'label' => 'Telefónne číslo'
+            'label' => 'Telefónne číslo',
+            'constraints' => [
+                new NotBlank()
+            ]
         ]);
 
         $builder->add('email', EmailType::class, [
@@ -58,6 +71,9 @@ final class HelpRequestType extends AbstractType
             'label' => 'E-mail adresa',
             'attr' => [
                 'placeholder' => '@'
+            ],
+            'constraints' => [
+                new Email()
             ]
         ]);
 
@@ -65,13 +81,19 @@ final class HelpRequestType extends AbstractType
             'required' => true,
             'attr' => [
                 'rows' => 7
+            ],
+            'constraints' => [
+                new NotBlank()
             ]
         ]);
 
         $builder->add('policy', CheckboxType::class, [
             'required' => true,
             'value' => 1,
-            'label' => 'Súhlasím so spracovaním osobných údajov'
+            'label' => 'Súhlasím so spracovaním osobných údajov',
+            'constraints' => [
+                new EqualTo(1)
+            ]
         ]);
 
         $builder->add('submit', SubmitType::class, ['label' => 'ODOSLAť žiadosť o pomoc']);

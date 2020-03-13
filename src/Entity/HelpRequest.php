@@ -31,8 +31,6 @@ final class HelpRequest
      * @var string
      *
      * @ORM\Column(type="string", length=255, name="institution_name")
-     *
-     * @Assert\NotBlank
      */
     private $institutionName;
 
@@ -40,8 +38,6 @@ final class HelpRequest
      * @var string
      *
      * @ORM\Column(type="string", length=255, name="contact_person")
-     *
-     * @Assert\NotBlank
      */
     private $contactPerson;
 
@@ -49,8 +45,6 @@ final class HelpRequest
      * @var string
      *
      * @ORM\Column(type="string", length=255, name="telephone")
-     *
-     * @Assert\NotBlank
      */
     private $telephone;
 
@@ -58,8 +52,6 @@ final class HelpRequest
      * @var string
      *
      * @ORM\Column(type="string", length=255, name="email")
-     *
-     * @Assert\NotBlank
      */
     private $email;
 
@@ -67,8 +59,6 @@ final class HelpRequest
      * @var string
      *
      * @ORM\Column(type="text", name="request_text")
-     *
-     * @Assert\NotBlank
      */
     private $requestText;
 
@@ -178,7 +168,7 @@ final class HelpRequest
      *
      * @return void
      */
-    private function setPolicy(bool $policy): void
+    public function setPolicy(bool $policy): void
     {
         $this->policy = $policy;
     }

@@ -4,7 +4,7 @@ home:
   controller: App\Controller\HomeController::index
 
 help_request:
-  methods: GET
+  methods: GET|POST
   path: /ziadost-o-pomoc
   controller: App\Controller\HelpRequestController::index
 
@@ -19,11 +19,6 @@ faq:
   controller: App\Controller\FaqController::index
 
 partners:
-  methods: GET
+  methods: GET|
   path: /partneri
   controller: App\Controller\PartnersController::index
-
-help_request_send:
-  methods: POST
-  path: /ziadost-o-pomoc/odosli
-  controller: App\Controller\HelpRequestController::submit
