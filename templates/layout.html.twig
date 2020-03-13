@@ -13,12 +13,12 @@
   <meta property="og:title" content="Kto pomôže Slovensku"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image"
-        content="{{ absolute_url(asset('static/img/og_image.jpg')) }}"/>
+        content="{{ 'https://' ~ app.request.httpHost ~ asset('static/img/og_image.jpg') }}"/>
   <meta property="og:description" content="Snažíme sa pomôcť slovenským zdravotníckym zariadeniam zvládnuť následky pandémie koronavírusu."/>
-  <meta property="og:url" content="{{ app.request.scheme ~'://' ~ app.request.httpHost }}">
+  <meta property="og:url" content="{{ 'https://' ~ app.request.httpHost }}">
   <!-- Twitter Card Meta Data -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="{{ app.request.scheme ~'://' ~ app.request.httpHost }}">
+  <meta name="twitter:site" content="{{ 'https://' ~ app.request.httpHost }}">
   <meta name="twitter:title" content="Kto pomôže Slovensku">
   <meta name="twitter:description" content="Snažíme sa pomôcť slovenským zdravotníckym zariadeniam zvládnuť následky pandémie koronavírusu.">
 
