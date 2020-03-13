@@ -5,7 +5,7 @@
       <div class="col-sm-12">
         <div class="box-content">
           <h2>Ako požiadať o pomoc?</h2>
-          <p>Stačí vyplniť nasledovný formulár. Všetky polia su povinné.</p>
+          <p>Stačí vyplniť nasledovný formulár. Všetky polia sú povinné.</p>
           {{ form_start(form) }}
           {{ form_row(form.institutionName) }}
           {{ form_row(form.address) }}
@@ -16,11 +16,11 @@
           {{ form_row(form.policy) }}
           <p class="small-text">Vyhlásenie: Zakliknutím potvrdzujem, že mám viac ako 18 rokov a dobrovoľne súhlasím s
             tým, aby fyzické osoby z iniciatívy "Ktopomozeslovensku.sk" spracúvali mnou poskytnuté osobné údaje (meno,
-            priezvisko, email) pre účel pomoci pri boji s pandémiou korona vírusu na Slovensku, ako je uvedené v našich
-            <a href="">Pravidlách ochrany osobných údajov</a>. Súhlasím s kontaktovaním za týmto účelom a s archiváciou
+            priezvisko, email) pre účel pomoci s pandémiou Korona vírusu na Slovensku, ako je uvedené v našich
+            <a href="{{ path('policy') }}">Pravidlách ochrany osobných údajov</a>. Súhlasím s kontaktovaním za týmto účelom a s archiváciou
             osobných údajov počas nevyhnutne nutného obdobia maximálne však do 3 mesiacov po odvolaní súhlasu.
             Potvrdzujem, že všetky uvedené údaje sú pravdivé, aktuálne a kompletné. Svoj súhlas môžem kedykoľvek odvolať
-            spôsobom uvedeným v <a href="{{ path('policy') }}">Pravidlách ochrany osobných údajov</a></p>
+            spôsobom uvedeným v Pravidlách ochrany osobných údajov.</a></p>
           {{ form_end(form) }}
         </div>
       </div>
