@@ -18,6 +18,11 @@ recipients:
   path: /komu-sme-pomohli
   controller: App\Controller\RecipientsController::index
 
+team:
+  methods: GET
+  path: /organizacny-team
+  controller: App\Controller\TeamController::index
+
 faq:
   methods: GET
   path: /faq
