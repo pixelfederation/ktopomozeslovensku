@@ -1,0 +1,19 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+	color:#333;
+	background: #f2f2f2;
+}
+
+#home {
+	top:0;
+	left:0;
+	width:70px;
+	position:fixed;
+	height:100%;
+	background: #9c0000 url("../img/ktopomozesk.png") no-repeat top;
+}
+
+main {
+	padding-left:70px;
+	overflow:hidden;
+}

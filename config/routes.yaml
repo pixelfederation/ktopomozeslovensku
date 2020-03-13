@@ -1,3 +1,14 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+  methods: GET
+  path: /
+  controller: App\Controller\HomeController::index
+
+help_request:
+  methods: GET
+  path: /ziadost-o-pomoc
+  controller: App\Controller\HelpRequestController::index
+
+help_request_send:
+  methods: POST
+  path: /ziadost-o-pomoc/odosli
+  controller: App\Controller\HelpRequestController::submit

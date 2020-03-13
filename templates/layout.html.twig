@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Kto pomôže Slovensku</title>
+  <meta id="responsive-view-port" name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
+  <!-- Core Meta Data -->
+  <meta name="description" content="Snažíme sa pomôcť slovenským zdravotníckym zariadeniam zvládnuť následky pandémie koronavírusu.">
+  <meta name="keywords" content="pomoc, slovensko, corona, covid-19">
+
+  <!-- Open Graph Meta Data -->
+  <meta property="og:title" content="Kto pomôže Slovensku"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image"
+        content="{{ asset('static/img/og_image.jpg') }}"/>
+  <meta property="og:description" content="Snažíme sa pomôcť slovenským zdravotníckym zariadeniam zvládnuť následky pandémie koronavírusu."/>
+  <meta property="og:url" content="https://www.ktopomozeslovensku.com/">
+  <!-- Twitter Card Meta Data -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="https://www.ktopomozeslovensku.com/">
+  <meta name="twitter:title" content="Kto pomôže Slovensku">
+  <meta name="twitter:description" content="Snažíme sa pomôcť slovenským zdravotníckym zariadeniam zvládnuť následky pandémie koronavírusu.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ asset('static/img/favicon.png') }}" sizes="16x16">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap&subset=latin-ext" rel="stylesheet">
+
+  <!-- stylesheets -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('static/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('static/css/bootstrap-theme.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('static/css/layout.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('static/css/menu.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('static/css/mediaquery.css') }}">
+
+</head>
+<body>
+<div id="home">
+</div>
+<header>
+  {% embed "menu.html.twig" %}{% endembed %}
+</header>
+<main>
+  {% block main %}{% endblock %}
+</main>
+
+<script type="text/javascript" src="{{ asset('static/js/jquery-3.1.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('static/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('static/js/custom.js') }}"></script>
+</body>
+</html>
