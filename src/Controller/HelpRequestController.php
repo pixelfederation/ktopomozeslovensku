@@ -12,6 +12,8 @@ namespace App\Controller;
 use App\Entity\HelpRequest;
 use App\Form\HelpRequestType;
 use App\Service\HelpRequestService;
+use DateTimeImmutable;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +40,7 @@ final class HelpRequestController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws Exception
      */
     public function index(Request $request): Response
     {
@@ -48,6 +51,7 @@ final class HelpRequestController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var HelpRequest $helpRequest */
             $helpRequest = $form->getData();
+            $helpRequest->setCreatedAt(new DateTimeImmutable());
             $this->service->save($helpRequest);
 
             return $this->redirectToRoute('help_request_success');

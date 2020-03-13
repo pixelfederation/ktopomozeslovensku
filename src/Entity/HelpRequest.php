@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +26,12 @@ class HelpRequest
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var DateTimeImmutable
+     * @ORM\Column(type="datetime_immutable", name="created_at")
+     */
+    private $createdAt;
 
     /**
      * @var string
@@ -82,11 +89,19 @@ class HelpRequest
     }
 
     /**
-     * @param int $id
+     * @return DateTimeImmutable
      */
-    public function setId(int $id): void
+    public function getCreatedAt(): DateTimeImmutable
     {
-        $this->id = $id;
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTimeImmutable $createdAt
+     */
+    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 
     /**
