@@ -73,25 +73,9 @@ final class HelpRequest
     private $requestText;
 
     /**
-     * @param string $institutionName
-     * @param string $contactPerson
-     * @param string $telephone
-     * @param string $email
-     * @param string $requestText
+     * @var bool
      */
-    public function __construct(
-        string $institutionName,
-        string $contactPerson,
-        string $telephone,
-        string $email,
-        string $requestText
-    ) {
-        $this->institutionName = $institutionName;
-        $this->contactPerson = $contactPerson;
-        $this->telephone = $telephone;
-        $this->email = $email;
-        $this->requestText = $requestText;
-    }
+    private $policy;
 
     /**
      * @return int
@@ -101,44 +85,109 @@ final class HelpRequest
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return string
      */
-    public function getInstitutionName(): string
+    public function getInstitutionName(): ?string
     {
         return $this->institutionName;
     }
 
     /**
+     * @param string $institutionName
+     */
+    public function setInstitutionName(string $institutionName): void
+    {
+        $this->institutionName = $institutionName;
+    }
+
+    /**
      * @return string
      */
-    public function getContactPerson(): string
+    public function getContactPerson(): ?string
     {
         return $this->contactPerson;
     }
 
     /**
+     * @param string $contactPerson
+     */
+    public function setContactPerson(string $contactPerson): void
+    {
+        $this->contactPerson = $contactPerson;
+    }
+
+    /**
      * @return string
      */
-    public function getTelephone(): string
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
     /**
-     * @return string
+     * @param string $telephone
      */
-    public function getEmail(): string
+    public function setTelephone(string $telephone): void
     {
-        return $this->email;
+        $this->telephone = $telephone;
     }
 
     /**
      * @return string
      */
-    public function getRequestText(): string
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRequestText(): ?string
     {
         return $this->requestText;
+    }
+
+    /**
+     * @param string $requestText
+     */
+    public function setRequestText(string $requestText): void
+    {
+        $this->requestText = $requestText;
+    }
+
+    /**
+     * @param bool $policy
+     *
+     * @return void
+     */
+    private function setPolicy(bool $policy): void
+    {
+        $this->policy = $policy;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPolicy(): ?bool
+    {
+        return $this->policy;
     }
 }

@@ -3,7 +3,7 @@ body {
   color:#333;
   background: #f2f2f2;
 }
-​
+
 #home {
   top:0;
   left:0;
@@ -12,64 +12,74 @@ body {
   height:100%;
   background: #9c0000 url("../img/ktopomozesk.png") no-repeat top;
 }
-​
+
 h1, h2, h3 {
   font-weight: 100;
   color:#0070b6;
 }
-​
+
 .bold {
   font-weight:600;
 }
-​
-main {
-  padding-left:70px;
+
+.dark {
+  color: #00234d;
 }
-​
+
+.small-text {
+  font-size: 90%;
+  opacity: 0.8;
+  margin:10px 0 15px;
+}
+
+.row {
+  padding-left: 70px;
+}
+
 .mainstat {
   background:white;
   margin-bottom:30px;
   text-align: center;
 }
-​
+
 .mainstat .highlight {
   background: #00aeef;
   padding: 15px;
   color: #fff;
   margin: 0 -15px;
 }
-​
+
 .mainstat h2 {
   font-size: 90px;
   font-weight: 600;
   margin-bottom:25px;
 }
-​
+
 .mainstat .highlight h3 {
   margin:0;
   color: white;
   font-weight: 400;
 }
-​
+
 .container .row {
   display:flex;
   flex-wrap: wrap;
 }
-​
+
 .box {
   display: flex;
 }
-​
+
 .box p {
   font-size:16px;
   margin:30px 0;
 }
-​
+
 .box-content {
   background: white;
   padding:20px 20px 60px;
 }
-​
+
 .btn-default {
   color: white;
   background: #00234d;
@@ -80,4 +90,37 @@ main {
   text-transform: uppercase;
   padding: 15px 30px;
   text-shadow: none !important;
+}
+
+@media (max-width: 767px) {
+  #home {
+    width: 100%;
+    position: absolute;
+    height: 50px;
+    background: #9c0000 url("../img/bannermobil.jpg") no-repeat left;
+    background-size:cover;
+  }
+
+  .row {
+    padding-left: 0;
+    display: block;
+  }
+
+  .box {
+    margin-bottom: 30px;
+    display: block;
+    width:100%;
+  }
+
+  .mainstat h1 {
+    font-size: 24px;
+  }
+
+  .mainstat h2 {
+    font-size: 40px;
+  }
+
+  .mainstat h3 {
+    font-size: 16px;
+  }
 }

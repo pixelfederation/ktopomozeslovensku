@@ -9,8 +9,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\HelpRequest;
+use App\Form\HelpRequestType;
 use App\Service\HelpRequestService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 use Twig\Error\LoaderError;
@@ -50,14 +53,23 @@ final class HelpRequestController extends AbstractController
      */
     public function index(): Response
     {
-        return new Response($this->twig->render('help-request.html.twig'));
+        $helpRequest = new HelpRequest();
+        $form = $this->createForm(HelpRequestType::class, $helpRequest);
+
+        return $this->render(
+            'help-request.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
     }
 
     /**
      * @return Response
      */
-    public function submit(): Response
+    public function submit(Request $request): Response
     {
-
+        dump($request);
+        exit;
     }
 }
