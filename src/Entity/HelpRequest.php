@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="help_request")
  */
-final class HelpRequest
+class HelpRequest
 {
     /**
      * @var int
