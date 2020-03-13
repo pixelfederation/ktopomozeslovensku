@@ -25,7 +25,7 @@ faq:
 
 partners:
   methods: GET
-  path: /partneri
+  path: /garanti
   controller: App\Controller\PartnersController::index
 
 policy:
