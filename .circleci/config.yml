@@ -14,6 +14,7 @@ jobs:
       - run: touch .env
       - run: composer install -n --prefer-dist
 
-      - run: sshpass -p "${SFTP_PASS}" scp . ${SFTP_USER}@${SFTP_HOST}:22/ktopomozeslovensku.sk/
-      - run: sshpass -p "${SFTP_PASS}" sftp rm ktopomozeslovensku.sk/var/cache/prod/*
+      #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
+      #- run: sshpass -p "${SFTP_PASS}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null . ${SFTP_USER}@${SFTP_HOST}:22/ktopomozeslovensku.sk/
+      #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ktopomozeslovensku.sk/var/cache/prod/*
 #      - run: curl -k "sftp://${SFTP_HOST}:22/ktopomozeslovensku.sk/" --user "${SFTP_USER}:${SFTP_PASS}" -T . --ftp-create-dirs
