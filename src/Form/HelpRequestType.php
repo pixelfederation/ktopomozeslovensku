@@ -50,6 +50,9 @@ final class HelpRequestType extends AbstractType
         $builder->add('address',  TextType::class, [
             'required' => true,
             'label' => 'Adresa nemocnice / zariadenia / organizácie',
+            'attr' => [
+                'placeholder' => 'Adresa'
+            ],
             'constraints' => [
                 new NotBlank()
             ]
