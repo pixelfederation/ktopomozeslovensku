@@ -47,6 +47,14 @@ final class HelpRequestType extends AbstractType
             ]
         ]);
 
+        $builder->add('address',  TextType::class, [
+            'required' => true,
+            'label' => 'Adresa nemocnice / zariadenia / organizácie',
+            'constraints' => [
+                new NotBlank()
+            ]
+        ]);
+
         $builder->add('contactPerson', TextType::class, [
             'required' => true,
             'label' => 'Meno konktaktnej osoby',

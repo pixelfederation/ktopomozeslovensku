@@ -57,6 +57,13 @@ class HelpRequest
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=255, name="address")
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="text", name="request_text")
      */
     private $requestText;
@@ -178,5 +185,21 @@ class HelpRequest
     public function getPolicy(): ?bool
     {
         return $this->policy;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address): void
+    {
+        $this->address = $address;
     }
 }
