@@ -1,19 +1,83 @@
 body {
-    font-family: 'Open Sans', sans-serif;
-	color:#333;
-	background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+  color:#333;
+  background: #f2f2f2;
 }
-
+​
 #home {
-	top:0;
-	left:0;
-	width:70px;
-	position:fixed;
-	height:100%;
-	background: #9c0000 url("../img/ktopomozesk.png") no-repeat top;
+  top:0;
+  left:0;
+  width:70px;
+  position:fixed;
+  height:100%;
+  background: #9c0000 url("../img/ktopomozesk.png") no-repeat top;
 }
-
+​
+h1, h2, h3 {
+  font-weight: 100;
+  color:#0070b6;
+}
+​
+.bold {
+  font-weight:600;
+}
+​
 main {
-	padding-left:70px;
-	overflow:hidden;
+  padding-left:70px;
+}
+​
+.mainstat {
+  background:white;
+  margin-bottom:30px;
+  text-align: center;
+}
+​
+.mainstat .highlight {
+  background: #00aeef;
+  padding: 15px;
+  color: #fff;
+  margin: 0 -15px;
+}
+​
+.mainstat h2 {
+  font-size: 90px;
+  font-weight: 600;
+  margin-bottom:25px;
+}
+​
+.mainstat .highlight h3 {
+  margin:0;
+  color: white;
+  font-weight: 400;
+}
+​
+.container .row {
+  display:flex;
+  flex-wrap: wrap;
+}
+​
+.box {
+  display: flex;
+}
+​
+.box p {
+  font-size:16px;
+  margin:30px 0;
+}
+​
+.box-content {
+  background: white;
+  padding:20px 20px 60px;
+}
+​
+.btn-default {
+  color: white;
+  background: #00234d;
+  border:0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  text-shadow: none !important;
 }
