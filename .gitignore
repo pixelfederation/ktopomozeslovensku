@@ -27,3 +27,4 @@ docker-compose.override.yml
 ###< phpunit/phpunit ###
 
 .DS_Store
+logs
