@@ -11,7 +11,7 @@ jobs:
 
       - run: sudo apt update
       - run: sudo docker-php-ext-install zip
-      - run: touch .env.prod
+      - run: touch .env
       - run: composer install -n --prefer-dist
 
       - run: env
