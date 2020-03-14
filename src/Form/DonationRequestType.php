@@ -107,7 +107,7 @@ final class DonationRequestType extends AbstractType
         ]);
 
         $builder->add('submit', SubmitType::class, [
-                'label' => 'ODOSLAť ponuku', 'attr' => ['class' => 'btn-default']
+                'label' => 'ODOSLAť DAR', 'attr' => ['class' => 'btn-default']
             ]
         );
     }
