@@ -11,10 +11,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
+use Exception;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="donation_request")
+ * @ORM\HasLifecycleCallbacks()
  */
 class DonationRequest
 {
@@ -79,6 +81,18 @@ class DonationRequest
      * @var bool|null
      */
     private $policy;
+
+    /**
+     *
+     * @return void
+     *
+     * @throws Exception
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     /**
      * @return DateTimeImmutable
