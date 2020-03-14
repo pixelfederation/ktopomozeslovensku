@@ -72,6 +72,9 @@ final class HelpRequestType extends AbstractType
         $builder->add('telephone', TelType::class, [
             'required' => true,
             'label' => 'Telefónne číslo',
+            'attr' => [
+                'placeholder' => '+421'
+            ],
             'constraints' => [
                 new NotBlank()
             ]

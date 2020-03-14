@@ -11,19 +11,17 @@ namespace App\Form;
 
 use App\Entity\DonationItem;
 use App\Entity\DonationRequest;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\View\ChoiceListView;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -32,20 +30,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 final class DonationRequestType extends AbstractType
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -65,7 +49,6 @@ final class DonationRequestType extends AbstractType
             ]
         ]);
 
-
         $builder->add('address', TextType::class, [
             'required' => true,
             'label' => 'Adresa konktaktnej osoby',
@@ -80,8 +63,22 @@ final class DonationRequestType extends AbstractType
         $builder->add('telephone', TelType::class, [
             'required' => true,
             'label' => 'Telefónne číslo',
+            'attr' => [
+                'placeholder' => '+421'
+            ],
             'constraints' => [
                 new NotBlank()
+            ]
+        ]);
+
+        $builder->add('email', EmailType::class, [
+            'required' => true,
+            'label' => 'E-mail adresa',
+            'attr' => [
+                'placeholder' => '@'
+            ],
+            'constraints' => [
+                new Email()
             ]
         ]);
 
@@ -123,22 +120,5 @@ final class DonationRequestType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => DonationRequest::class]);
-    }
-
-    /**
-     * @return array{string, strings}
-     */
-    private function getDonationItemsChoices(): array
-    {
-        /** @var EntityRepository $donationItems */
-        $donationItemsRepository = $this->entityManager->getRepository(DonationItem::class);
-
-        $all = $donationItemsRepository->findAll();
-
-        $items = [];
-        foreach ($all as $item) {
-            $items[$item->getName()] = $item->getId();
-        }
-        return $items;
     }
 }

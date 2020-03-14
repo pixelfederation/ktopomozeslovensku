@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToOne;
 use DateTimeImmutable;
 
 /**
@@ -40,6 +39,13 @@ class DonationRequest
      * @ORM\Column(type="string", length=255, name="contact_person")
      */
     private $contactPerson;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=255, name="email")
+     */
+    private $email;
 
     /**
      * @var string|null
@@ -210,4 +216,19 @@ class DonationRequest
         return sprintf('[%s](%s): %s', $this->getContactPerson(), $this->getQuantity(), $this->donationItem->getName());
     }
 
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     */
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
+    }
 }
