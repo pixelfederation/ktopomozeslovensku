@@ -13,7 +13,7 @@ easy_admin:
         fields:  ['institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
     DonationItem:
       class: App\Entity\DonationItem
-      label: Donation Item
+      label: Typ pomôcky
       list:
         fields: ['id', 'name', 'requests']
     DonationRequest:

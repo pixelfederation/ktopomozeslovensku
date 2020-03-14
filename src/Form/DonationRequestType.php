@@ -25,6 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  *
@@ -53,17 +54,51 @@ final class DonationRequestType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('contactPerson', TextType::class);
-        $builder->add('address', TextType::class);
+        $builder->add('contactPerson', TextType::class, [
+            'required' => true,
+            'label' => 'Meno konktaktnej osoby',
+            'attr' => [
+                'placeholder' => 'Meno a priezvisko'
+            ],
+            'constraints' => [
+                new NotBlank()
+            ]
+        ]);
 
-        $builder->add('telephone', TelType::class);
+
+        $builder->add('address', TextType::class, [
+            'required' => true,
+            'label' => 'Adresa konktaktnej osoby',
+            'attr' => [
+                'placeholder' => 'Adresa'
+            ],
+            'constraints' => [
+                new NotBlank()
+            ]
+        ]);
+
+        $builder->add('telephone', TelType::class, [
+            'required' => true,
+            'label' => 'Telefónne číslo',
+            'constraints' => [
+                new NotBlank()
+            ]
+        ]);
 
         $builder->add('donationItem', EntityType::class, [
+            'required' => true,
+            'label' => 'Typ pomôcok, ktoré viem ponúknuť',
             'class' => DonationItem::class,
             'choice_label' => 'name'
         ]);
 
-        $builder->add('quantity', IntegerType::class);
+        $builder->add('quantity', IntegerType::class, [
+            'required' => true,
+            'label' => 'Množstvo',
+            'constraints' => [
+                new NotBlank()
+            ]
+        ]);
 
         $builder->add('policy', CheckboxType::class, [
             'required' => true,
@@ -75,7 +110,7 @@ final class DonationRequestType extends AbstractType
         ]);
 
         $builder->add('submit', SubmitType::class, [
-                'label' => 'ODOSLAť žiadosť', 'attr' => ['class' => 'btn-default']
+                'label' => 'ODOSLAť ponuku', 'attr' => ['class' => 'btn-default']
             ]
         );
     }
