@@ -29,7 +29,7 @@ class DonationItem
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string", length=255, name="value")
      */
@@ -53,7 +53,7 @@ class DonationItem
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -69,7 +69,7 @@ class DonationItem
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -96,5 +96,13 @@ class DonationItem
     public function setRequests(Collection $requests): void
     {
         $this->requests = $requests;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getName() ?? '';
     }
 }
