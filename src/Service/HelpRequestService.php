@@ -23,11 +23,18 @@ final class HelpRequestService
     private $entityManager;
 
     /**
-     * @param EntityManagerInterface $entityManager
+     * @var Mailer
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    private $mailer;
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param Mailer                 $mailer
+     */
+    public function __construct(EntityManagerInterface $entityManager, Mailer $mailer)
     {
         $this->entityManager = $entityManager;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -40,5 +47,15 @@ final class HelpRequestService
         $this->entityManager->persist($request);
         $this->entityManager->flush();
         $this->entityManager->clear();
+
+        $this->mailer->sendMail(
+            'Bola pridaná nová požiadavka o pomoc.',
+                "Názov nemocnice / zariadenia / organizácie: {$request->getInstitutionName()}" . PHP_EOL
+                . "Adresa nemocnice / zariadenia / organizácie: {$request->getAddress()}" . PHP_EOL
+                . "Meno kontaktnej osoby: {$request->getContactPerson()}" . PHP_EOL
+                . "Telefónne číslo: {$request->getTelephone()}" . PHP_EOL
+                . "E-mail adresa: {$request->getEmail()}" . PHP_EOL
+                . "Potrebujeme: {$request->getRequestText()}" . PHP_EOL
+            );
     }
 }
