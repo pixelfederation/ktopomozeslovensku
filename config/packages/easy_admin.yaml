@@ -1,0 +1,21 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+      HelpRequest:
+        class: App\Entity\HelpRequest
+        list:
+          fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
+          sort: 'createdAt'
+        show:
+        search:
+
+    user:
+      display_name: true
+      display_avatar: false
+
+    edit:
+      actions: ['show', '-delete']
+    list:
+      actions: ['show', 'search', '-edit', '-delete']
+    show:
+      actions: ['-edit', '-delete']
