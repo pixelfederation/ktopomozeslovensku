@@ -51,7 +51,6 @@ final class HelpRequestController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var HelpRequest $helpRequest */
             $helpRequest = $form->getData();
-            $helpRequest->setCreatedAt(new DateTimeImmutable());
             $this->service->save($helpRequest);
 
             return $this->redirectToRoute('help_request_success');

@@ -11,10 +11,12 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="help_request")
+ * @ORM\HasLifecycleCallbacks()
  */
 class HelpRequest
 {
@@ -86,6 +88,18 @@ class HelpRequest
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     *
+     * @return void
+     *
+     * @throws Exception
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new DateTimeImmutable();
     }
 
     /**

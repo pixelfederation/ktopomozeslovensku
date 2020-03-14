@@ -53,7 +53,6 @@ final class DonationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var DonationRequest $donationRequest */
             $donationRequest = $form->getData();
-            $donationRequest->setCreatedAt(new DateTimeImmutable());
             $this->service->save($donationRequest);
 
             return $this->redirectToRoute('donation_success');
