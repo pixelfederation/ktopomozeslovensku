@@ -8,6 +8,10 @@ easy_admin:
           sort: 'createdAt'
         show:
         search:
+      DonationItem:
+        class: App\Entity\DonationItem
+      DonationRequest:
+        class: App\Entity\DonationRequest
 
     user:
       display_name: true

@@ -33,6 +33,16 @@ partners:
   path: /garanti
   controller: App\Controller\PartnersController::index
 
+donation:
+  methods: GET|POST
+  path: /darujem
+  controller: App\Controller\DonationController::index
+
+donation_success:
+  methods: GET|POST
+  path: /darujem/dakujeme
+  controller: App\Controller\DonationController::success
+
 policy:
   methods: GET
   path: /pravidla-ochrany-osobnych-udajov
