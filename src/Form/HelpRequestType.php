@@ -60,7 +60,7 @@ final class HelpRequestType extends AbstractType
 
         $builder->add('contactPerson', TextType::class, [
             'required' => true,
-            'label' => 'Meno kontaktnej osoby',
+            'label' => 'Kontaktná osoba',
             'attr' => [
                 'placeholder' => 'Meno a priezvisko'
             ],
@@ -94,19 +94,19 @@ final class HelpRequestType extends AbstractType
         $builder->add('requestText', TextareaType::class, [
             'required' => true,
             'attr' => [
-                'rows' => 7
+                'rows' => 7,
+                'placeholder' => 'Prosíme napíšte, aký materiál potrebujete a uveďte aj počty kusov.'
             ],
             'label' => 'Potrebujeme',
             'constraints' => [
                 new NotBlank()
-            ],
-            'data' => 'Prosíme napíšte, aký materiál potrebujete a uveďte aj počty kusov.'
+            ]
         ]);
 
         $builder->add('policy', CheckboxType::class, [
             'required' => true,
             'value' => 1,
-            'label' => 'Súhlasím so spracovaním osobných údajov',
+            'label' => 'Súhlasím so spracovaním osobných údajov *',
             'constraints' => [
                 new EqualTo(1)
             ]
