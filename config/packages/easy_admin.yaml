@@ -20,9 +20,9 @@ easy_admin:
       label: Darujem
       class: App\Entity\DonationRequest
       list:
-        fields: ['id', 'createdAt', 'contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
       new:
-        fields: ['contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+        fields: ['email','contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
   design:
     menu:
       - { entity: 'HelpRequest', icon: 'hands-helping'}
