@@ -43,7 +43,7 @@ final class HelpRequestType extends AbstractType
                 'placeholder' => 'Názov'
             ],
             'constraints' => [
-                new NotBlank()
+
             ]
         ]);
 
