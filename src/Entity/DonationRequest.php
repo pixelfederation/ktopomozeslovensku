@@ -77,7 +77,7 @@ class DonationRequest
     /**
      * @return DateTimeImmutable
      */
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -85,7 +85,7 @@ class DonationRequest
     /**
      * @param DateTimeImmutable $createdAt
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    public function setCreatedAt(?DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -202,5 +202,12 @@ class DonationRequest
         $this->policy = $policy;
     }
 
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return sprintf('[%s](%s): %s', $this->getContactPerson(), $this->getQuantity(), $this->donationItem->getName());
+    }
 
 }

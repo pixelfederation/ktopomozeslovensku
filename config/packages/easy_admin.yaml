@@ -1,25 +1,41 @@
 easy_admin:
-    entities:
-        # List the entity class name you want to manage
-      HelpRequest:
-        class: App\Entity\HelpRequest
-        list:
-          fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
-          sort: 'createdAt'
-        show:
-        search:
-      DonationItem:
-        class: App\Entity\DonationItem
-      DonationRequest:
-        class: App\Entity\DonationRequest
+  site_name: 'KtopomozeSlovensku'
+  entities:
+    HelpRequest:
+      class: App\Entity\HelpRequest
+      label: Potrebujem Pomoc
+      list:
+        fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
+        sort: 'createdAt'
+      show:
+      search:
+      new:
+        fields:  ['institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
+    DonationItem:
+      class: App\Entity\DonationItem
+      label: Donation Item
+      list:
+        fields: ['id', 'name', 'requests']
+    DonationRequest:
+      label: Darujem
+      class: App\Entity\DonationRequest
+      list:
+        fields: ['id', 'createdAt', 'contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+      new:
+        fields: ['contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+  design:
+    menu:
+      - { entity: 'HelpRequest', icon: 'hands-helping'}
+      - { entity: 'DonationRequest', icon: 'people-carry'}
+      - { entity: 'DonationItem', icon: 'cubes'}
 
-    user:
-      display_name: true
-      display_avatar: false
+  user:
+    display_name: true
+    display_avatar: false
 
-    edit:
-      actions: ['show', '-delete']
-    list:
-      actions: ['show', 'search', '-edit', '-delete']
-    show:
-      actions: ['-edit', '-delete']
+  edit:
+    actions: ['show', '-delete']
+  list:
+    actions: ['show', 'search', '-edit', '-delete']
+  show:
+    actions: ['-edit', '-delete']
