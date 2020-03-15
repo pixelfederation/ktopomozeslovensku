@@ -33,4 +33,14 @@ final class Mailer
             mail($email, $subject, $message, 'From: web@ktopomozeslovensku.sk');
         }
     }
+
+    /**
+     * @param string $subject
+     * @param string $message
+     * @param string $recipient
+     */
+    public function sendMailToRecipient(string $subject, string $message, string $recipient): void
+    {
+        mail($recipient, $subject, $message, 'From: web@ktopomozeslovensku.sk');
+    }
 }

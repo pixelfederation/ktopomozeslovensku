@@ -53,6 +53,7 @@ final class DonationRequestService
             . "Telefónne číslo: {$request->getTelephone()}" . PHP_EOL
             . "E-mail adresa: {$request->getEmail()}" . PHP_EOL
             . "Typ pomôcok, ktoré viem ponúknuť: {$request->getDonationItem()->getName()}" . PHP_EOL
-            . "Množstvo: {$request->getQuantity()}" . PHP_EOL );
+            . "Množstvo: {$request->getQuantity()}" . PHP_EOL
+        );
     }
 }

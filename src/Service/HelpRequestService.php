@@ -56,6 +56,12 @@ final class HelpRequestService
                 . "Telefónne číslo: {$request->getTelephone()}" . PHP_EOL
                 . "E-mail adresa: {$request->getEmail()}" . PHP_EOL
                 . "Potrebujeme: {$request->getRequestText()}" . PHP_EOL
-            );
+        );
+
+        $this->mailer->sendMailToRecipient(
+            "KtoPomôžeSlovensku - žiadosť prijatá",
+            "Žiadosť bola prijatá, prosím čakajte kým sa Vám ozveme na Vami uvedené kontaktné údaje.",
+            $request->getEmail()
+        );
     }
 }
