@@ -43,19 +43,18 @@ final class ExportController
      */
     public function dopyt(Request $request): Response
     {
-        $entity = HelpRequest::class;
-        $repository = $this->entityManager->getRepository($entity);
-        $donations = $repository->findAll();
+        $data = $this->entityManager->getRepository(HelpRequest::class)->findAll();
 
         $encoders = [new CsvEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
         $serializer = new Serializer($normalizers, $encoders);
-        $content = $serializer->serialize($donations, 'csv',[AbstractNormalizer::IGNORED_ATTRIBUTES => ['createdAt']]);
+        $content = $serializer->serialize($data, 'csv',  [AbstractNormalizer::IGNORED_ATTRIBUTES => ['createdAt']]);
 
         return new Response("\xEF\xBB\xBF".$content, 200, array(
             'Content-Type' => 'application/force-download',
-            'Content-Disposition' => 'attachment; filename="' . sprintf('export-dopyt-%s.csv', date('Ymd_His')) . '"'
+            'Content-Disposition' => 'attachment; filename="' . sprintf('export-dopyt-%s.csv', date('Ymd_His')) . '"',
+            'Cache-Control' =>  'no-cache',
         ));
     }
 
@@ -66,19 +65,30 @@ final class ExportController
      */
     public function ponuka(Request $request): Response
     {
-        $entity = DonationRequest::class;
-        $repository = $this->entityManager->getRepository($entity);
-        $donations = $repository->findAll();
+        $data = $this->entityManager->getRepository(DonationRequest::class)->findAll();
 
         $encoders = [new CsvEncoder()];
-        $normalizers = [new ObjectNormalizer()];
+        $defaultContext = [
+            AbstractNormalizer::IGNORED_ATTRIBUTES => ['createdAt', 'requests']
+        ];
+        $normalizers = [new ObjectNormalizer(null, null, null, null, null, null, $defaultContext)];
 
         $serializer = new Serializer($normalizers, $encoders);
-        $content = $serializer->serialize($donations, 'csv',[AbstractNormalizer::IGNORED_ATTRIBUTES => ['created_at']]);
+        $content = $serializer->serialize($data, 'csv', [
+            AbstractNormalizer::IGNORED_ATTRIBUTES => [
+                'createdAt',
+                'requests',
+                '__initializer__',
+                '__cloner__',
+                '__isInitialized__',
+                'policy'
+            ]
+        ]);
 
         return new Response("\xEF\xBB\xBF".$content, 200, array(
             'Content-Type' => 'application/force-download',
-            'Content-Disposition' => 'attachment; filename="' . sprintf('export-ponuka-%s.csv', date('Ymd_His')) . '"'
+            'Content-Disposition' => 'attachment; filename="' . sprintf('export-ponuka-%s.csv', date('Ymd_His')) . '"',
+            'Cache-Control' =>  'no-cache'
         ));
     }
 }
