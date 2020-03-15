@@ -1,4 +1,4 @@
-FROM docker.pixelfederation.com/docker/php-fpm:7.3.10
+FROM phpdockerio/php73-fpm
 
 WORKDIR /srv/www/
 USER www-data
@@ -20,3 +20,6 @@ LABEL description="This is php container" \
       app_version=${APP_VERSION}
 
 USER root
+
+RUN apt-get update \
+    && apt-get install -y php7.3-mysql php7.4-mysql

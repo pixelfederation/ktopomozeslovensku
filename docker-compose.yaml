@@ -16,46 +16,6 @@ services:
     volumes:
       - ./:/srv/www:delegated
       - ~/.ssh:/var/www/.ssh
-      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
-
-  ktopomozeslovensku-php-xdebug:
-    container_name: ktopomozeslovensku-php-xdebug
-    build: ./docker/php/
-    working_dir: /srv/www
-    depends_on:
-      - ktopomozeslovensku-mysql
-    environment:
-      - USER_ID=${USER_ID:-1000}
-      - USER_GROUP_ID=${USER_GROUP_ID:-1000}
-      - SYMFONY_ENV=dev
-      - APP_ENV=dev
-      - PHP_DEV_XDEBUG=true
-      - PHP_DOCKER_HOST_IP=debug-pc.docker.pxfd.tech
-      - XDEBUG_CONFIG=remote_host=debug-pc.docker.pxfd.tech idekey=xdebug
-    volumes:
-      - ./:/srv/www:delegated
-      - ~/.ssh:/var/www/.ssh
-      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
-
-  ktopomozeslovensku-php-composer:
-    build: ./docker/php-composer/
-    container_name: ktopomozeslovensku-php-composer
-    depends_on:
-      - ktopomozeslovensku-mysql
-    environment:
-      - USER_ID=${USER_ID:-1000}
-      - USER_GROUP_ID=${USER_GROUP_ID:-1000}
-      - SYMFONY_ENV=dev
-      - APP_ENV=dev
-    volumes:
-      - ./:/srv/www
-      - ~/.ssh:/var/www/.ssh
-    command: >
-      bash -c "usermod -u ${USER_ID:-1000} www-data \
-         && sudo -u www-data ssh-keyscan git.pixelfederation.com >> /var/www/.ssh/known_hosts \
-         && sudo -u www-data composer dump-autoload --optimize --classmap-authoritative \
-         && tail -f /dev/null"
-
 
   ktopomozeslovensku-mysql:
     container_name: ktopomozeslovensku-mysql
@@ -78,7 +38,6 @@ services:
     - 8888:80
     depends_on:
       - ktopomozeslovensku-php
-      - ktopomozeslovensku-php-xdebug
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - .:/srv/www:delegated
