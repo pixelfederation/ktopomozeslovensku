@@ -1,0 +1,61 @@
+@use '../config/colors'
+@use '../typo/utils' as typo
+@use '../layout/utils' as layout
+
+.nav
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+
+  position: absolute
+  top: 70px
+  left: 0
+  right: 0
+  bottom: -3px // some space on bottom ???
+
+  padding: 28px 28px 0
+  background: colors.$gray-100
+  overflow: auto
+  z-index: 1
+
+  &.is-collapsed
+    display: none
+
+  @include layout.from(desktop)
+    position: static
+
+    flex-direction: row
+    align-items: center
+    padding: 0
+    overflow: hidden
+
+    &.is-collapsed
+      display: flex
+
+  & > *
+    margin-bottom: 24px
+
+    @include layout.from(desktop)
+      margin-bottom: 0
+      margin-right: 32px
+
+  &__trigger
+    font-size: 24px
+
+    @include layout.from(desktop)
+      display: none
+
+  &__item
+    @include typo.p3
+    color: colors.$gray-0
+
+    &.is-active
+      font-weight: bold
+
+    &:hover
+      text-decoration: underline
+
+  &__content-separator
+    border-top: 1px solid colors.$gray-90
+    @include layout.from(desktop)
+      margin-bottom: 48px
