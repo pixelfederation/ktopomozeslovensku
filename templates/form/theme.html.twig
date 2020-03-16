@@ -1,0 +1,34 @@
+{% use 'form_div_layout.html.twig' %}
+
+{% block button_widget -%}
+  {%- set attr = attr|merge({class: (attr.class|default(' button--primary') ~ ' button')|trim}) -%}
+  {{- parent() -}}
+{%- endblock button_widget %}
+
+{%- block textarea_widget -%}
+  <textarea {{ block('widget_attributes') }} class="input">{{ value }}</textarea>
+{%- endblock textarea_widget -%}
+
+{% block checkbox_widget %}
+  <label>
+    <input type="checkbox" {{ block('widget_attributes') }} class="checkbox" required>
+    <strong>{{ label }}</strong>
+  </label>
+{%- endblock checkbox_widget %}
+
+{% block form_label -%}
+  {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' label label--above')|trim}) -%}
+  {{- parent() -}}
+{%- endblock form_label %}
+
+{% block form_widget_simple -%}
+  {% if type is not defined or type not in ['file', 'hidden'] %}
+  {%- if errors|length > 0 -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' input is-error')|trim}) -%}
+    {% else %}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' input')|trim}) -%}
+    {% endif %}
+  {% endif %}
+  {{- parent() -}}
+{%- endblock form_widget_simple %}
+
