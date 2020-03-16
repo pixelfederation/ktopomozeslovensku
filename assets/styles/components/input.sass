@@ -1,0 +1,37 @@
+@use '../config/colors'
+@use '../config/radius'
+@use '../typo/utils' as typo
+
+.input
+  width: 100%
+  margin: 0 0 32px 0
+  padding: 18px 20px
+
+  border: 1px solid
+  border-radius: radius.$normal
+
+  background: colors.$gray-100
+  color: colors.$gray-0
+
+  font-family: LatoLatinWeb, sans-serif
+  @include typo.p3
+
+  &.is-error
+    border-color: colors.$red-50
+
+    &:focus
+      border-color: colors.$red-50
+      box-shadow: 0 0 0 1px colors.$red-50 !important
+
+  &:disabled
+    opacity: 0.3
+
+  &:focus
+    outline: 0
+    border-color: colors.$blue-50
+    box-shadow: 0 0 0 1px colors.$blue-50
+
+  &--small
+    padding: 8px 20px
+
+

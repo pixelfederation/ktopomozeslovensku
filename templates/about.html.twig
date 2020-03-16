@@ -141,30 +141,6 @@
       </div>
     </article>
 
-    <article class="article">
-      <header>
-        <h3 class="article__heading">Často kladené otázky</h3>
-      </header>
-      <div class="article__body">
-        <dl class="faq">
-          <dt class="faq__q"><b>Ako prispieť?</b></dt>
-          <dd class="faq__a">Prispieť sa dá finančne aj nefinančne. Ako na to nájdete na podstránke <a href="{{ path('donation') }}">Darujem.</a>
-          </dd>
-
-          <dt class="faq__q"><b>Dostane pomoc každý?</b></dt>
-          <dd class="faq__a">Podľa výšky vyzbieraných prostriedkov sa budeme snažiť uspokojiť požiadavky čo najväčšieho počtu žiadateľov, ale určite nie je možné pomôcť každému a v rozsahu, akom potrebuje.</dd>
-
-          <dt class="faq__q"><b>Kto rozhodne o tom, ako budú peniaze použité?</b></dt>
-          <dd class="faq__a">O použití prostriedkov bude rozhodovať komisia zložená z iniciátorov a garantov výzvy.</dd>
-
-          <dt class="faq__q"><b>Kde sa dozviem, ako boli peniaze použité?</b></dt>
-          <dd class="faq__a">Kde sa dozviem, ako boli peniaze použité?</dd>
-
-          <dt class="faq__q"><b>Čo spravíte, ak vám po skončení pandémie ostanú nejaké prostriedky?</b></dt>
-          <dd class="faq__a">Všetky budú použité na podporu zdravotníckych zariadení.</dd>
-        </dl>
-      </div>
-    </article>
+    {% include 'partials/faq.html.twig' %}
   </div>
 {% endblock %}
-
