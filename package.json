@@ -1,0 +1,19 @@
+{
+  "name": "ktopomozeslovensku.sk",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@storybook/html": "^5.3.17",
+    "babel-loader": "^8.0.6"
+  },
+  "dependencies": {
+    "sass": "^1.26.3"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006 -s ./public",
+    "storybook-build": "build-storybook",
+    "styles-build": "sass assets/styles/index.sass public/static/css/public.css",
+    "styles-watch": "sass assets/styles/index.sass public/static/css/public.css --watch"
+  }
+}
