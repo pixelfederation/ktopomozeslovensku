@@ -10,8 +10,6 @@ jobs:
       HOST_PATH: ${DEV_HOST_PATH}
       DATABASE_URL: ${DEV_DATABASE_URL}
       APP_SECRET: ${DEV_APP_SECRET}
-      SFTP_HOST: 37.9.175.19
-      SFTP_USER: deploy.ktopomozeslovensku.sk
     steps:
       ## START GENERIC
       - checkout
@@ -27,11 +25,11 @@ jobs:
       ## END GENERIC
 
       - run: composer install -n --prefer-dist
-      #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
-      - run: sshpass -p "${SFTP_PASS}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null . ${SFTP_USER}@${SFTP_HOST}:22/${HOST_PATH}
-      #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ${HOST_PATH}var/cache/prod/*
       - run: ls -la ~/.ssh/
-      - run: ssh uid1953480@shellserver-3.websupport.sk -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ls -la ${HOST_PATH}/var/cache/dev/*
+      #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
+      - run: scp -P13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null . uid1953480@shellserver-3.websupport.sk/${HOST_PATH}
+      #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ${HOST_PATH}var/cache/prod/*
+      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk ls -la ${HOST_PATH}/var/cache/dev/*
 
     requires:
       - build
@@ -46,8 +44,6 @@ jobs:
       HOST_PATH: ${PROD_HOST_PATH}
       DATABASE_URL: ${PROD_DATABASE_URL}
       APP_SECRET: ${PROD_APP_SECRET}
-      SFTP_HOST: 37.9.175.19
-      SFTP_USER: deploy.ktopomozeslovensku.sk
     steps:
       ## START GENERIC
       - checkout
