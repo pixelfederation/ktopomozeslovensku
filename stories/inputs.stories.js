@@ -36,3 +36,22 @@ export const Checkbox = () => `
   </div>
 `
 
+export const CheckboxWithTextInput = () => `
+  <div style="width: 400px">
+    <div class="input__label-input-wrapper">
+      <label>
+        <input type="checkbox" class="checkbox">
+        <strong>Respiratory FFP1</strong>
+      </label>
+      <input placeholder="počet" class="input input--small" style="width: 100px">
+    </div>
+
+    <div class="input__label-input-wrapper">
+      <label>
+        <input type="checkbox" class="checkbox">
+        <strong>Iné</strong>
+      </label>
+      <input placeholder="niečo ďalšie" class="input input--small" style="width: 300px">
+    </div>
+  </div>
+`
