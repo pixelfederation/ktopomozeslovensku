@@ -1,40 +1,88 @@
 {% extends "layout.html.twig" %}
 {% block main %}
-  <div class="container-fluid">
-    <div class="row mainstat">
-      <div class="col-sm-12">
-        <h1>Aktuálne sme spoločne prispeli</h1>
-        <h2 class="value">{{ donatedAmount }}</h2>
-        <div class="highlight">
-          <h3>Prispieť môžeš aj ty na <span class="bold">číslo účtu: <a class="dark" href="https://ib.fio.sk/ib/transparent?a=2901467117">SK2683300000002901467117</a></span></h3>
-          <img class="img-thumbnail" style="margin: 20px 5px 0px 5px; width: 200px; height: 240px;" src="{{ asset('static/img/qrcode.png') }}"/>
-          <img class="img-thumbnail" style="margin: 20px 5px 0px 5px; width: 200px; height: 240px;" src="{{ asset('static/img/viamo.png') }}"/>
-        </div>
+  <div class="l-container">
+    <header class="hero">
+      <h1 class="hero__heading">Pomoc pre slovenské zdravotnícke zariadenia</h1>
+      <p class="hero__subheading">Aby sme spolu zvládli pandémiu koronavírusu</p>
+    </header>
+
+    <div class="separator" style="width: 100%; max-width: 300px"></div>
+
+    <section class="result">
+      <div class="result__stats">
+        <p class="p1">Aktuálne sme spoločne prispeli</p>
+        <p class="h1">{{ donatedAmount }}</p>
       </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4 box">
-        <div class="box-content">
-          <h2>Čo robíme?</h2>
-          <p>Pomáhame slovenským zdravotníckym zariadeniam zvládnuť pandémiu koronavírusu cez prehľadný systém financovania a zabezpečenia materiálnej pomoci pre nemocnice a domovy sociálnych služieb. Zapojiť sa môže každý, kto chce a môže.</p>
-        </div>
+
+      <div class="result__buttons">
+        <a href="#" class="button button--primary">Podporiť finančne</a>
+        <a href="#" class="button button--secondary">Podporiť nefinančne</a>
       </div>
-      <div class="col-sm-4 box">
-        <div class="box-content">
-          <h2>Ako to robíme?</h2>
-          <p>Prostredníctvom formulára zisťujeme požiadavky zdravotníkov, zbierame finančné príspevky prostredníctvom výzvy a špecializovaný tím pracuje na tom, aby potrebný materiál zabezpečil.</p>
-        </div>
+
+      <a href="#sharing-is-caring" class="result__share">
+        <i class="icon-arrow-right" style="display: inline-block; transform: scale(1.5) translateY(1px);"></i> Pomôcť zdieľaním
+      </a>
+    </section>
+
+    <article class="article">
+      <header>
+        <h1 class="article__heading">Komu sme pomohli</h1>
+      </header>
+
+      <div class="article__body">
+        <ul>
+          <li>
+            <p>
+            <strong>Fakultná nemocnica Martin.</strong>
+              Pre obvodných, všeobecných lekárov a pediatrov, 3x5 litrov 80% dezinfekcie na ruky. 15.3.2020
+            </p>
+          </li>
+          <li>
+            <p>
+            <strong>BaMaMed Nitra.</strong>
+              Doručených 100ks rúšok, 600 párov rukavíc. 15.3.2020
+            </p>
+          </li>
+          <li>
+            <p><strong>Centrálny príjem Kramáre.</strong>
+            Doručených 550ks rúšok, 2600 párov rukavíc. 13.3.2020
+            </p>
+          </li>
+          <li>
+            <p><strong>Pohotovosť Zvolen.</strong>
+            Doručených 200ks rúšok, 300 párov rukavíc. 13.3.2020
+            </p>
+          </li>
+          <li>
+            <p><strong>Fakultná nemocnica Martin.</strong> Doručených 300ks rúšok, 300 párov rukavíc. 13.3.2020</p>
+          </li>
+        </ul>
       </div>
-      <div class="col-sm-4 box">
-        <div class="box-content">
-          <h2>Kto môže žiadať o pomoc?</h2>
-          <p>Všetky zdravotnícke zariadenia - štátne aj súkromné, ktoré sa starajú o pacientov nakazených koronavírusom. Rovnako aj domovy sociálnych služieb a zariadenia pre seniorov.</p>
-          <a class="btn-default" role="button" href="{{ path('help_request') }}">POTREBUJEM POMOC</a>
-        </div>
+    </article>
+
+    <article class="article">
+      <header>
+        <h1 class="article__heading">Kto môže žiadať o pomoc?</h1>
+      </header>
+
+      <div class="article__body">
+        <p class="margin-bottom-large">Všetky zdravotnícke zariadenia — štátne aj súkromné, ktoré sa starajú o pacientov nakazených koronavírusom. Rovnako aj domovy sociálnych služieb a zariadenia pre seniorov.</p>
+
+        <a href="{{ path('help_request') }}" class="button button--secondary button--small" style="width: fit-content;">Požiadať o pomoc</a>
       </div>
-    </div>
+    </article>
+
+    <article class="article">
+      <header>
+        <h1 class="article__heading">O projekte</h1>
+      </header>
+
+      <div class="article__body">
+        <p>Prečo to robíme? Lebo všetkého je nedostatok. Pomáhame slovenským zdravotníckym zariadeniam zvládnuť pandémiu koronavírusu cez prehľadný systém financovania a zabezpečenia materiálnej pomoci pre nemocnice a domovy sociálnych služieb. Zapojiť sa môže každý, kto chce a môže.</p>
+
+        <a href="#">Čítajte viac</a>
+      </div>
+    </article>
   </div>
 {% endblock %}
 

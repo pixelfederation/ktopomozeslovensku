@@ -1,0 +1,37 @@
+@use 'reset'
+
+@use 'typo/fonts'
+@use 'config/colors'
+
+@use 'components/article'
+@use 'components/button'
+@use 'components/card'
+@use 'components/faq'
+@use 'components/footer'
+@use 'components/heading'
+@use 'components/hero'
+@use 'components/jumbotron'
+@use 'components/link'
+@use 'components/logo'
+@use 'components/nav'
+@use 'components/paragraph'
+@use 'components/result'
+@use 'components/separator'
+
+@use 'layout/cards'
+@use 'layout/containers'
+@use 'layout/nav' as l-nav
+@use 'layout/utils'
+
+body
+  color: colors.$gray-0
+  font-family: LatoLatinWeb, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  text-rendering: optimizeLegibility
+
+  &.no-scroll
+    overflow: hidden
+
+.relative
+  position: relative

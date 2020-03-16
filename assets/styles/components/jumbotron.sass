@@ -1,0 +1,45 @@
+@use '../config/colors'
+@use '../typo/utils' as typo
+@use '../layout/utils' as layout
+
+.jumbotron
+  width: 100%
+
+  padding: 68px 28px
+
+  background: colors.$red-70
+  text-align: center
+
+  @include layout.from(desktop)
+    padding: 96px 105px
+
+  &__inner
+    max-width: 1230px
+    margin: 0 auto
+
+  &__heading
+    @include typo.h2
+    color: colors.$gray-100
+    margin-bottom: 32px
+
+  &__sharing
+    display: flex
+    justify-content: center
+    flex-direction: column
+
+    @include layout.from(desktop)
+      flex-direction: row
+      align-items: center
+      max-width: 770px
+      margin: 0 auto
+
+    & > *
+      width: 100%
+      margin-bottom: 32px
+
+      @include layout.from(desktop)
+        margin-right: 32px
+        margin-bottom: 0
+
+      &:last-child
+        margin-right: 0

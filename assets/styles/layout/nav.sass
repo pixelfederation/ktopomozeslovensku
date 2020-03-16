@@ -1,0 +1,32 @@
+@use '../config/colors'
+@use '../layout/utils' as layout
+
+.l-nav
+  display: flex
+  height: 70px
+  max-width: calc(1230px + 8vw)
+  margin: 0 auto
+  align-items: center
+  justify-content: space-between
+  flex-direction: row
+  padding: 0 28px
+
+  @include layout.from(desktop)
+    padding: 0 4vw
+    margin: 0 auto
+
+.l-footer-nav
+  display: flex
+  max-width: calc(1230px + 8vw)
+  margin: 0 auto
+  align-items: center
+  justify-content: space-between
+  flex-direction: column
+  padding: 0 28px
+
+  @include layout.from(desktop)
+    height: 70px
+    flex-direction: row
+    padding: 0 4vw
+    margin: 0 auto
+

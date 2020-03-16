@@ -1,0 +1,74 @@
+@use '../config/colors'
+@use '../config/radius'
+@use '../typo/utils' as typo
+
+.button
+  display: flex
+  height: 60px
+  justify-content: center
+  align-items: center
+
+  @include typo.p3
+  font-family: LatoLatinWebHeavy, sans-serif
+  text-align: center
+  text-decoration: none
+
+  border-radius: radius.$normal
+  border: 1px solid transparent
+
+  cursor: pointer
+
+  overflow: hidden
+  padding: 0 40px
+
+  &:hover
+    text-decoration: none
+
+  &--primary
+    color: colors.$gray-100
+    background: colors.$blue-50
+
+    &:hover
+      background: colors.$blue-60
+
+    &:focus
+      outline: 0
+      box-shadow: 0 0 0 5px rgba(20, 170, 245, 0.5)
+
+
+  &--secondary
+    color: colors.$gray-0
+    background: transparent
+    border-color: colors.$gray-50
+
+    &:hover
+      background: colors.$gray-95
+
+    &:focus
+      outline: 0
+      box-shadow: 0 0 0 5px rgba(20, 170, 245, 0.5)
+
+  &--ternary
+    color: colors.$gray-100
+    background: transparent
+    border: 2px solid colors.$gray-100
+
+    &:hover
+      color: colors.$red-70
+      background: colors.$gray-100
+
+    &:focus
+      outline: 0
+      box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.5)
+
+  &--small
+    height: 38px
+    padding: 0 16px
+
+  &--narrow
+    padding: 0 32px
+
+  &--with-icon
+    i
+      font-size: 24px
+      margin-right: 4px
