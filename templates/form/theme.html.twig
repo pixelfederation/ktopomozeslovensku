@@ -5,6 +5,11 @@
   {{- parent() -}}
 {%- endblock button_widget %}
 
+{% block choice_widget -%}
+  {%- set attr = attr|merge({class: (attr.class|default(' input'))|trim}) -%}
+  {{- parent() -}}
+{%- endblock choice_widget %}
+
 {%- block textarea_widget -%}
   <textarea {{ block('widget_attributes') }} class="input">{{ value }}</textarea>
 {%- endblock textarea_widget -%}
