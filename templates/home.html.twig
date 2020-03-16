@@ -8,19 +8,21 @@
 
     <div class="separator" style="width: 100%; max-width: 300px"></div>
 
-    {% include "partials/donated.html.twig" %}
-
-    <article class="article">
-      <header>
-        <h1 class="article__heading">Potrebujete pomoc?</h1>
-      </header>
-
-      <div class="article__body">
-        <p class="margin-bottom-large">O pomoc môžu žiadať všetky zdravotnícke zariadenia — štátne aj súkromné, ktoré sa starajú o pacientov nakazených koronavírusom. Rovnako aj domovy sociálnych služieb a zariadenia pre seniorov.</p>
-
-        <a href="{{ path('help_request') }}" class="button button--primary button--center">Požiadať o pomoc</a>
+    <section class="result">
+      <div class="result__stats">
+        <p class="p1">Aktuálne sme spoločne prispeli</p>
+        <p class="h1">{{ donatedAmount }}</p>
       </div>
-    </article>
+
+      <div class="result__buttons">
+        <a href="#" class="button button--primary">Podporiť finančne</a>
+        <a href="#" class="button button--secondary">Podporiť nefinančne</a>
+      </div>
+
+      <a href="#sharing-is-caring" class="result__share">
+        <i class="icon-arrow-right" style="display: inline-block; transform: scale(1.5) translateY(1px);"></i> Pomôcť zdieľaním
+      </a>
+    </section>
 
     <article class="article">
       <header>
@@ -29,30 +31,44 @@
 
       <div class="article__body">
         <ul>
-          <li class="l-log">
-            <span class="l-log__date">13. 3. 2020</span>
-            <span class="l-log__desc">
-              <strong>Fakultná nemocnica Martin.</strong>
-                Pre obvodných, všeobecných lekárov a pediatrov, 3x5 litrov 80% dezinfekcie na ruky.
-              </span>
+          <li>
+            <p>
+            <strong>Fakultná nemocnica Martin.</strong>
+              Pre obvodných, všeobecných lekárov a pediatrov, 3x5 litrov 80% dezinfekcie na ruky. 15.3.2020
+            </p>
           </li>
-          <li class="l-log">
-            <span class="l-log__date">13. 3. 2020</span>
-            <span class="l-log__desc">
-              <strong>BaMaMed Nitra.</strong>
-                Doručených 100ks rúšok
-              </span>
+          <li>
+            <p>
+            <strong>BaMaMed Nitra.</strong>
+              Doručených 100ks rúšok, 600 párov rukavíc. 15.3.2020
+            </p>
           </li>
-          <li class="l-log">
-            <span class="l-log__date">20. 3. 2020</span>
-            <span class="l-log__desc">
-              <strong>BaMaMed Nitra.</strong>
-                Doručených 300ks rúšok, 300 párov rukavíc, 600 respi
-              </span>
+          <li>
+            <p><strong>Centrálny príjem Kramáre.</strong>
+            Doručených 550ks rúšok, 2600 párov rukavíc. 13.3.2020
+            </p>
+          </li>
+          <li>
+            <p><strong>Pohotovosť Zvolen.</strong>
+            Doručených 200ks rúšok, 300 párov rukavíc. 13.3.2020
+            </p>
+          </li>
+          <li>
+            <p><strong>Fakultná nemocnica Martin.</strong> Doručených 300ks rúšok, 300 párov rukavíc. 13.3.2020</p>
           </li>
         </ul>
+      </div>
+    </article>
 
-        <a href="#">Zobraziť všetko (500)</a>
+    <article class="article">
+      <header>
+        <h1 class="article__heading">Kto môže žiadať o pomoc?</h1>
+      </header>
+
+      <div class="article__body">
+        <p class="margin-bottom-large">Všetky zdravotnícke zariadenia — štátne aj súkromné, ktoré sa starajú o pacientov nakazených koronavírusom. Rovnako aj domovy sociálnych služieb a zariadenia pre seniorov.</p>
+
+        <a href="{{ path('help_request') }}" class="button button--secondary button--small" style="width: fit-content;">Požiadať o pomoc</a>
       </div>
     </article>
 
@@ -64,7 +80,7 @@
       <div class="article__body">
         <p>Prečo to robíme? Lebo všetkého je nedostatok. Pomáhame slovenským zdravotníckym zariadeniam zvládnuť pandémiu koronavírusu cez prehľadný systém financovania a zabezpečenia materiálnej pomoci pre nemocnice a domovy sociálnych služieb. Zapojiť sa môže každý, kto chce a môže.</p>
 
-        <a href="{{ path('about') }}">Čítajte viac</a>
+        <a href="#">Čítajte viac</a>
       </div>
     </article>
   </div>
