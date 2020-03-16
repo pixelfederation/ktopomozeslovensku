@@ -89,7 +89,27 @@ final class DonationController extends AbstractController
      */
     public function non_finance(Request $request): Response
     {
-        return $this->render('donation-nonfinance.html.twig');
+        $donationRequest = new DonationRequest();
+        $form = $this->createForm(DonationRequestType::class, $donationRequest);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var DonationRequest $donationRequest */
+            $donationRequest = $form->getData();
+            $this->service->save($donationRequest);
+
+            return $this->redirectToRoute('donation_success');
+        }
+
+        $donatedAmount = $this->reporterService->getDonatedAmount();
+
+        return $this->render(
+            'donation-nonfinance.html.twig',
+            [
+                'form' => $form->createView(),
+                'donatedAmount' => $donatedAmount
+            ]
+        );
     }
 
     /**
