@@ -7,9 +7,6 @@ jobs:
     environment:
       APP_ENV: dev
       APP_DEBUG: 1
-      HOST_PATH: ${DEV_HOST_PATH}
-      DATABASE_URL: ${DEV_DATABASE_URL}
-      APP_SECRET: ${DEV_APP_SECRET}
     steps:
       ## START GENERIC
       - checkout
@@ -24,11 +21,14 @@ jobs:
       - run: touch .env
       ## END GENERIC
 
+      - run: echo export HOST_PATH="${DEV_HOST_PATH}" >> $BASH_ENV
+      - run: echo export DATABASE_URL="${DEV_DATABASE_URL}" >> $BASH_ENV
+      - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
+      - run: source $BASH_ENV
+
       - run: composer install -n --prefer-dist
       - run: ls -la ~/.ssh/
-      #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
       - run: scp -P13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r . uid1953480@shellserver-3.websupport.sk:~/${HOST_PATH}
-      #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ${HOST_PATH}var/cache/prod/*
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk ls -la ~/${HOST_PATH}/var/cache/dev/*
 
     requires:
@@ -41,9 +41,6 @@ jobs:
     environment:
       APP_ENV: prod
       APP_DEBUG: 0
-      HOST_PATH: ${PROD_HOST_PATH}
-      DATABASE_URL: ${PROD_DATABASE_URL}
-      APP_SECRET: ${PROD_APP_SECRET}
     steps:
       ## START GENERIC
       - checkout
@@ -58,11 +55,14 @@ jobs:
       - run: touch .env
       ## END GENERIC
 
+      - run: echo export HOST_PATH="${PROD_HOST_PATH}" >> $BASH_ENV
+      - run: echo export DATABASE_URL="${PROD_DATABASE_URL}" >> $BASH_ENV
+      - run: echo export APP_SECRET="${PROD_APP_SECRET}" >> $BASH_ENV
+      - run: source $BASH_ENV
+
       - run: composer install -n --prefer-dist
-      #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
-      #- run: sshpass -p "${SFTP_PASS}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null . ${SFTP_USER}@${SFTP_HOST}:22/${HOST_PATH}
-      #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ${HOST_PATH}var/cache/prod/*
-      #- run: curl -k "sftp://${SFTP_HOST}:22/${HOST_PATH}" --user "${SFTP_USER}:${SFTP_PASS}" -T . --ftp-create-dirs
+      # - run: scp -P13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r . uid1953480@shellserver-3.websupport.sk:~/${HOST_PATH}
+      # - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk ls -la ~/${HOST_PATH}/var/cache/dev/*
 workflows:
   version: 2
   ci-cd-deploy:
