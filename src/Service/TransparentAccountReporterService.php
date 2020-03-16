@@ -33,7 +33,7 @@ final class TransparentAccountReporterService
     public function getDonatedAmount(): string
     {
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://ib.fio.sk/ib/transparent?a=2901467117&f=13.02.2020&t=13.03.2020');
+        $response = $client->request('GET', 'https://ib.fio.sk/ib/transparent?a=2901467117');
 
         $content = $response->getContent(false);
 
@@ -42,7 +42,7 @@ final class TransparentAccountReporterService
         $doc->loadHTML($content);
 
         $xpath = new DOMXPath($doc);
-        $query = "//table[contains(@class, 'table')]/tbody/tr/td[6]";
+        $query = "//table[contains(@class, 'table')]/tbody/tr/td[3]";
 
         $entries = $xpath->query($query);
 
