@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="donation_item")
  */
-class DonationItem
+class Item
 {
     /**
      * @var int
@@ -31,23 +31,31 @@ class DonationItem
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=255, name="value")
+     * @ORM\Column(type="string", length=255, name="value", unique=true)
      */
     private $name;
 
     /**
-     * @var Collection
+     * @var Collection|HelpRequestsItems[]|array
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequest", mappedBy="donationItem")
+     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="item")
      */
-    private $requests;
+    private $requestedItems;
+
+    /**
+     * @var Collection|DonationRequest[]|array
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequestsItems", mappedBy="item")
+     */
+    private $donatedItems;
 
     /**
      *
      */
     public function __construct()
     {
-        $this->requests = new ArrayCollection();
+        $this->requestedItems = new ArrayCollection();
+        $this->donatedItems = new ArrayCollection();
     }
 
     /**
@@ -83,26 +91,28 @@ class DonationItem
     }
 
     /**
-     * @return Collection
-     */
-    public function getRequests(): Collection
-    {
-        return $this->requests;
-    }
-
-    /**
-     * @param Collection $requests
-     */
-    public function setRequests(Collection $requests): void
-    {
-        $this->requests = $requests;
-    }
-
-    /**
      * @return string
      */
     public function __toString(): string
     {
         return $this->getName() ?? '';
     }
+
+    /**
+     * @return HelpRequestsItems[]|array|Collection
+     */
+    public function getRequestedItems()
+    {
+        return $this->requestedItems;
+    }
+
+    /**
+     * @return DonationRequest[]|array|Collection
+     */
+    public function getDonatedItems()
+    {
+        return $this->donatedItems;
+    }
+
+
 }

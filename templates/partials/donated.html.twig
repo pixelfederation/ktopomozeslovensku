@@ -1,0 +1,15 @@
+<section class="result {{ upper is defined ? 'result--upper' : '' }}">
+  <div class="result__stats">
+    <p class="p1">Aktuálne sme spoločne prispeli</p>
+    <p class="h1">{{ donatedAmount }}</p>
+  </div>
+
+  <div class="result__buttons">
+    <a href="{{ path('donation_finance') }}" class="button button--primary">Podporiť finančne</a>
+    <a href="{{ path('donation_nonfinance') }}" class="button button--secondary">Podporiť nefinančne</a>
+  </div>
+
+  <a href="#sharing-is-caring" class="result__share">
+    <i class="icon-arrow-right" style="display: inline-block; transform: scale(1.5) translateY(1px);"></i> Pomôcť zdieľaním
+  </a>
+</section>

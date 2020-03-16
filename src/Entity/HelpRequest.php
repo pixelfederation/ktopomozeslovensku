@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 
@@ -76,6 +77,13 @@ class HelpRequest
      * @ORM\Column(type="text", name="request_text")
      */
     private $requestText;
+
+    /**
+     * @var Collection|HelpRequestsItems[]|array
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="helpRequest")
+     */
+    private $requestedItems;
 
     /**
      * @var bool
@@ -230,5 +238,20 @@ class HelpRequest
     public function setAddress(string $address): void
     {
         $this->address = $address;
+    }
+
+    /**
+     * @param Item $item
+     * @param int $quantity
+     *
+     * @return void
+     */
+    public function addHelpRequestItem(Item $item, int $quantity): void
+    {
+        if ($this->requestedItems->contains($item)) {
+            return;
+        }
+
+        $this->requestedItems->add(HelpRequestsItems::fromRequest($this, $item, $quantity));
     }
 }

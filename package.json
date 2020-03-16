@@ -8,12 +8,15 @@
     "babel-loader": "^8.0.6"
   },
   "dependencies": {
+    "autoprefixer": "^9.7.4",
+    "cssnano": "^4.1.10",
+    "postcss-cli": "^7.1.0",
     "sass": "^1.26.3"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006 -s ./public",
     "storybook-build": "build-storybook",
-    "styles-build": "sass assets/styles/index.sass public/static/css/public.css",
+    "styles-build": "sass --no-source-map assets/styles/index.sass public/static/css/public.css && postcss public/static/css/public.css -r --no-map --use autoprefixer --use cssnano ",
     "styles-watch": "sass assets/styles/index.sass public/static/css/public.css --watch"
   }
 }
