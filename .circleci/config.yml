@@ -5,13 +5,13 @@ jobs:
       - image: circleci/php:7.3-node-browsers
 
     environment:
-      APP_ENV=dev
-      APP_DEBUG=1
-      HOST_PATH=${DEV_HOST_PATH}
-      DATABASE_URL=${DEV_DATABASE_URL}
-      APP_SECRET=${DEV_APP_SECRET}
-      SFTP_HOST=37.9.175.19
-      SFTP_USER=deploy.ktopomozeslovensku.sk
+      APP_ENV: dev
+      APP_DEBUG: 1
+      HOST_PATH: ${DEV_HOST_PATH}
+      DATABASE_URL: ${DEV_DATABASE_URL}
+      APP_SECRET: ${DEV_APP_SECRET}
+      SFTP_HOST: 37.9.175.19
+      SFTP_USER: deploy.ktopomozeslovensku.sk
     steps:
       ## START GENERIC
       - checkout
@@ -41,13 +41,13 @@ jobs:
       - image: circleci/php:7.3-node-browsers
 
     environment:
-      APP_ENV=prod
-      APP_DEBUG=0
-      HOST_PATH=${PROD_HOST_PATH}
-      DATABASE_URL=${PROD_DATABASE_URL}
-      APP_SECRET=${PROD_APP_SECRET}
-      SFTP_HOST=37.9.175.19
-      SFTP_USER=deploy.ktopomozeslovensku.sk
+      APP_ENV: prod
+      APP_DEBUG: 0
+      HOST_PATH: ${PROD_HOST_PATH}
+      DATABASE_URL: ${PROD_DATABASE_URL}
+      APP_SECRET: ${PROD_APP_SECRET}
+      SFTP_HOST: 37.9.175.19
+      SFTP_USER: deploy.ktopomozeslovensku.sk
     steps:
       ## START GENERIC
       - checkout
