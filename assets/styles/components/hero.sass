@@ -1,0 +1,20 @@
+@use '../typo/utils' as typo
+@use '../layout/utils' as layout
+
+.hero
+  width: 100%
+  padding: 32px 0
+
+  @include layout.from(desktop)
+    max-width: 1020px
+    text-align: center
+    padding: 32px 0 80px
+
+  &__heading
+    margin-bottom: 24px
+
+  &__heading-standalone
+    padding: 32px 0 64px
+
+  &__subheading
+    @include typo.p2

@@ -3,6 +3,11 @@ home:
   path: /
   controller: App\Controller\HomeController::index
 
+about:
+  methods: GET
+  path: /o-projekte
+  controller: App\Controller\AboutController::index
+
 help_request:
   methods: GET|POST
   path: /ziadost-o-pomoc
@@ -34,9 +39,19 @@ partners:
   controller: App\Controller\PartnersController::index
 
 donation:
-  methods: GET|POST
+  methods: GET
   path: /darujem
   controller: App\Controller\DonationController::index
+
+donation_finance:
+  methods: GET|POST
+  path: /darujem-financnu-pomoc
+  controller: App\Controller\DonationController::finance
+
+donation_nonfinance:
+  methods: GET|POST
+  path: /darujem-nefinancnu-pomoc
+  controller: App\Controller\DonationController::non_finance
 
 donation_success:
   methods: GET|POST

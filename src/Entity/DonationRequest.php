@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
 use Exception;
@@ -25,7 +27,7 @@ class DonationRequest
      *
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="id")
      */
     private $id;
 
@@ -64,23 +66,24 @@ class DonationRequest
     private $address;
 
     /**
-     * @var DonationItem|null
-     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="requests")
-     * @ORM\JoinColumn(name="donation_item_id", referencedColumnName="id")
-     */
-    private $donationItem;
-
-    /**
-     * @var int|null
+     * @var Collection
      *
-     * @ORM\Column(type="integer", length=255, name="quantity")
+     * @ORM\OneToMany(targetEntity="DonationRequestsItems", mappedBy="donationRequest")
      */
-    private $quantity;
+    private $donatedItems;
 
     /**
      * @var bool|null
      */
     private $policy;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->donatedItems = new ArrayCollection();
+    }
 
     /**
      *
@@ -175,38 +178,6 @@ class DonationRequest
     }
 
     /**
-     * @return DonationItem|null
-     */
-    public function getDonationItem(): ?DonationItem
-    {
-        return $this->donationItem;
-    }
-
-    /**
-     * @param DonationItem|null $donationItem
-     */
-    public function setDonationItem(?DonationItem $donationItem): void
-    {
-        $this->donationItem = $donationItem;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @param int|null $quantity
-     */
-    public function setQuantity(?int $quantity): void
-    {
-        $this->quantity = $quantity;
-    }
-
-    /**
      * @return bool|null
      */
     public function getPolicy(): ?bool
@@ -227,7 +198,7 @@ class DonationRequest
      */
     public function __toString(): string
     {
-        return sprintf('[%s](%s): %s', $this->getContactPerson(), $this->getQuantity(), $this->donationItem->getName());
+        return sprintf('[%s]', $this->getEmail());
     }
 
     /**
@@ -244,5 +215,20 @@ class DonationRequest
     public function setEmail(?string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @param Item $item
+     * @param int $quantity
+     *
+     * @return void
+     */
+    public function addDonationItem(Item $item, int $quantity)
+    {
+        if ($this->donatedItems->contains($item)) {
+            return;
+        }
+
+        $this->donatedItems->add(DonationRequestsItems::fromRequest($this, $item, $quantity));
     }
 }

@@ -13,6 +13,7 @@ namespace App\Controller;
 use App\Entity\DonationRequest;
 use App\Form\DonationRequestType;
 
+use App\Service\TransparentAccountReporterService;
 use App\Service\DonationRequestService;
 use DateTimeImmutable;
 use Exception;
@@ -31,11 +32,17 @@ final class DonationController extends AbstractController
     private $service;
 
     /**
+     * @var TransparentAccountReporterService
+     */
+    private $reporterService;
+
+    /**
      * @param DonationRequestService $service
      */
-    public function __construct(DonationRequestService $service)
+    public function __construct(DonationRequestService $service, TransparentAccountReporterService $reporterService)
     {
         $this->service = $service;
+        $this->reporterService = $reporterService;
     }
 
 
@@ -58,12 +65,31 @@ final class DonationController extends AbstractController
             return $this->redirectToRoute('donation_success');
         }
 
+        $donatedAmount = $this->reporterService->getDonatedAmount();
+
         return $this->render(
             'donation.html.twig',
             [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'donatedAmount' => $donatedAmount
             ]
         );
+    }
+
+    /**
+     * @return Response
+     */
+    public function finance(Request $request): Response
+    {
+        return $this->render('donation-finance.html.twig');
+    }
+
+    /**
+     * @return Response
+     */
+    public function non_finance(Request $request): Response
+    {
+        return $this->render('donation-nonfinance.html.twig');
     }
 
     /**

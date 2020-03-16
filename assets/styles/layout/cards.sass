@@ -1,0 +1,23 @@
+@use './utils' as layout
+
+.l-cards
+  display: flex
+  flex-direction: column
+  margin: 0 auto
+  max-width: 656px
+  padding: 0 28px
+
+  @include layout.from(tablet)
+    padding: 0
+    max-width: calc(1024px + 8vw)
+
+  &__inner
+    @include layout.from(tablet)
+      display: grid
+      grid-template: auto / 1fr 1fr
+      grid-gap: 32px
+      margin: 0 4vw
+
+    @include layout.from(desktop)
+      grid-template: auto / 1fr 1fr 1fr
+

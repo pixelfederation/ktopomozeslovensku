@@ -13,18 +13,19 @@ easy_admin:
       new:
         fields:  ['institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
     DonationItem:
-      class: App\Entity\DonationItem
+      class: App\Entity\Item
       label: Typ pomôcky
       list:
-        fields: ['id', 'name', 'requests']
+        fields: ['id', 'name']
     DonationRequest:
       label: Darujem
       class: App\Entity\DonationRequest
       list:
-        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address',]
         actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
       new:
-        fields: ['email','contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+        fields: ['email','contactPerson', 'telephone', 'address']
+
   design:
     menu:
       - { entity: 'HelpRequest', icon: 'hands-helping'}

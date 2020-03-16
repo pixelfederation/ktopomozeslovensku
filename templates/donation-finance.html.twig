@@ -1,0 +1,67 @@
+{% extends "layout.html.twig" %}
+{% block main %}
+  <div class="l-container">
+    <h1 class="hero__heading-standalone">Darujem</h1>
+
+    <article class="article">
+      <div class="article__body">
+        <p>Vaše príspevky sa využijú na kúpu zdravotníckych pomôcok. Respirátory, rúška, dezinfekcie, čističky vzduchu, skrátka všetko, čo bude potrebné.</p>
+      </div>
+    </article>
+
+    <article class="article">
+      <header>
+        <h3 class="article__heading">Bankový prevod</h3>
+      </header>
+      <div class="article__body">
+        <p>Pošlite prosím svoj príspevok na <a href="https://ib.fio.sk/ib/transparent?a=2901467117" target="_blank">transparentný účet:</a></p>
+
+        <p>
+          IBAN: <b>SK2683300000002901467117</b><br>
+          SWIFT/BIC: <b>FIOZSKBAXXX</b><br>
+          Banka: Fio banka, a.s., pobočka zahraničnej banky<br>
+          Adresa banky: Nám. SNP 21, 811 01, Bratislava<br>
+          Majiteľ účtu: Suchová, Zuzana<br>
+          Názov účtu: Suchová, Zuzana<br>
+        </p>
+
+        <p>
+          Účet patrí Zuzane Suchovej, ktorá je jednou z členiek tejto iniciatívy.
+        </p>
+      </div>
+    </article>
+
+    <article class="article">
+      <header>
+        <h3 class="article__heading">QR kód PAY by square</h3>
+      </header>
+      <div class="article__body">
+        <p>Prispieť môžete aj cez QR kód PAY by square. Naskenujte tento kód mobilnou aplikáciou vašej banky.</p>
+
+        <p>
+          <img src="/static/img/qrcode.png" alt="PAY by square QR kód" style="width: 300px;margin-top: 16px;max-width: 100%;">
+        </p>
+      </div>
+    </article>
+
+    <article class="article">
+      <header>
+        <h3 class="article__heading">VIAMO</h3>
+      </header>
+      <div class="article__body">
+        <p>Prispieť môžete aj cez aplikáciu <strong>VIAMO.</strong></p>
+
+        <p><strong>a) priamo vo VIAMO aplikácii</strong> na záložke “Platba firme / škole” kliknite na “Vybrať zo zoznamu”, potom kliknite “Dobročinnosť” a vyberte Kto pomôže Slovensku. Zadajte sumu a platbu potvrďte PIN-om alebo</p>
+
+        <p><strong>b) naskenujte QR kód</strong> (VIAMO platba) svojou VIAMO aplikáciou — zadajte sumu a platbu potvrďte PIN-om
+        </p>
+
+        <p>
+          <img src="/static/img/viamo.png" alt="Viamo QR kód" style="width: 300px;margin-top: 16px;max-width: 100%;">
+        </p>
+      </div>
+    </article>
+
+    {% include 'partials/faq.html.twig' %}
+  </div>
+{% endblock %}

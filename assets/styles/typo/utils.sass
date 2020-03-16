@@ -1,0 +1,65 @@
+$min-viewport: 360px
+$max-viewport: 1024px
+
+@function strip-unit($value)
+  @return $value / ($value * 0 + 1)
+
+@mixin fluid-type($prop, $min-font-size, $max-font-size)
+  &
+    #{$prop}: $min-font-size
+    @media screen and (min-width: $min-viewport)
+      #{$prop}: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-viewport}) / #{strip-unit($max-viewport - $min-viewport)}))
+
+    @media screen and (min-width: $max-viewport)
+      #{$prop}: $max-font-size
+
+@mixin h1
+  font-family: ff-tisa-web-pro, serif
+  font-weight: 700
+  line-height: 110%
+  letter-spacing: -0.01em
+  @include fluid-type('font-size', 40px, 64px)
+
+
+@mixin h2
+  font-family: ff-tisa-web-pro, serif
+  font-weight: 700
+  line-height: 120%
+  letter-spacing: -0.015em
+  @include fluid-type('font-size', 32px, 50px)
+
+@mixin h3
+  font-family: ff-tisa-web-pro, serif
+  font-weight: 700
+  line-height: 120%
+  letter-spacing: -0.01em
+  @include fluid-type('font-size', 24px, 32px)
+
+@mixin h4
+  font-family: ff-tisa-web-pro, serif
+  font-weight: 700
+  line-height: 125%
+  letter-spacing: -0.01em
+  @include fluid-type('font-size', 20px, 24px)
+
+@mixin p1
+  line-height: 140%
+  @include fluid-type('font-size', 18px, 20px)
+
+@mixin p2
+  line-height: 145%
+  font-size: 18px
+
+@mixin p3
+  line-height: 140%
+  font-size: 16px
+
+@mixin p4
+  line-height: 130%
+  font-size: 14px
+
+.text-center
+  text-align: center
+
+strong, b
+  font-weight: bold
