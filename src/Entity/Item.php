@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="donation_item")
  */
-class Item
+class DonationItem
 {
     /**
      * @var int
@@ -31,31 +31,31 @@ class Item
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=255, name="value", unique=true)
+     * @ORM\Column(type="string", length=255, name="value")
      */
     private $name;
 
     /**
-     * @var Collection|HelpRequestsItems[]|array
+     * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="item")
+     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequest", mappedBy="donationItem")
      */
-    private $requestedItems;
+    private $requests;
 
     /**
-     * @var Collection|DonationRequest[]|array
+     * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequestsItems", mappedBy="item")
+     * @ORM\OneToMany(targetEntity="App\Entity\Donation", mappedBy="donationItem")
      */
-    private $donatedItems;
+    private $donations;
 
     /**
      *
      */
     public function __construct()
     {
-        $this->requestedItems = new ArrayCollection();
-        $this->donatedItems = new ArrayCollection();
+        $this->requests = new ArrayCollection();
+        $this->donations = new ArrayCollection();
     }
 
     /**
@@ -64,14 +64,6 @@ class Item
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -91,6 +83,22 @@ class Item
     }
 
     /**
+     * @return Collection
+     */
+    public function getRequests(): Collection
+    {
+        return $this->requests;
+    }
+
+    /**
+     * @param Collection $requests
+     */
+    public function setRequests(Collection $requests): void
+    {
+        $this->requests = $requests;
+    }
+
+    /**
      * @return string
      */
     public function __toString(): string
@@ -99,20 +107,10 @@ class Item
     }
 
     /**
-     * @return HelpRequestsItems[]|array|Collection
+     * @return Collection
      */
-    public function getRequestedItems()
+    public function getDonations(): Collection
     {
-        return $this->requestedItems;
+        return $this->donations;
     }
-
-    /**
-     * @return DonationRequest[]|array|Collection
-     */
-    public function getDonatedItems()
-    {
-        return $this->donatedItems;
-    }
-
-
 }

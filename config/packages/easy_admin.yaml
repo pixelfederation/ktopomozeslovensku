@@ -7,30 +7,87 @@ easy_admin:
       list:
         fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
         sort: 'createdAt'
-        actions: [{ name: 'export_dopyt', ask_confirm: false,type: 'route' }]
+        actions: [{ name: 'export_dopyt', ask_confirm: false, type: 'route' }]
       show:
       search:
       new:
         fields:  ['institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
     DonationItem:
-      class: App\Entity\Item
+      class: App\Entity\DonationItem
       label: Typ pomôcky
       list:
-        fields: ['id', 'name']
+        fields: ['id', 'name', 'requests', 'donations']
+        actions: ['new', 'show', 'edit', 'delete']
+      edit:
+        fields:
+          - 'name'
     DonationRequest:
       label: Darujem
       class: App\Entity\DonationRequest
       list:
-        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address',]
+        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
         actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
       new:
-        fields: ['email','contactPerson', 'telephone', 'address']
+        fields: ['email','contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+    Recipient:
+      class: App\Entity\Recipient
+      label: 'Komu sme pomohli - prijemca'
+      list:
+        fields:
+          - 'id'
+          - 'institutionName'
+          - 'donations'
+        actions: ['show', 'edit', 'delete']
+      show:
+        fields: ['institutionName', 'donations']
+      edit:
+        fields:
+          - 'institutionName'
+##          - 'donations'
+#          - property: 'donations'
+#            label: 'Donations'
+#            type: 'collection'
+#            type_options:
+#              entry_type: 'App\Form\DonationType'
+#              allow_delete: true
+#              allow_add: true
+#              by_reference: false
+
+    Donation:
+      class: App\Entity\Donation
+      label: 'Komu sme pomohli - polozky'
+      list:
+        fields:
+          - 'id'
+          - recipient
+          - donationItem
+          - count
+          - donatedAt
+        actions: ['show', 'new', 'edit', 'delete']
+      show:
+        fields: ['recipient', 'donationItem', 'count']
+        actions: ['edit', 'delete']
+      edit:
+        fields:
+          - recipient
+          - donationItem
+          - count
+          - donatedAt
+        actions: ['-show', 'delete']
+      new:
+        fields:
+          - recipient
+          - donationItem
+          - count
+          - donatedAt
 
   design:
     menu:
       - { entity: 'HelpRequest', icon: 'hands-helping'}
       - { entity: 'DonationRequest', icon: 'people-carry'}
       - { entity: 'DonationItem', icon: 'cubes'}
+      - { entity: 'Recipient', icon: 'hands-helping'}
+      - { entity: 'Donation', icon: 'hands-helping'}
 
   user:
     display_name: true
