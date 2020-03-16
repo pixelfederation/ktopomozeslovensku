@@ -3,6 +3,11 @@ home:
   path: /
   controller: App\Controller\HomeController::index
 
+about:
+  methods: GET
+  path: /o-projekte
+  controller: App\Controller\AboutController::index
+
 help_request:
   methods: GET|POST
   path: /ziadost-o-pomoc
