@@ -67,7 +67,9 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "yarn",
+            "yarn styles-build"
         ],
         "post-update-cmd": [
             "@auto-scripts"
