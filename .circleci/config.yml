@@ -16,10 +16,10 @@ jobs:
       ## START GENERIC
       - checkout
 
-      - run: curl -sL https://deb.nodesource.com/setup_12.x | bash -
-      - run: mkdir -p /usr/share/man/man1mkdir /usr/share/man/man1
-      - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-      - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - run: curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+      - run: sudo mkdir -p /usr/share/man/man1mkdir /usr/share/man/man1
+      - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+      - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
       - run: sudo apt update && sudo apt install -y openssh-client sshpass nodejs ant git yarn
       - run: sudo docker-php-ext-install zip
@@ -51,10 +51,10 @@ jobs:
       ## START GENERIC
       - checkout
 
-      - run: curl -sL https://deb.nodesource.com/setup_12.x | bash -
-      - run: mkdir -p /usr/share/man/man1mkdir /usr/share/man/man1
-      - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-      - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - run: curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+      - run: sudo mkdir -p /usr/share/man/man1mkdir /usr/share/man/man1
+      - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+      - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
       - run: sudo apt update && sudo apt install -y openssh-client sshpass nodejs ant git yarn
       - run: sudo docker-php-ext-install zip
