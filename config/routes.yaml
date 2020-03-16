@@ -52,3 +52,13 @@ policy:
   methods: GET
   path: /pravidla-ochrany-osobnych-udajov
   controller: App\Controller\PolicyController::index
+
+export_dopyt:
+  methods: GET
+  path: /export/dopyt
+  controller: App\Controller\ExportController::dopyt
+
+export_ponuka:
+  methods: GET
+  path: /export/ponuka
+  controller: App\Controller\ExportController::ponuka

@@ -60,7 +60,8 @@ final class HelpRequestService
 
         $this->mailer->sendMailToRecipient(
             "KtoPomôžeSlovensku - žiadosť prijatá",
-            "Žiadosť bola prijatá, prosím čakajte kým sa Vám ozveme na Vami uvedené kontaktné údaje.",
+            "Ďakujeme, že ste nás kontaktovali. Vašu žiadosť sme zaznamenali a určite Vás budeme v najbližšej dobe kontaktovať.
+Vopred ďakujeme za Vašu trpezlivosť.",
             $request->getEmail()
         );
     }

@@ -7,6 +7,7 @@ easy_admin:
       list:
         fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
         sort: 'createdAt'
+        actions: [{ name: 'export_dopyt', ask_confirm: false,type: 'route' }]
       show:
       search:
       new:
@@ -21,6 +22,7 @@ easy_admin:
       class: App\Entity\DonationRequest
       list:
         fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+        actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
       new:
         fields: ['email','contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
   design:
@@ -36,6 +38,6 @@ easy_admin:
   edit:
     actions: ['show', '-delete']
   list:
-    actions: ['show', 'search', '-edit', '-delete']
+    actions: ['show', 'search', 'edit', '-delete']
   show:
     actions: ['-edit', '-delete']
