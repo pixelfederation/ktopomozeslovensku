@@ -1,20 +1,58 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/php:7.3-node-browsers
-        environment:
-          APP_ENV=prod
+workflows:
+  version: 2
+  build-test-and-approval-deploy:
+    jobs:
+      - build:
+          docker:
+            - image: circleci/php:7.3-node-browsers
 
-    steps:
-      - checkout
+          steps:
+            - checkout
 
-      - run: sudo apt update && sudo apt install -y openssh-client sshpass
-      - run: sudo docker-php-ext-install zip
-      - run: touch .env
-      - run: composer install -n --prefer-dist
+            - run: curl -sL https://deb.nodesource.com/setup_12.x | bash -
+            - run: mkdir -p /usr/share/man/man1mkdir /usr/share/man/man1
+            - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+            - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
-      #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
-      #- run: sshpass -p "${SFTP_PASS}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null . ${SFTP_USER}@${SFTP_HOST}:22/ktopomozeslovensku.sk/
-      #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ktopomozeslovensku.sk/var/cache/prod/*
-#      - run: curl -k "sftp://${SFTP_HOST}:22/ktopomozeslovensku.sk/" --user "${SFTP_USER}:${SFTP_PASS}" -T . --ftp-create-dirs
+            - run: sudo apt update && sudo apt install -y openssh-client sshpass nodejs ant git yarn
+            - run: sudo docker-php-ext-install zip
+      - dev:
+          environment:
+            APP_ENV=dev
+            APP_DEBUG=1
+            HOST_PATH=${DEV_HOST_PATH}
+            DATABASE_URL=${DEV_DATABASE_URL}
+            APP_SECRET=${DEV_APP_SECRET}
+            SFTP_HOST=37.9.175.19
+            SFTP_USER=deploy.ktopomozeslovensku.sk
+          steps:
+            - run: composer install -n --prefer-dist
+            #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
+            - run: sshpass -p "${SFTP_PASS}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null . ${SFTP_USER}@${SFTP_HOST}:22/${HOST_PATH}
+            #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ${HOST_PATH}var/cache/prod/*
+            - run: ls -la ~/.ssh/
+            - run: ssh uid1953480@shellserver-3.websupport.sk -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ls -la ${HOST_PATH}/var/cache/dev/*
+
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - dev
+      - prod:
+          environment:
+            APP_ENV=prod
+            APP_DEBUG=0
+            HOST_PATH=${PROD_HOST_PATH}
+            DATABASE_URL=${PROD_DATABASE_URL}
+            APP_SECRET=${PROD_APP_SECRET}
+            SFTP_HOST=37.9.175.19
+            SFTP_USER=deploy.ktopomozeslovensku.sk
+          steps:
+            - run: composer install -n --prefer-dist
+            #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
+            #- run: sshpass -p "${SFTP_PASS}" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null . ${SFTP_USER}@${SFTP_HOST}:22/${HOST_PATH}
+            #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ${HOST_PATH}var/cache/prod/*
+            #- run: curl -k "sftp://${SFTP_HOST}:22/${HOST_PATH}" --user "${SFTP_USER}:${SFTP_PASS}" -T . --ftp-create-dirs
+          requires:
+            - hold
