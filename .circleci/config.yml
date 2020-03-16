@@ -27,9 +27,9 @@ jobs:
       - run: composer install -n --prefer-dist
       - run: ls -la ~/.ssh/
       #- run: ssh-keyscan -H ${SFTP_HOST}:22 >> ~/.ssh/known_hosts
-      - run: scp -P13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r . uid1953480@shellserver-3.websupport.sk/${HOST_PATH}
+      - run: scp -P13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r . uid1953480@shellserver-3.websupport.sk:~/${HOST_PATH}
       #- run: sshpass -p "${SFTP_PASS}" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null rm ${HOST_PATH}var/cache/prod/*
-      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk ls -la ${HOST_PATH}/var/cache/dev/*
+      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk ls -la ~/${HOST_PATH}/var/cache/dev/*
 
     requires:
       - build
