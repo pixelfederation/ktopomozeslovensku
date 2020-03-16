@@ -25,3 +25,18 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Controller\HomeController:
+      arguments:
+        $donations: '@DonationsRepository'
+      tags: ['controller.service_arguments']
+
+    App\Controller\RecipientsController:
+        arguments:
+            $donations: '@DonationsRepository'
+        tags: ['controller.service_arguments']
+
+    DonationsRepository:
+        class: 'Doctrine\ORM\EntityRepository'
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+        arguments: ['App\Entity\Donation']

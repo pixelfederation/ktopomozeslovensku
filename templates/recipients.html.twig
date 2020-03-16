@@ -1,27 +1,24 @@
 {% extends "layout.html.twig" %}
 {% block main %}
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="box-content">
-        <h1>Komu sme pomohli</h1>
-        <p>
-          Piatok 13.3.2020
-          <ul>
-            <li>Fakultná nemocnica Martin, doručených 300ks rúšok, 300 párov rukavíc</li>
-            <li>Pohotovosť Zvolen, doručených 200ks rúšok, 300 párov rukavíc</li>
-            <li>Centrálny príjem Kramáre, doručených 550ks rúšok, 2600 párov rukavíc</li>
-          </ul>
-          Sobota 14.3.2020
-          <ul>
-            <li>BaMaMed Nitra, doručených 100ks rúšok, 600 párov rukavíc</li>
-          </ul>
-          Nedeľa 15.3. 2020
-          <ul>
-            <li>Fakultná nemocnica Martin, pre obvodných, všeobecných lekárov a pediatrov, 3x5 litrov 80% dezinfekcie na ruky</li>
-          </ul>
-        </p>
+  <div class="l-container">
+    <h1 class="hero__heading-standalone">Komu sme pomohli</h1>
+
+    <article class="article">
+      <div class="article__body">
+        <ul>
+          {% for donation in donations %}
+          <li class="l-log">
+            <span class="l-log__date">{{ donation.donatedAt|date("d. m. Y") }}</span>
+            <span class="l-log__desc">
+              <strong>{{ donation.recipient.institutionName }}.</strong>
+                {{ donation.donationItem.name }}, {{ donation.count }} ks
+              </span>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
-    </div>
+    </article>
+
+    {% include "partials/need-help.html.twig" %}
   </div>
 {% endblock %}

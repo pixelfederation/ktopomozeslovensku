@@ -1,0 +1,22 @@
+@use '../typo/utils' as typo
+@use '../layout/utils' as layout
+
+.l-log
+  display: flex
+  flex-direction: column
+
+  @include layout.from(tablet)
+    flex-direction: row
+
+  &__date
+    @include typo.p3
+
+    @include layout.from(tablet)
+      padding-top: 2px
+      margin-right: 16px
+      flex: 0 0 100px
+
+  &__desc
+    @include typo.p2
+    margin-bottom: 16px
+    flex: 1 0

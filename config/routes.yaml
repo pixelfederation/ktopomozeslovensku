@@ -23,6 +23,11 @@ recipients:
   path: /komu-sme-pomohli
   controller: App\Controller\RecipientsController::index
 
+contact:
+  methods: GET
+  path: /kontakt
+  controller: App\Controller\ContactController::index
+
 team:
   methods: GET
   path: /organizacny-team

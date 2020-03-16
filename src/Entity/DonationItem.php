@@ -43,11 +43,19 @@ class DonationItem
     private $requests;
 
     /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Donation", mappedBy="donationItem")
+     */
+    private $donations;
+
+    /**
      *
      */
     public function __construct()
     {
         $this->requests = new ArrayCollection();
+        $this->donations = new ArrayCollection();
     }
 
     /**
@@ -56,14 +64,6 @@ class DonationItem
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -104,5 +104,13 @@ class DonationItem
     public function __toString(): string
     {
         return $this->getName() ?? '';
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDonations(): Collection
+    {
+        return $this->donations;
     }
 }
