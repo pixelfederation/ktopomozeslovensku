@@ -23,6 +23,7 @@ jobs:
 
       - run: sudo apt update && sudo apt install -y openssh-client sshpass nodejs ant git yarn
       - run: sudo docker-php-ext-install zip
+      - run: touch .env
       ## END GENERIC
 
       - run: composer install -n --prefer-dist
@@ -58,6 +59,7 @@ jobs:
 
       - run: sudo apt update && sudo apt install -y openssh-client sshpass nodejs ant git yarn
       - run: sudo docker-php-ext-install zip
+      - run: touch .env
       ## END GENERIC
 
       - run: composer install -n --prefer-dist
