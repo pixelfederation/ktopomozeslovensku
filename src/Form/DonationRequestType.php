@@ -9,11 +9,10 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Entity\Item;
+use App\Entity\DonationItem;
 use App\Entity\DonationRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -41,7 +40,7 @@ final class DonationRequestType extends AbstractType
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->repository = $entityManager->getRepository(Item::class);
+        $this->repository = $entityManager->getRepository(DonationItem::class);
     }
 
     /**
@@ -121,7 +120,7 @@ final class DonationRequestType extends AbstractType
         ]);
 
         $builder->add('submit', SubmitType::class, [
-                'label' => 'ODOSLAť DAR', 'attr' => ['class' => 'btn-default']
+                'label' => 'ODOSLAŤ DAR', 'attr' => ['class' => 'btn-default']
             ]
         );
     }

@@ -27,10 +27,10 @@ final class DonationRequestsItems
     private $donationRequest;
 
     /**
-     * @var Item
+     * @var DonationItem
      *
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="donatedItems")
+     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="donatedItems")
      * @ORM\JoinColumn(name="item_id")
      */
     private $item;
@@ -44,10 +44,10 @@ final class DonationRequestsItems
 
     /**
      * @param DonationRequest $request
-     * @param Item $item
+     * @param DonationItem $item
      * @param int $quantity
      */
-    private function __construct(DonationRequest $request, Item $item, int $quantity)
+    private function __construct(DonationRequest $request, DonationItem $item, int $quantity)
     {
         $this->donationRequest = $request;
         $this->item = $item;
@@ -56,12 +56,12 @@ final class DonationRequestsItems
 
     /**
      * @param DonationRequest $request
-     * @param Item $item
+     * @param DonationItem $item
      * @param int $quantity
      *
      * @return DonationRequestsItems
      */
-    public static function fromRequest(DonationRequest $request, Item $item, int $quantity): DonationRequestsItems
+    public static function fromRequest(DonationRequest $request, DonationItem $item, int $quantity): DonationRequestsItems
     {
         return new self($request, $item, $quantity);
     }
@@ -83,17 +83,17 @@ final class DonationRequestsItems
     }
 
     /**
-     * @return Item
+     * @return DonationItem
      */
-    public function getItem(): Item
+    public function getItem()
     {
         return $this->item;
     }
 
     /**
-     * @param Item $item
+     * @param DonationItem $item
      */
-    public function setItem(Item $item): void
+    public function setItem(DonationItem $item): void
     {
         $this->item = $item;
     }
