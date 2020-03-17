@@ -17,7 +17,7 @@ jobs:
       - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
       - run: sudo apt update && sudo apt install -y openssh-client sshpass nodejs ant git yarn rsync
-      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install zip pdo_mysql
       - run: touch .env
       ## END GENERIC
 
@@ -57,7 +57,7 @@ jobs:
       - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
       - run: sudo apt update && sudo apt install -y openssh-client sshpass nodejs ant git yarn rsync
-      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install zip pdo_mysql
       - run: touch .env
       ## END GENERIC
 
