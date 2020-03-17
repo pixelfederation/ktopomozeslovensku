@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
@@ -23,15 +24,30 @@ final class AboutController
     private $twig;
 
     /**
-     * @param Twig $twig
+     * @var EntityRepository
      */
-    public function __construct(Twig $twig)
+    private $partners;
+
+    /**
+     * @param Twig             $twig
+     * @param EntityRepository $partners
+     */
+    public function __construct(Twig $twig, EntityRepository $partners)
     {
         $this->twig = $twig;
+        $this->partners = $partners;
     }
 
     public function index(): Response
     {
-        return new Response($this->twig->render('about.html.twig'));
+        $partners = $this->partners->findBy([], ['donatedAmount' => 'DESC', 'helpedAt' => 'DESC', 'name' => 'ASC']);
+
+        return new Response($this->twig->render(
+            'about.html.twig',
+                [
+                    'partners' => $partners,
+                ]
+            )
+        );
     }
 }

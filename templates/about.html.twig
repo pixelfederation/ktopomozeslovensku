@@ -30,40 +30,17 @@
 
   <div class="l-cards" style="margin-top: -32px; margin-bottom: 128px;">
     <div class="l-cards__inner">
-      <div class="card">
-        <p>VÚB banka</p>
-        <p>40 000€</p>
-      </div>
 
+      {% for partner in partners %}
       <div class="card">
-        <p>Pixel Federation</p>
-        <p>20 000€</p>
-      </div>
-
-      <div class="card">
-        <p>Curaden Slovakia s.r.o.</p>
-        <p>10 000€</p>
-      </div>
-
-      <div class="card">
-        <p>Berlin Brands</p>
-        <p>10 000€</p>
-      </div>
-
-      <div class="card">
-        <p>Sashe</p>
+        <p>{{ partner.name }}</p>
+        {% if partner.donatedAmount > 0 %}
+        <p>{{ partner.donatedAmount|number_format(0, '.', ' ') }}€</p>
+        {% else %}
         <p>Nefinančná pomoc</p>
+        {% endif %}
       </div>
-
-      <div class="card">
-        <p>Finstat</p>
-        <p>Nefinančná pomoc</p>
-      </div>
-
-      <div class="card">
-        <p>Hamala Kluch Víglaský s.r.o.</p>
-        <p>Nefinančná pomoc</p>
-      </div>
+      {% endfor %}
 
       <div class="card card--empty">
         <p>Vaša firma?</p>
