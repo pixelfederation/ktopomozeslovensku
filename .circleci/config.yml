@@ -22,10 +22,10 @@ jobs:
       ## END GENERIC
 
       - run: echo export HOST_PATH="${DEV_HOST_PATH}" >> $BASH_ENV
-      - run: echo export APP_ENV=dev >> .env
-      - run: echo export APP_DEBUG=1 >> .env
-      - run: echo export DATABASE_URL="${DEV_DATABASE_URL}" >> .env
-      - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> .env
+      - run: echo export APP_ENV=dev >> $BASH_ENV
+      - run: echo export APP_DEBUG=1 >> $BASH_ENV
+      - run: echo export DATABASE_URL="${DEV_DATABASE_URL}" >> $BASH_ENV
+      - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
       - run: source $BASH_ENV
 
       - run: echo APP_ENV=dev >> .env
@@ -63,10 +63,10 @@ jobs:
       ## END GENERIC
 
       - run: echo export HOST_PATH="${PROD_HOST_PATH}" >> $BASH_ENV
-      - run: echo export APP_ENV=prod >> .env
-      - run: echo export APP_DEBUG=0 >> .env
-      - run: echo export DATABASE_URL="${PROD_DATABASE_URL}" >> .env
-      - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> .env
+      - run: echo export APP_ENV=prod >> $BASH_ENV
+      - run: echo export APP_DEBUG=0 >> $BASH_ENV
+      - run: echo export DATABASE_URL="${PROD_DATABASE_URL}" >> $BASH_ENV
+      - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
       - run: source $BASH_ENV
 
       - run: echo APP_ENV=prod >> .env
