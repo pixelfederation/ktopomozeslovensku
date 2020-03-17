@@ -29,8 +29,8 @@ jobs:
 
       - run: composer install -n --prefer-dist
 
-      - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/sub/dev/ktopomozeslovensku.sk
-      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/sub/dev/ktopomozeslovensku.sk/var/cache/dev ~/sub/dev/ktopomozeslovensku.sk/var/cache/dev_old;rm -rf ~/sub/dev/ktopomozeslovensku.sk/var/cache/dev_old"
+      - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/ktopomozeslovensku.sk/sub/dev/ktopomozeslovensku.sk
+      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/ktopomozeslovensku.sk/sub/dev/ktopomozeslovensku.sk/var/cache/dev ~/ktopomozeslovensku.sk/sub/dev/ktopomozeslovensku.sk/var/cache/dev_old;rm -rf ~/ktopomozeslovensku.sk/sub/dev/ktopomozeslovensku.sk/var/cache/dev_old"
 
   prod:
     docker:
@@ -62,7 +62,7 @@ jobs:
       - run: composer install -n --prefer-dist
 
       - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/ktopomozeslovensku.sk
-      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/ktopomozeslovensku.sk/var/cache/prod ~/ktopomozeslovensku.sk/var/cache/prod_old;rm -rf ~/sub/dev/ktopomozeslovensku.sk/var/cache/prod_old"
+      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/ktopomozeslovensku.sk/var/cache/prod ~/ktopomozeslovensku.sk/var/cache/prod_old;rm -rf ~/ktopomozeslovensku.sk/var/cache/prod_old"
 workflows:
   version: 2
   ci-cd-deploy:
