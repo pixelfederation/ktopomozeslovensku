@@ -16,7 +16,7 @@ easy_admin:
       class: App\Entity\DonationItem
       label: Typ pomôcky
       list:
-        fields: ['id', 'name', 'requests', 'donations']
+        fields: ['id', 'name', 'donations', 'donatedItems', 'requestedItems']
         actions: ['new', 'show', 'edit', 'delete']
       edit:
         fields:
@@ -25,10 +25,10 @@ easy_admin:
       label: Darujem
       class: App\Entity\DonationRequest
       list:
-        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address']
         actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
       new:
-        fields: ['email','contactPerson', 'telephone', 'address', 'donationItem', 'quantity']
+        fields: ['email','contactPerson', 'telephone', 'address']
     Recipient:
       class: App\Entity\Recipient
       label: 'Komu sme pomohli - prijemca'
@@ -81,6 +81,30 @@ easy_admin:
           - count
           - donatedAt
 
+    DonationRequestsItems:
+      class: App\Entity\DonationRequestsItems
+      label: Darovane Prostriedky
+      list:
+        fields:
+          - id
+          - donationRequest
+          - item
+          - quantity
+      new:
+        fields:
+          - donationRequest
+          - item
+          - quantity
+
+    HelpRequestsItems:
+      class: App\Entity\HelpRequestsItems
+      label: Ziadane Prostriedky
+      list:
+        fields:
+          - helpRequest
+          - item
+          - quantity
+
   design:
     menu:
       - { entity: 'HelpRequest', icon: 'hands-helping'}
@@ -88,6 +112,8 @@ easy_admin:
       - { entity: 'DonationItem', icon: 'cubes'}
       - { entity: 'Recipient', icon: 'hands-helping'}
       - { entity: 'Donation', icon: 'hands-helping'}
+      - { entity: 'DonationRequestsItems', icon: 'hands'}
+      - { entity: 'HelpRequestsItems', icon: 'hands'}
 
   user:
     display_name: true

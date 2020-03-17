@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 
@@ -78,6 +79,13 @@ class HelpRequest
     private $requestText;
 
     /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="helpRequest")
+     */
+    private $requestedItems;
+
+    /**
      * @var bool
      */
     private $policy;
@@ -88,6 +96,17 @@ class HelpRequest
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @param DonationItem $item
+     * @param int $quantity
+     *
+     * @return void
+     */
+    public static function addRequestItem(DonationItem $item, int $quantity)
+    {
+
     }
 
     /**
@@ -167,6 +186,22 @@ class HelpRequest
     }
 
     /**
+     * @return Collection
+     */
+    public function getRequestedItems(): Collection
+    {
+        return $this->requestedItems;
+    }
+
+    /**
+     * @param Collection $requestedItems
+     */
+    public function setRequestedItems(Collection $requestedItems): void
+    {
+        $this->requestedItems = $requestedItems;
+    }
+
+    /**
      * @return string
      */
     public function getEmail(): ?string
@@ -230,5 +265,13 @@ class HelpRequest
     public function setAddress(string $address): void
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('%s [%s]', $this->getInstitutionName(), $this->getContactPerson());
     }
 }
