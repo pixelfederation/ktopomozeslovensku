@@ -33,10 +33,9 @@ jobs:
       - run: echo DATABASE_URL="${DEV_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${DEV_APP_SECRET}" >> .env
       - run: echo ADMIN_PWD="${DEV_ADMIN_PWD}" >> .env
-      - run: source .env
 
       - run: composer install -n --prefer-dist
-      - run: ./bin/console doctrine:migrations:migrate -n
+      - run: ./bin/console doctrine:migrations:migrate -n --env=dev
 
       - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/dev ~/${HOST_PATH}/var/cache/dev_old;rm -rf ~/${HOST_PATH}/var/cache/dev_old"
@@ -74,10 +73,9 @@ jobs:
       - run: echo DATABASE_URL="${PROD_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${PROD_APP_SECRET}" >> .env
       - run: echo ADMIN_PWD="${PROD_ADMIN_PWD}" >> .env
-      - run: source .env
 
       - run: composer install -n --prefer-dist
-      - run: ./bin/console doctrine:migrations:migrate -n
+      - run: ./bin/console doctrine:migrations:migrate -n --env=prod
 
       - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/prod ~/${HOST_PATH}/var/cache/prod_old;rm -rf ~/${HOST_PATH}/var/cache/prod_old"
