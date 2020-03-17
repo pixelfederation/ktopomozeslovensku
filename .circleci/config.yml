@@ -21,10 +21,10 @@ jobs:
       - run: touch .env
       ## END GENERIC
 
-      - run: echo export HOST_PATH="${DEV_HOST_PATH}" >> $BASH_ENV
-      - run: echo export DATABASE_URL="${DEV_DATABASE_URL}" >> $BASH_ENV
-      - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
-      - run: source $BASH_ENV
+      - run: echo export HOST_PATH="${DEV_HOST_PATH}" >> .env
+      - run: echo export DATABASE_URL="${DEV_DATABASE_URL}" >> .env
+      - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> .env
+      - run: source .env
 
       - run: composer install -n --prefer-dist
 
@@ -52,10 +52,10 @@ jobs:
       - run: touch .env
       ## END GENERIC
 
-      - run: echo export HOST_PATH="${PROD_HOST_PATH}" >> $BASH_ENV
-      - run: echo export DATABASE_URL="${PROD_DATABASE_URL}" >> $BASH_ENV
-      - run: echo export APP_SECRET="${PROD_APP_SECRET}" >> $BASH_ENV
-      - run: source $BASH_ENV
+      - run: echo export HOST_PATH="${PROD_HOST_PATH}" >> .env
+      - run: echo export DATABASE_URL="${PROD_DATABASE_URL}" >> .env
+      - run: echo export APP_SECRET="${PROD_APP_SECRET}" >> .env
+      - run: source .env
 
       - run: composer install -n --prefer-dist
 
