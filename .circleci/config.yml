@@ -21,16 +21,20 @@ jobs:
       - run: touch .env
       ## END GENERIC
 
+      - run: echo export HOST_PATH="${DEV_HOST_PATH}" >> $BASH_ENV
+      - run: source $BASH_ENV
+
       - run: echo APP_ENV=dev >> .env
       - run: echo APP_DEBUG=1 >> .env
       - run: echo DATABASE_URL="${DEV_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${DEV_APP_SECRET}" >> .env
+      - run: echo ADMIN_PWD="${DEV_ADMIN_PWD}" >> .env
       - run: source .env
 
       - run: composer install -n --prefer-dist
 
-      - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/ktopomozeslovensku.sk/sub/dev
-      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/ktopomozeslovensku.sk/sub/dev/var/cache/dev ~/ktopomozeslovensku.sk/sub/dev/var/cache/dev_old;rm -rf ~/ktopomozeslovensku.sk/sub/dev/var/cache/dev_old"
+      - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
+      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/dev ~/${HOST_PATH}/var/cache/dev_old;rm -rf ~/${HOST_PATH}/var/cache/dev_old"
 
   prod:
     docker:
@@ -53,16 +57,20 @@ jobs:
       - run: touch .env
       ## END GENERIC
 
+      - run: echo export HOST_PATH="${PROD_HOST_PATH}" >> $BASH_ENV
+      - run: source $BASH_ENV
+
       - run: echo APP_ENV=prod >> .env
       - run: echo APP_DEBUG=0 >> .env
       - run: echo DATABASE_URL="${PROD_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${PROD_APP_SECRET}" >> .env
+      - run: echo ADMIN_PWD="${PROD_ADMIN_PWD}" >> .env
       - run: source .env
 
       - run: composer install -n --prefer-dist
 
-      - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/ktopomozeslovensku.sk
-      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/ktopomozeslovensku.sk/var/cache/prod ~/ktopomozeslovensku.sk/var/cache/prod_old;rm -rf ~/ktopomozeslovensku.sk/var/cache/prod_old"
+      - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
+      - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/prod ~/${HOST_PATH}/var/cache/prod_old;rm -rf ~/${HOST_PATH}/var/cache/prod_old"
 workflows:
   version: 2
   ci-cd-deploy:
