@@ -32,6 +32,7 @@ jobs:
       - run: source .env
 
       - run: composer install -n --prefer-dist
+      - run: ./bin/console doctrine:migrations:migrate -n
 
       - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/dev ~/${HOST_PATH}/var/cache/dev_old;rm -rf ~/${HOST_PATH}/var/cache/dev_old"
@@ -68,6 +69,7 @@ jobs:
       - run: source .env
 
       - run: composer install -n --prefer-dist
+      - run: ./bin/console doctrine:migrations:migrate -n
 
       - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/prod ~/${HOST_PATH}/var/cache/prod_old;rm -rf ~/${HOST_PATH}/var/cache/prod_old"
