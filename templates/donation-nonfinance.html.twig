@@ -21,7 +21,15 @@
         {{ form_row(form.telephone) }}
         {{ form_row(form.email) }}
         {% for item in form.items %}
-          {{ form_row(item) }}
+          <div class="form-container">
+            {{ form_widget(item.item) }}
+            {% if item.quantity is defined %}
+              {{ form_widget(item.quantity) }}
+            {% endif %}
+            {% if item.description is defined %}
+              {{ form_widget(item.description) }}
+            {% endif %}
+          </div>
         {% endfor %}
         {{ form_widget(form.policy) }}
             <p class="p4" style="margin-bottom: 32px">
