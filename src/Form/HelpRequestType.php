@@ -9,15 +9,25 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Entity\DonationItem;
+use App\Entity\HelpRequest;
+use App\Form\Embeded\ItemFormEmbedded;
 use App\Form\Model\HelpRequestForm;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\EqualTo;
@@ -28,19 +38,19 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 final class HelpRequestType extends AbstractType
 {
-    use ItemsFragment;
 
     /**
-     * @var EntityManagerInterface
+     * @var ObjectRepository
      */
-    private $entityManager;
+    private $repository;
 
     /**
      * @param EntityManagerInterface $entityManager
+     *
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
+        $this->repository = $entityManager->getRepository(DonationItem::class);
     }
 
     /**
@@ -106,7 +116,74 @@ final class HelpRequestType extends AbstractType
             ]
         ]);
 
-        $this->renderItemsFragment($builder, $this->entityManager);
+
+        $builder->add('items', CollectionType::class, ['required' => true]);
+        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($builder) {
+            $form = $event->getForm();
+            /** @var DonationItem $item */
+            foreach ($this->repository->findAll() as $item) {
+                $form->get('items')
+                    ->add(
+                        $builder->create(sprintf('%s', $item->getId()),
+                            FormType::class,
+                            [
+                                'by_reference' => false,
+                                'auto_initialize' => false
+                            ]
+                        )
+                            ->add(
+                                'item',
+                                CheckboxType::class,
+                                [
+                                    'required' => false,
+                                    'label' => $item->getName()
+                                ]
+                            )
+                            ->add(
+                                'quantity',
+                                NumberType::class,
+                                [
+                                    'required' => false,
+                                    'attr' => [
+                                        'class' => 'input--small',
+                                    ],
+                                    'label' => '',
+                                    'data' => 0
+                                ]
+                            )
+                            ->getForm()
+                    );
+            }
+            $form->get('items')->add(
+                $builder->create('other',
+                    FormType::class,
+                    [
+                        'by_reference' => false,
+                        'auto_initialize' => false
+                    ]
+                )
+                    ->add(
+                        'item',
+                        CheckboxType::class,
+                        [
+                            'required' => false,
+                            'label' => 'Iné ...'
+                        ]
+                    )
+                    ->add(
+                        'description',
+                        TextType::class,
+                        [
+                            'required' => false,
+                            'attr' => [
+                                'class' => 'input--small'
+                            ]
+                        ]
+                    )
+                    ->getForm()
+            );
+        });
+
 
         $builder->add('policy', CheckboxType::class, [
             'required' => true,
