@@ -17,9 +17,13 @@
     margin-left: auto
 
 .form-container .checkbox:not(:checked) ~ .input
-  background-color: colors.$gray-90
-  border-color: white
-  pointer-events: none
+  display: none
+
+.form-container .checkbox:checked ~ label
+  flex: 1
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
 
 .checkbox:checked ~ label
   font-weight: bold
