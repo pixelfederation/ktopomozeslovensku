@@ -40,7 +40,7 @@ jobs:
       - run: echo APP_DEBUG=1 >> .env
       - run: echo DATABASE_URL="${DEV_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${DEV_APP_SECRET}" >> .env
-      - run: echo ADMIN_PWD="${DEV_ADMIN_PWD}" >> .env
+      - run: echo ADMIN_PWD="'${DEV_ADMIN_PWD}'" >> .env
 
       - run: composer install -n --prefer-dist
       - run: ./bin/console doctrine:migrations:migrate -n --env=dev
@@ -89,7 +89,7 @@ jobs:
       - run: echo APP_DEBUG=0 >> .env
       - run: echo DATABASE_URL="${PROD_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${PROD_APP_SECRET}" >> .env
-      - run: echo ADMIN_PWD="${PROD_ADMIN_PWD}" >> .env
+      - run: echo ADMIN_PWD="'${PROD_ADMIN_PWD}'" >> .env
 
       - run: composer install -n --prefer-dist
       - run: ./bin/console doctrine:migrations:migrate -n --env=prod
