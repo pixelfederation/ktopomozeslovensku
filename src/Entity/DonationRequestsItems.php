@@ -30,11 +30,6 @@ final class DonationRequestsItems
      * @var DonationRequest|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\DonationRequest", inversedBy="donatedItems")
-     * @ORM\JoinColumn(name="donation_request_id", nullable=false)
-     * @var DonationRequest
-     *
-     * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="App\Entity\DonationRequest", inversedBy="donatedItems")
      * @ORM\JoinColumn(name="donation_request_id")
      */
     private $donationRequest;
@@ -147,6 +142,11 @@ final class DonationRequestsItems
      */
     public function __toString(): string
     {
-        return sprintf('%s (%s) pcs', $this->item->getName(), $this->getQuantity());
+        if ($this->item === null) {
+            return sprintf('ine: %s (%s) pcs', $this->other, $this->quantity ?? 0);
+
+        }
+
+        return sprintf('%s ,(%s) pcs', $this->item->getName(), $this->quantity ?? 0);
     }
 }

@@ -72,21 +72,6 @@ class DonationRequest
      */
     private $donatedItems;
 
-//    /**
-//     * @var DonationItem|null
-//     *
-//     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="donations")
-//     * @ORM\JoinColumn(name="donation_item_id", referencedColumnName="id")
-//     */
-//    private $donationItem;
-//
-//    /**
-//     * @var int|null
-//     *
-//     * @ORM\Column(type="integer", length=255, name="quantity")
-//     */
-//    private $quantity;
-
     /**
      * @var bool|null
      */

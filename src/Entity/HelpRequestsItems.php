@@ -29,7 +29,7 @@ final class HelpRequestsItems
     /**
      * @var HelpRequest|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\HelpRequest", inversedBy="requestedItems", cascade={perisist})
+     * @ORM\ManyToOne(targetEntity="App\Entity\HelpRequest", inversedBy="requestedItems")
      * @ORM\JoinColumn(name="help_request_id", nullable=false)
      */
     private $helpRequest;
@@ -37,7 +37,7 @@ final class HelpRequestsItems
     /**
      * @var DonationItem|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="requestedItems", cascade={persist})
+     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="requestedItems")
      * @ORM\JoinColumn(name="item_id", nullable=false)
      */
     private $item;
@@ -141,6 +141,11 @@ final class HelpRequestsItems
      */
     public function __toString(): string
     {
-        return  '';
+        if ($this->item === null) {
+            return sprintf('ine: %s ,(%s) pcs', $this->other, $this->quantity ?? 0);
+
+        }
+
+        return sprintf('%s ,(%s) pcs', $this->item->getName(), $this->quantity ?? 0);
     }
 }

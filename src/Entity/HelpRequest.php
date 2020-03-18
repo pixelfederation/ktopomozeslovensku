@@ -72,16 +72,9 @@ class HelpRequest
     private $address;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="text", name="request_text")
-     */
-    private $requestText;
-
-    /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="helpRequest")
+     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="helpRequest", cascade={"persist"})
      */
     private $requestedItems;
 

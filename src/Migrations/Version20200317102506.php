@@ -22,7 +22,7 @@ final class Version20200317102506 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('INSERT INTO danation_requests_items (donation_request_id, item_id, quantity) SELECT id AS donation_request_id, donation_item_id AS item_id, quantity FROM donation_request;');
+        $this->addSql('INSERT INTO danation_requests_items (donation_request_id, item_id, quantity) SELECT id AS donation_request_id, donation_item_id AS item_id, quantity FROM donation_request WHERE donation_item_id IS NOT NULL;');
         $this->addSql('ALTER TABLE donation_request DROP FOREIGN KEY FK_113B732F38C3AEEE');
         $this->addSql('DROP INDEX IDX_113B732F38C3AEEE ON donation_request');
         $this->addSql('ALTER TABLE donation_request DROP donation_item_id, DROP quantity');
