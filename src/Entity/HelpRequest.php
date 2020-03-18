@@ -79,6 +79,13 @@ class HelpRequest
     private $requestedItems;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="text", name="requested_text", nullable=true)
+     */
+    private $requestedText;
+
+    /**
      * @var bool
      */
     private $policy;
@@ -262,5 +269,21 @@ class HelpRequest
     public function setResolved(bool $resolved): void
     {
         $this->resolved = $resolved;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRequestedText(): string
+    {
+        return $this->requestedText;
+    }
+
+    /**
+     * @param string $requestedText
+     */
+    public function setRequestedText(string $requestedText): void
+    {
+        $this->requestedText = $requestedText;
     }
 }
