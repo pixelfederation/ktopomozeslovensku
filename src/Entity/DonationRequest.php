@@ -68,7 +68,7 @@ class DonationRequest
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequestsItems", mappedBy="donationRequest")
+     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequestsItems", mappedBy="donationRequest", cascade={"persist"})
      */
     private $donatedItems;
 

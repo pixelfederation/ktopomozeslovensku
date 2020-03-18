@@ -145,7 +145,7 @@ final class DonationRequestService
      */
     private function generateRequestedEmailText(DonationRequest $helpRequest): string
     {
-        $requests = $helpRequest->getDonatedItems()->map(static function (DonationRequest $item) {
+        $requests = $helpRequest->getDonatedItems()->map(static function (DonationRequestsItems $item) {
             return sprintf('- %s', (string) $item);
         })->toArray();
 

@@ -22,7 +22,7 @@ final class Version20200317104647 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE danation_requests_items ADD id INT AUTO_INCREMENT NOT NULL, DROP PRIMARY KEY, ADD PRIMARY KEY (id)');
+        $this->addSql('ALTER TABLE donation_requests_items ADD id INT AUTO_INCREMENT NOT NULL, DROP PRIMARY KEY, ADD PRIMARY KEY (id)');
         $this->addSql('ALTER TABLE help_requests_items ADD id INT AUTO_INCREMENT NOT NULL, DROP PRIMARY KEY, ADD PRIMARY KEY (id)');
     }
 
@@ -31,10 +31,10 @@ final class Version20200317104647 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE danation_requests_items MODIFY id INT NOT NULL');
-        $this->addSql('ALTER TABLE danation_requests_items DROP PRIMARY KEY');
-        $this->addSql('ALTER TABLE danation_requests_items DROP id');
-        $this->addSql('ALTER TABLE danation_requests_items ADD PRIMARY KEY (donation_request_id, item_id)');
+        $this->addSql('ALTER TABLE donation_requests_items MODIFY id INT NOT NULL');
+        $this->addSql('ALTER TABLE donation_requests_items DROP PRIMARY KEY');
+        $this->addSql('ALTER TABLE donation_requests_items DROP id');
+        $this->addSql('ALTER TABLE donation_requests_items ADD PRIMARY KEY (donation_request_id, item_id)');
         $this->addSql('ALTER TABLE help_requests_items MODIFY id INT NOT NULL');
         $this->addSql('ALTER TABLE help_requests_items DROP PRIMARY KEY');
         $this->addSql('ALTER TABLE help_requests_items DROP id');
