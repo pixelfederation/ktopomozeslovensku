@@ -9,7 +9,7 @@ easy_admin:
       class: App\Entity\HelpRequest
       label: Potrebujem Pomoc
       list:
-        fields: ['id', 'createdAt', 'resolved', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestedItems']
+        fields: ['id', 'createdAt', 'resolved', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestedText', 'requestedItems']
         sort: 'createdAt'
         actions: [{ name: 'export_dopyt', ask_confirm: false, type: 'route' }]
       show:
