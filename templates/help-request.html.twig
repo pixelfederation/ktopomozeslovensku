@@ -19,7 +19,7 @@
         {{ form_row(form.contactPerson) }}
         {{ form_row(form.telephone) }}
         {{ form_row(form.email) }}
-        <label class="label label--above">Typ a počet pomôcok, o ktoré máte záujem</label>
+        <h3 style="margin-bottom: 32px">Typ pomôcok, ktoré potrebujete</h3>
         {% for item in form.items %}
           <div class="form-container">
               {{ form_widget(item.item) }}

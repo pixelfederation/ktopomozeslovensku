@@ -19,6 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  *
@@ -35,10 +37,9 @@ trait ItemsFragment
     {
         $repository = $entityManager->getRepository(DonationItem::class);
 
-        $builder->add('items', CollectionType::class, [
-            'required' => true,
-        ]);
-        $builder->add('items', CollectionType::class, ['required' => true]);
+        $builder->add('items', CollectionType::class, ['required' => true, 'constraints' => [new All(new NotBlank())]]);
+
+        // Add dynamic fields
         $builder->addEventListener(FormEvents::POST_SET_DATA, static function (FormEvent $event) use ($builder, $repository) {
             $form = $event->getForm();
             /** @var DonationItem $item */
@@ -104,6 +105,29 @@ trait ItemsFragment
                     )
                     ->getForm()
             );
+        });
+
+        // Filter all non submitted choices
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, static function (FormEvent $event) {
+            /** @var array $form */
+            $form = $event->getData();
+
+            if (!isset($form['items']) || count($form['items']) === 0) {
+                return;
+            }
+
+            $filterEmptyItems = array_filter($form['items'], static function (array $item) {
+                return (array_key_exists('item', $item) && $item['item'] === 'on');
+            });
+
+            if (count($filterEmptyItems) === 0) {
+                $form['items'] = null;
+                $event->setData($form);
+                return;
+            }
+
+            $form['items'] = $filterEmptyItems;
+            $event->setData($form);
         });
     }
 }
