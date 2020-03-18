@@ -30,6 +30,7 @@ final class HelpRequestType extends AbstractType
 {
     use ItemsFragment;
 
+
     /**
      * @var EntityManagerInterface
      */

@@ -35,7 +35,9 @@ trait ItemsFragment
     {
         $repository = $entityManager->getRepository(DonationItem::class);
 
-        $builder->add('items', CollectionType::class, ['required' => true]);
+        $builder->add('items', CollectionType::class, [
+            'required' => true,
+        ]);
         $builder->addEventListener(FormEvents::POST_SET_DATA, static function (FormEvent $event) use ($builder, $repository) {
             $form = $event->getForm();
             /** @var DonationItem $item */
@@ -63,8 +65,10 @@ trait ItemsFragment
                                 [
                                     'required' => false,
                                     'attr' => [
-                                        'class' => 'small__input'
-                                    ]
+                                        'class' => 'input--small'
+                                    ],
+                                    'data' => 0,
+                                    'html5' => true
                                 ]
                             )
                             ->getForm()
@@ -83,7 +87,7 @@ trait ItemsFragment
                         CheckboxType::class,
                         [
                             'required' => false,
-                            'label' => 'Ine'
+                            'label' => 'Iné ...'
                         ]
                     )
                     ->add(
@@ -92,7 +96,7 @@ trait ItemsFragment
                         [
                             'required' => false,
                             'attr' => [
-                                'class' => 'small__input'
+                                'class' => 'input--small'
                             ]
                         ]
                     )

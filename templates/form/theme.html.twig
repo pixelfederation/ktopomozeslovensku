@@ -15,10 +15,8 @@
 {%- endblock textarea_widget -%}
 
 {% block checkbox_widget %}
-  <label>
     <input type="checkbox" {{ block('widget_attributes') }} class="checkbox">
-    <strong>{{ label }}</strong>
-  </label>
+    <label for="{{ id }}">{{ label }}</label>
 {%- endblock checkbox_widget %}
 
 {% block form_label -%}
