@@ -68,7 +68,7 @@ class DonationRequest
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="DonationRequestsItems", mappedBy="donationRequest")
+     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequestsItems", mappedBy="donationRequest", cascade={"persist"})
      */
     private $donatedItems;
 
@@ -78,11 +78,34 @@ class DonationRequest
     private $policy;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="resolved")
+     */
+    private $resolved = false;
+
+    /**
      *
      */
     public function __construct()
     {
         $this->donatedItems = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDonatedItems(): Collection
+    {
+        return $this->donatedItems;
+    }
+
+    /**
+     * @param Collection $donatedItems
+     */
+    public function setDonatedItems(Collection $donatedItems): void
+    {
+        $this->donatedItems = $donatedItems;
     }
 
     /**
@@ -198,7 +221,7 @@ class DonationRequest
      */
     public function __toString(): string
     {
-        return sprintf('[%s]', $this->getEmail());
+        return sprintf('(%s) %s [%s]', $this->getId(), $this->getContactPerson(), $this->getEmail());
     }
 
     /**
@@ -218,17 +241,20 @@ class DonationRequest
     }
 
     /**
-     * @param Item $item
-     * @param int $quantity
+     * @return bool
+     */
+    public function getResolved(): bool
+    {
+        return $this->resolved;
+    }
+
+    /**
+     * @param bool $resolved
      *
      * @return void
      */
-    public function addDonationItem(Item $item, int $quantity)
+    public function setResolved(bool $resolved): void
     {
-        if ($this->donatedItems->contains($item)) {
-            return;
-        }
-
-        $this->donatedItems->add(DonationRequestsItems::fromRequest($this, $item, $quantity));
+        $this->resolved = $resolved;
     }
 }

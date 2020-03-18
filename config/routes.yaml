@@ -23,6 +23,11 @@ recipients:
   path: /komu-sme-pomohli
   controller: App\Controller\RecipientsController::index
 
+contact:
+  methods: GET
+  path: /kontakt
+  controller: App\Controller\ContactController::index
+
 team:
   methods: GET
   path: /organizacny-team
@@ -51,7 +56,7 @@ donation_finance:
 donation_nonfinance:
   methods: GET|POST
   path: /darujem-nefinancnu-pomoc
-  controller: App\Controller\DonationController::non_finance
+  controller: App\Controller\DonationController::nonFinance
 
 donation_success:
   methods: GET|POST

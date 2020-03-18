@@ -18,82 +18,75 @@ use Doctrine\ORM\Mapping as ORM;
 final class DonationRequestsItems
 {
     /**
-     * @var DonationRequest
+     * @var int
      *
-     * @ORM\Id()
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer", name="id")
+     */
+    private $id;
+
+    /**
+     * @var DonationRequest|null
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\DonationRequest", inversedBy="donatedItems")
-     * @ORM\JoinColumn(name="donation_request_id")
+     * @ORM\JoinColumn(name="donation_request_id", nullable=false)
      */
     private $donationRequest;
 
     /**
-     * @var Item
+     * @var DonationItem|null
      *
-     * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="donatedItems")
-     * @ORM\JoinColumn(name="item_id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="donatedItems")
+     * @ORM\JoinColumn(name="item_id", nullable=true)
      */
     private $item;
 
     /**
+     * @var int|null
      * @var int
      *
-     * @ORM\Column(name="quantity", type="integer", length=64)
+     * @ORM\Column(name="quantity", type="integer", length=64, nullable=true)
      */
     private $quantity;
 
     /**
-     * @param DonationRequest $request
-     * @param Item $item
-     * @param int $quantity
-     */
-    private function __construct(DonationRequest $request, Item $item, int $quantity)
-    {
-        $this->donationRequest = $request;
-        $this->item = $item;
-        $this->quantity = $quantity;
-    }
-
-    /**
-     * @param DonationRequest $request
-     * @param Item $item
-     * @param int $quantity
+     * @var string|null
      *
-     * @return DonationRequestsItems
+     * @ORM\Column(name="other", type="text", nullable=true)
      */
-    public static function fromRequest(DonationRequest $request, Item $item, int $quantity): DonationRequestsItems
-    {
-        return new self($request, $item, $quantity);
-    }
+    private $other;
 
     /**
-     * @return DonationRequest
+     * @return DonationRequest|null
      */
-    public function getDonationRequest(): DonationRequest
+    public function getDonationRequest(): ?DonationRequest
     {
         return $this->donationRequest;
     }
 
     /**
-     * @param DonationRequest $donationRequest
+     * @param DonationRequest|null $donationRequest
      */
-    public function setDonationRequest(DonationRequest $donationRequest): void
+    public function setDonationRequest(?DonationRequest $donationRequest): void
     {
         $this->donationRequest = $donationRequest;
     }
 
+
+
     /**
-     * @return Item
+     * @return DonationItem
      */
-    public function getItem(): Item
+    public function getItem(): ?DonationItem
     {
         return $this->item;
     }
 
     /**
-     * @param Item $item
+     * @param DonationItem $item
      */
-    public function setItem(Item $item): void
+    public function setItem(DonationItem $item): void
     {
         $this->item = $item;
     }
@@ -101,7 +94,7 @@ final class DonationRequestsItems
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
@@ -112,5 +105,50 @@ final class DonationRequestsItems
     public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOther(): ?string
+    {
+        return $this->other;
+    }
+
+    /**
+     * @param string|null $other
+     */
+    public function setOther(?string $other): void
+    {
+        $this->other = $other;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        if ($this->item === null) {
+            return sprintf('ine: %s (%s) pcs', $this->other, $this->quantity ?? 0);
+
+        }
+
+        return sprintf('%s (%s) pcs', $this->item->getName(), $this->quantity ?? 0);
     }
 }

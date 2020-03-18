@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="donation_item")
  */
-class Item
+class DonationItem
 {
     /**
      * @var int
@@ -36,26 +36,41 @@ class Item
     private $name;
 
     /**
-     * @var Collection|HelpRequestsItems[]|array
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="item")
-     */
-    private $requestedItems;
-
-    /**
-     * @var Collection|DonationRequest[]|array
+     * @var Collection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\DonationRequestsItems", mappedBy="item")
      */
     private $donatedItems;
 
     /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="item")
+     */
+    private $requestedItems;
+
+    /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Donation", mappedBy="donationItem")
+     */
+    private $donations;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="`show`")
+     */
+    private $show = true;
+
+    /**
      *
      */
     public function __construct()
     {
-        $this->requestedItems = new ArrayCollection();
         $this->donatedItems = new ArrayCollection();
+        $this->requestedItems = new ArrayCollection();
+        $this->donations = new ArrayCollection();
     }
 
     /**
@@ -99,20 +114,44 @@ class Item
     }
 
     /**
-     * @return HelpRequestsItems[]|array|Collection
+     * @return Collection
      */
-    public function getRequestedItems()
+    public function getDonations(): Collection
+    {
+        return $this->donations;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDonatedItems(): Collection
+    {
+        return $this->donatedItems;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getRequestedItems(): Collection
     {
         return $this->requestedItems;
     }
 
     /**
-     * @return DonationRequest[]|array|Collection
+     * @return bool
      */
-    public function getDonatedItems()
+    public function isShow(): bool
     {
-        return $this->donatedItems;
+        return $this->show;
     }
 
-
+    /**
+     * @param bool $show
+     *
+     * @return void
+     */
+    public function setShow(bool $show): void
+    {
+        $this->show = $show;
+    }
 }

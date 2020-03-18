@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 use Twig\Error\LoaderError;
@@ -24,13 +25,19 @@ final class RecipientsController
      * @var Twig
      */
     private $twig;
+    /**
+     * @var EntityRepository
+     */
+    private $donations;
 
     /**
-     * @param Twig $twig
+     * @param EntityRepository $donations
+     * @param Twig             $twig
      */
-    public function __construct(Twig $twig)
+    public function __construct(EntityRepository $donations, Twig $twig)
     {
         $this->twig = $twig;
+        $this->donations = $donations;
     }
 
     /**
@@ -42,6 +49,12 @@ final class RecipientsController
      */
     public function index(): Response
     {
-        return new Response($this->twig->render('recipients.html.twig'));
+        $donations = $this->donations->findBy([], ['donatedAt' => 'DESC']);
+
+        return new Response($this->twig->render(
+            'recipients.html.twig', [
+                'donations' => $donations
+            ]
+        ));
     }
 }

@@ -9,13 +9,13 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Entity\HelpRequest;
+use App\Form\Model\HelpRequestForm;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,6 +28,21 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 final class HelpRequestType extends AbstractType
 {
+    use ItemsFragment;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -47,11 +62,11 @@ final class HelpRequestType extends AbstractType
             ]
         ]);
 
-        $builder->add('address',  TextType::class, [
+        $builder->add('address', TextType::class, [
             'required' => true,
             'label' => 'Adresa nemocnice / zariadenia / organizácie',
             'attr' => [
-                'placeholder' => 'Adresa'
+                'placeholder' => 'Ulica, PSČ, Mesto'
             ],
             'constraints' => [
                 new NotBlank()
@@ -91,17 +106,7 @@ final class HelpRequestType extends AbstractType
             ]
         ]);
 
-        $builder->add('requestText', TextareaType::class, [
-            'required' => true,
-            'attr' => [
-                'rows' => 7,
-                'placeholder' => 'Prosíme napíšte, aký materiál potrebujete a uveďte aj počty kusov.'
-            ],
-            'label' => 'Potrebujeme',
-            'constraints' => [
-                new NotBlank()
-            ]
-        ]);
+        $this->renderItemsFragment($builder, $this->entityManager);
 
         $builder->add('policy', CheckboxType::class, [
             'required' => true,
@@ -113,7 +118,7 @@ final class HelpRequestType extends AbstractType
         ]);
 
         $builder->add('submit', SubmitType::class, [
-                'label' => 'ODOSLAť žiadosť', 'attr' => ['class' => 'btn-default']
+                'label' => 'Odoslať žiadosť', 'attr' => ['class' => 'btn-default']
             ]
         );
     }
@@ -125,6 +130,6 @@ final class HelpRequestType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => HelpRequest::class]);
+        $resolver->setDefaults(['data_class' => HelpRequestForm::class]);
     }
 }

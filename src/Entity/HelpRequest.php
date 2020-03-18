@@ -72,16 +72,9 @@ class HelpRequest
     private $address;
 
     /**
-     * @var string
+     * @var Collection
      *
-     * @ORM\Column(type="text", name="request_text")
-     */
-    private $requestText;
-
-    /**
-     * @var Collection|HelpRequestsItems[]|array
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="helpRequest")
+     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="helpRequest", cascade={"persist"})
      */
     private $requestedItems;
 
@@ -89,6 +82,13 @@ class HelpRequest
      * @var bool
      */
     private $policy;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="resolved")
+     */
+    private $resolved = false;
 
     /**
      * @return int
@@ -175,6 +175,22 @@ class HelpRequest
     }
 
     /**
+     * @return Collection
+     */
+    public function getRequestedItems(): Collection
+    {
+        return $this->requestedItems;
+    }
+
+    /**
+     * @param Collection $requestedItems
+     */
+    public function setRequestedItems(Collection $requestedItems): void
+    {
+        $this->requestedItems = $requestedItems;
+    }
+
+    /**
      * @return string
      */
     public function getEmail(): ?string
@@ -188,22 +204,6 @@ class HelpRequest
     public function setEmail(string $email): void
     {
         $this->email = $email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRequestText(): ?string
-    {
-        return $this->requestText;
-    }
-
-    /**
-     * @param string $requestText
-     */
-    public function setRequestText(string $requestText): void
-    {
-        $this->requestText = $requestText;
     }
 
     /**
@@ -241,17 +241,26 @@ class HelpRequest
     }
 
     /**
-     * @param Item $item
-     * @param int $quantity
-     *
-     * @return void
+     * @return string
      */
-    public function addHelpRequestItem(Item $item, int $quantity): void
+    public function __toString()
     {
-        if ($this->requestedItems->contains($item)) {
-            return;
-        }
+        return sprintf('%s [%s]', $this->getInstitutionName(), $this->getContactPerson());
+    }
 
-        $this->requestedItems->add(HelpRequestsItems::fromRequest($this, $item, $quantity));
+    /**
+     * @return bool
+     */
+    public function getResolved(): bool
+    {
+        return $this->resolved;
+    }
+
+    /**
+     * @param bool $resolved
+     */
+    public function setResolved(bool $resolved): void
+    {
+        $this->resolved = $resolved;
     }
 }

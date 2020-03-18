@@ -18,82 +18,72 @@ use Doctrine\ORM\Mapping as ORM;
 final class HelpRequestsItems
 {
     /**
-     * @var DonationRequest
+     * @var int
      *
-     * @ORM\Id()
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer", name="id")
+     */
+    private $id;
+
+    /**
+     * @var HelpRequest|null
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\HelpRequest", inversedBy="requestedItems")
-     * @ORM\JoinColumn(name="help_request_id")
+     * @ORM\JoinColumn(name="help_request_id", nullable=false)
      */
     private $helpRequest;
 
     /**
-     * @var Item
+     * @var DonationItem|null
      *
-     * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="requestedItems")
-     * @ORM\JoinColumn(name="item_id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="requestedItems")
+     * @ORM\JoinColumn(name="item_id", nullable=true)
      */
     private $item;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="quantity", type="integer", length=64)
+     * @ORM\Column(name="quantity", type="integer", length=64, nullable=true)
      */
     private $quantity;
 
     /**
-     * @param HelpRequest $request
-     * @param Item $item
-     * @param int $quantity
-     */
-    private function __construct(HelpRequest $request, Item $item, int $quantity)
-    {
-        $this->helpRequest = $request;
-        $this->item = $item;
-        $this->quantity = $quantity;
-    }
-
-    /**
-     * @param HelpRequest $request
-     * @param Item $item
-     * @param int $quantity
+     * @var string|null
      *
-     * @return HelpRequestsItems
+     * @ORM\Column(name="other", type="text", nullable=true)
      */
-    public static function fromRequest(HelpRequest $request, Item $item, int $quantity): HelpRequestsItems
-    {
-        return new self($request, $item, $quantity);
-    }
+    private $other;
 
     /**
-     * @return DonationRequest
+     * @return HelpRequest
      */
-    public function getHelpRequest(): DonationRequest
+    public function getHelpRequest(): ?HelpRequest
     {
         return $this->helpRequest;
     }
 
     /**
-     * @param DonationRequest $helpRequest
+     * @param HelpRequest $helpRequest
      */
-    public function setHelpRequest(DonationRequest $helpRequest): void
+    public function setHelpRequest(?HelpRequest $helpRequest): void
     {
         $this->helpRequest = $helpRequest;
     }
 
     /**
-     * @return Item
+     * @return DonationItem
      */
-    public function getItem(): Item
+    public function getItem(): ?DonationItem
     {
         return $this->item;
     }
 
     /**
-     * @param Item $item
+     * @param DonationItem $item
      */
-    public function setItem(Item $item): void
+    public function setItem(?DonationItem $item): void
     {
         $this->item = $item;
     }
@@ -101,7 +91,7 @@ final class HelpRequestsItems
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
@@ -112,5 +102,50 @@ final class HelpRequestsItems
     public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOther(): ?string
+    {
+        return $this->other;
+    }
+
+    /**
+     * @param string|null $other
+     */
+    public function setOther(?string $other): void
+    {
+        $this->other = $other;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        if ($this->item === null) {
+            return sprintf('ine: %s (%s) pcs', $this->other, $this->quantity ?? 0);
+
+        }
+
+        return sprintf('%s (%s) pcs', $this->item->getName(), $this->quantity ?? 0);
     }
 }

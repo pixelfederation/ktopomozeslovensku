@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\TransparentAccountReporterService;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -33,15 +34,24 @@ final class HomeController
      * @var TransparentAccountReporterService
      */
     private $reporterService;
+    /**
+     * @var EntityRepository
+     */
+    private $donations;
 
     /**
      * @param Twig                              $twig
      * @param TransparentAccountReporterService $reporterService
+     * @param EntityRepository                  $donations
      */
-    public function __construct(Twig $twig, TransparentAccountReporterService $reporterService)
-    {
+    public function __construct(
+        Twig $twig,
+        TransparentAccountReporterService $reporterService,
+        EntityRepository $donations
+    ) {
         $this->twig = $twig;
         $this->reporterService = $reporterService;
+        $this->donations = $donations;
     }
 
     /**
@@ -58,7 +68,16 @@ final class HomeController
     public function index(): Response
     {
         $donatedAmount = $this->reporterService->getDonatedAmount();
+        $donations = $this->donations->findBy([], ['donatedAt' => 'DESC'], 3);
+        $donationsCount = $this->donations->count([]);
 
-        return new Response($this->twig->render('home.html.twig', ['donatedAmount' => $donatedAmount]));
+        return new Response($this->twig->render(
+            'home.html.twig',
+            [
+                'donatedAmount' => $donatedAmount,
+                'donations' => $donations,
+                'donationsCount' => $donationsCount,
+            ]
+        ));
     }
 }

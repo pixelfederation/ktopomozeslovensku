@@ -17,24 +17,30 @@ export const Main = () => `
 `;
 
 export const Footer = () => `
-<footer class="l-nav">
-  <div class="footer__nav">
-    <p class="footer__nav-item">©2020 KtopomozeSlovensku</p>
-    <a href="#" class="footer__nav-item">Súkromie</a>
-    <a href="#" class="footer__nav-item">Kontakt</a>
+<div>
+  <footer class="l-footer-nav">
+    <div class="footer__nav">
+      <p class="footer__nav-item">©2020 KtopomozeSlovensku</p>
+      <a href="#" class="footer__nav-item">Súkromie</a>
+      <a href="#" class="footer__nav-item">Kontakt</a>
+    </div>
+    <div class="footer__share">
+      <a href="https://www.facebook.com/KtoPomozeSlovensku/" target="_blank">
+        <i class="icon-brand-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/ktopomozeslovensku/" target="_blank">
+        <i class="icon-brand-instagram"></i>
+      </a>
+    </div>
+  </footer>
+
+  <div class="footer-legal">
+    <div class="footer-legal__inner">
+      <i class="footer-legal__icon icon-certificate"></i>
+      <p class="footer-legal__text">
+        Iniciatíva Kto pomôže Slovensku aj účet SK268330000000290146711, Fio banka, a.s., pobočka zahraničnej banky bol preverený Odborom počítačovej kriminality Úradu kriminálnej polície Prezídia Policajného zboru Slovenskej republiky
+      </p>
+    </div>
   </div>
-  <div class="footer__share">
-    <a href="#">
-      <i class="icon-brand-facebook"></i>
-    </a>
-    <a href="#">
-      <i class="icon-brand-twitter"></i>
-    </a>
-    <a href="#">
-      <i class="icon-brand-instagram"></i>
-    </a>
-    <a href="#">
-      <i class="icon-email-at"></i>
-    </a>
-  </div>
-</footer>`;
+</div>`;
+

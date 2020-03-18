@@ -5,15 +5,18 @@
   {{- parent() -}}
 {%- endblock button_widget %}
 
+{% block choice_widget -%}
+  {%- set attr = attr|merge({class: (attr.class|default(' input'))|trim}) -%}
+  {{- parent() -}}
+{%- endblock choice_widget %}
+
 {%- block textarea_widget -%}
   <textarea {{ block('widget_attributes') }} class="input">{{ value }}</textarea>
 {%- endblock textarea_widget -%}
 
 {% block checkbox_widget %}
-  <label>
-    <input type="checkbox" {{ block('widget_attributes') }} class="checkbox" required>
-    <strong>{{ label }}</strong>
-  </label>
+    <input type="checkbox" {{ block('widget_attributes') }} class="checkbox">
+    <label for="{{ id }}">{{ label }}</label>
 {%- endblock checkbox_widget %}
 
 {% block form_label -%}

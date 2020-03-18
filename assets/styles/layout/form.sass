@@ -1,0 +1,32 @@
+@use '../config/colors' as colors
+
+.form-container
+  width: 100%
+  height: 3em
+  display: flex
+  align-items: baseline
+
+  label
+    align-items: center
+    margin-bottom: 24px
+
+  input:not(.checkbox)
+    display: inline-block
+    vertical-align: top
+    margin-left: auto
+    &[type=text]
+      width: 70%
+    &[type=number]
+      width: 25%
+
+.form-container .checkbox:not(:checked) ~ .input
+  display: none
+
+.form-container .checkbox:checked ~ label
+  flex: 1
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
+
+.checkbox:checked ~ label
+  font-weight: bold
