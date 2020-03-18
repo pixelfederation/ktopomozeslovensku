@@ -21,6 +21,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 /**
  *
@@ -37,7 +38,13 @@ trait ItemsFragment
     {
         $repository = $entityManager->getRepository(DonationItem::class);
 
-        $builder->add('items', CollectionType::class, ['required' => true, 'constraints' => [new All(new NotBlank())]]);
+        $builder->add('items', CollectionType::class, [
+            'required' => true,
+            'constraints' => [
+                new NotNull(),
+                new All(new NotBlank())
+            ]
+        ]);
 
         // Add dynamic fields
         $builder->addEventListener(FormEvents::POST_SET_DATA, static function (FormEvent $event) use ($builder, $repository) {
