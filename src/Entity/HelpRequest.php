@@ -84,6 +84,13 @@ class HelpRequest
     private $policy;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="resolved")
+     */
+    private $resolved = false;
+
+    /**
      * @return int
      */
     public function getId(): ?int
@@ -239,5 +246,21 @@ class HelpRequest
     public function __toString()
     {
         return sprintf('%s [%s]', $this->getInstitutionName(), $this->getContactPerson());
+    }
+
+    /**
+     * @return bool
+     */
+    public function getResolved(): bool
+    {
+        return $this->resolved;
+    }
+
+    /**
+     * @param bool $resolved
+     */
+    public function setResolved(bool $resolved): void
+    {
+        $this->resolved = $resolved;
     }
 }

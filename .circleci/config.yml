@@ -1,4 +1,8 @@
 version: 2
+
+orbs:
+  slack: circleci/slack@3.4.2
+
 jobs:
   dev:
     docker:
@@ -8,6 +12,11 @@ jobs:
       APP_ENV: dev
       APP_DEBUG: 1
     steps:
+      ## SLACK
+      - slack/notify:
+          colof: '#42f4ad'
+          channel: '#dev-web'
+          message: Ktopomozeslovensku.sk DEV Build Start
       ## START GENERIC
       - checkout
 
@@ -40,6 +49,9 @@ jobs:
       - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --exclude='public/.htpasswd' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/dev ~/${HOST_PATH}/var/cache/dev_old;rm -rf ~/${HOST_PATH}/var/cache/dev_old"
 
+      - slack/status
+          channel: '#dev-web'
+
   prod:
     docker:
       - image: circleci/php:7.3-node-browsers
@@ -48,6 +60,12 @@ jobs:
       APP_ENV: prod
       APP_DEBUG: 0
     steps:
+      ## SLACK
+      - slack/notify:
+          color: '#f45442'
+          channel: '#dev-web'
+          message: Ktopomozeslovensku.sk PROD Build Start
+
       ## START GENERIC
       - checkout
 
@@ -79,6 +97,9 @@ jobs:
 
       - run: rsync -avc -e 'ssh -p 13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -l uid1953480' --exclude='.git' --exclude='.cache' --exclude='.composer' --exclude='node_modules' --exclude='var' --delete . shellserver-3.websupport.sk:~/${HOST_PATH}
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/prod ~/${HOST_PATH}/var/cache/prod_old;rm -rf ~/${HOST_PATH}/var/cache/prod_old"
+
+      - slack/status
+        channel: '#dev-web'
 workflows:
   version: 2
   ci-cd-deploy:

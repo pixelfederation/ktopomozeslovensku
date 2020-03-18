@@ -9,7 +9,7 @@ easy_admin:
       class: App\Entity\HelpRequest
       label: Potrebujem Pomoc
       list:
-        fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestedItems']
+        fields: ['id', 'createdAt', 'resolved', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestedItems']
         sort: 'createdAt'
         actions: [{ name: 'export_dopyt', ask_confirm: false, type: 'route' }]
       show:
@@ -36,7 +36,7 @@ easy_admin:
       label: Darujem
       class: App\Entity\DonationRequest
       list:
-        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address', 'donatedItems']
+        fields: ['id', 'createdAt', 'resolved', 'email', 'contactPerson', 'telephone', 'address', 'donatedItems']
         sort: 'createdAt'
         actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
       new:

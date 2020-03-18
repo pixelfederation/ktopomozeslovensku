@@ -30,7 +30,7 @@ final class DonationRequestsItems
      * @var DonationRequest|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\DonationRequest", inversedBy="donatedItems")
-     * @ORM\JoinColumn(name="donation_request_id")
+     * @ORM\JoinColumn(name="donation_request_id", nullable=false)
      */
     private $donationRequest;
 
@@ -38,7 +38,7 @@ final class DonationRequestsItems
      * @var DonationItem|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\DonationItem", inversedBy="donatedItems")
-     * @ORM\JoinColumn(name="item_id", nullable=false)
+     * @ORM\JoinColumn(name="item_id", nullable=true)
      */
     private $item;
 
@@ -53,7 +53,7 @@ final class DonationRequestsItems
     /**
      * @var string|null
      *
-     * @ORM\Column(name="other", type="text")
+     * @ORM\Column(name="other", type="text", nullable=true)
      */
     private $other;
 

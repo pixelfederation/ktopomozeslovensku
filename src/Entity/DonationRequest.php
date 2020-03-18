@@ -78,6 +78,13 @@ class DonationRequest
     private $policy;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="resolved")
+     */
+    private $resolved = false;
+
+    /**
      *
      */
     public function __construct()
@@ -231,5 +238,23 @@ class DonationRequest
     public function setEmail(?string $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getResolved(): bool
+    {
+        return $this->resolved;
+    }
+
+    /**
+     * @param bool $resolved
+     *
+     * @return void
+     */
+    public function setResolved(bool $resolved): void
+    {
+        $this->resolved = $resolved;
     }
 }
