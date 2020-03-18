@@ -14,22 +14,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  */
-final class HelpRequestForm
+final class DonationRequestForm
 {
     /**
-     * @var string|null
-     */
-    private $institutionName;
-
-    /**
-     * @var string|null
-     */
-    private $address;
-
-    /**
-     * @var string|null
+     * @var  string|null
      */
     private $contactPerson;
+
+    /**
+     * @var string|null
+     */
+    private $email;
 
     /**
      * @var string|null
@@ -39,7 +34,7 @@ final class HelpRequestForm
     /**
      * @var string|null
      */
-    private $email;
+    private $address;
 
     /**
      * @var array|null
@@ -50,38 +45,6 @@ final class HelpRequestForm
      * @var bool|null
      */
     private $policy;
-
-    /**
-     * @return string|null
-     */
-    public function getInstitutionName(): ?string
-    {
-        return $this->institutionName;
-    }
-
-    /**
-     * @param string|null $institutionName
-     */
-    public function setInstitutionName(?string $institutionName): void
-    {
-        $this->institutionName = $institutionName;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    /**
-     * @param string|null $address
-     */
-    public function setAddress(?string $address): void
-    {
-        $this->address = $address;
-    }
 
     /**
      * @return string|null
@@ -97,6 +60,22 @@ final class HelpRequestForm
     public function setContactPerson(?string $contactPerson): void
     {
         $this->contactPerson = $contactPerson;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     */
+    public function setEmail(?string $email): void
+    {
+        $this->email = $email;
     }
 
     /**
@@ -118,17 +97,17 @@ final class HelpRequestForm
     /**
      * @return string|null
      */
-    public function getEmail(): ?string
+    public function getAddress(): ?string
     {
-        return $this->email;
+        return $this->address;
     }
 
     /**
-     * @param string|null $email
+     * @param string|null $address
      */
-    public function setEmail(?string $email): void
+    public function setAddress(?string $address): void
     {
-        $this->email = $email;
+        $this->address = $address;
     }
 
     /**
@@ -142,7 +121,7 @@ final class HelpRequestForm
     /**
      * @param array|null $items
      */
-    public function setItems(array $items): void
+    public function setItems(?array $items): void
     {
         $this->items = $items;
     }

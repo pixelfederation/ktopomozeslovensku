@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Entity\DonationItem;
-use App\Entity\DonationRequest;
+use App\Form\Model\DonationRequestForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\AbstractType;
@@ -30,17 +30,19 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 final class DonationRequestType extends AbstractType
 {
+    use ItemsFragment;
+
     /**
-     * @var ObjectRepository
+     * @var EntityManagerInterface
      */
-    private $repository;
+    private $entityManager;
 
     /**
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->repository = $entityManager->getRepository(DonationItem::class);
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -95,20 +97,7 @@ final class DonationRequestType extends AbstractType
             ]
         ]);
 
-//        $builder->add('donationItem', EntityType::class, [
-//            'required' => true,
-//            'label' => 'Typ pomôcok, ktoré viem ponúknuť',
-//            'class' => Item::class,
-//            'choice_label' => 'name'
-//        ]);
-//
-//        $builder->add('quantity', IntegerType::class, [
-//            'required' => true,
-//            'label' => 'Množstvo',
-//            'constraints' => [
-//                new NotBlank()
-//            ]
-//        ]);
+        $this->renderItemsFragment($builder, $this->entityManager);
 
         $builder->add('policy', CheckboxType::class, [
             'required' => true,
@@ -132,6 +121,6 @@ final class DonationRequestType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => DonationRequest::class]);
+        $resolver->setDefaults(['data_class' => DonationRequestForm::class]);
     }
 }

@@ -58,7 +58,7 @@ final class DonationRequestsItems
     private $other;
 
     /**
-     * @return DonationRequest
+     * @return DonationRequest|null
      */
     public function getDonationRequest(): ?DonationRequest
     {
@@ -66,12 +66,14 @@ final class DonationRequestsItems
     }
 
     /**
-     * @param DonationItem $donationRequest
+     * @param DonationRequest|null $donationRequest
      */
-    public function setDonationRequest(DonationItem $donationRequest): void
+    public function setDonationRequest(?DonationRequest $donationRequest): void
     {
         $this->donationRequest = $donationRequest;
     }
+
+
 
     /**
      * @return DonationItem

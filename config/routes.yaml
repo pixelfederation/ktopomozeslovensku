@@ -56,7 +56,7 @@ donation_finance:
 donation_nonfinance:
   methods: GET|POST
   path: /darujem-nefinancnu-pomoc
-  controller: App\Controller\DonationController::non_finance
+  controller: App\Controller\DonationController::nonFinance
 
 donation_success:
   methods: GET|POST

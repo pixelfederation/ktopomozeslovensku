@@ -200,22 +200,6 @@ class HelpRequest
     }
 
     /**
-     * @return string
-     */
-    public function getRequestText(): ?string
-    {
-        return $this->requestText;
-    }
-
-    /**
-     * @param string $requestText
-     */
-    public function setRequestText(string $requestText): void
-    {
-        $this->requestText = $requestText;
-    }
-
-    /**
      * @param bool $policy
      *
      * @return void

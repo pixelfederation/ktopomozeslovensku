@@ -84,17 +84,23 @@ Vopred ďakujeme za Vašu trpezlivosť.',
     }
 
     /**
-     * @param HelpRequest $helpRequest
+     * @param HelpRequestForm $form
      *
-     * @return string
+     * @return HelpRequest
      */
-    private function generateRequestedEmailText(HelpRequest $helpRequest): string
+    private function buildEntity(HelpRequestForm $form): HelpRequest
     {
-        $requests = $helpRequest->getRequestedItems()->map(static function (HelpRequestsItems $item) {
-            return sprintf('- %s', (string) $item);
-        })->toArray();
+        $newHelpRequest = new HelpRequest();
+        $newHelpRequest->setInstitutionName($form->getInstitutionName());
+        $newHelpRequest->setAddress($form->getAddress());
+        $newHelpRequest->setContactPerson($form->getContactPerson());
+        $newHelpRequest->setTelephone($form->getTelephone());
+        $newHelpRequest->setEmail($form->getEmail());
+        $newHelpRequest->setPolicy($form->getPolicy());
+        $newHelpRequest->setRequestedItems($this->buildRequestedItems($newHelpRequest, $form));
 
-        return implode(PHP_EOL, $requests );
+
+        return $newHelpRequest;
     }
 
     /**
@@ -146,22 +152,16 @@ Vopred ďakujeme za Vašu trpezlivosť.',
     }
 
     /**
-     * @param HelpRequestForm $form
+     * @param HelpRequest $helpRequest
      *
-     * @return HelpRequest
+     * @return string
      */
-    private function buildEntity(HelpRequestForm $form): HelpRequest
+    private function generateRequestedEmailText(HelpRequest $helpRequest): string
     {
-        $newHelpRequest = new HelpRequest();
-        $newHelpRequest->setInstitutionName($form->getInstitutionName());
-        $newHelpRequest->setAddress($form->getAddress());
-        $newHelpRequest->setContactPerson($form->getContactPerson());
-        $newHelpRequest->setTelephone($form->getTelephone());
-        $newHelpRequest->setEmail($form->getEmail());
-        $newHelpRequest->setPolicy($form->getPolicy());
-        $newHelpRequest->setRequestedItems($this->buildRequestedItems($newHelpRequest, $form));
+        $requests = $helpRequest->getRequestedItems()->map(static function (HelpRequestsItems $item) {
+            return sprintf('- %s', (string) $item);
+        })->toArray();
 
-
-        return $newHelpRequest;
+        return implode(PHP_EOL, $requests );
     }
 }
