@@ -99,7 +99,8 @@ jobs:
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/prod ~/${HOST_PATH}/var/cache/prod_old;rm -rf ~/${HOST_PATH}/var/cache/prod_old"
 
       - slack/status
-        channel: '#dev-web'
+          channel: '#dev-web'
+
 workflows:
   version: 2
   ci-cd-deploy:
