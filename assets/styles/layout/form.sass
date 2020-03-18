@@ -12,9 +12,12 @@
 
   input:not(.checkbox)
     display: inline-block
-    width: 40.5%
     vertical-align: top
     margin-left: auto
+    &[type=text]
+      width: 70%
+    &[type=number]
+      width: 25%
 
 .form-container .checkbox:not(:checked) ~ .input
   display: none
