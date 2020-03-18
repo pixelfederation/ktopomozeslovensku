@@ -68,7 +68,7 @@ final class DonationRequestType extends AbstractType
             'required' => true,
             'label' => 'Adresa konktaktnej osoby',
             'attr' => [
-                'placeholder' => 'Adresa'
+                'placeholder' => 'Ulica, PSČ, Mesto'
             ],
             'constraints' => [
                 new NotBlank()
@@ -109,7 +109,7 @@ final class DonationRequestType extends AbstractType
         ]);
 
         $builder->add('submit', SubmitType::class, [
-                'label' => 'ODOSLAŤ DAR', 'attr' => ['class' => 'btn-default']
+                'label' => 'Odoslať dar', 'attr' => ['class' => 'btn-default']
             ]
         );
     }

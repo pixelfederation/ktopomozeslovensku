@@ -66,7 +66,7 @@ final class HelpRequestType extends AbstractType
             'required' => true,
             'label' => 'Adresa nemocnice / zariadenia / organizácie',
             'attr' => [
-                'placeholder' => 'Adresa'
+                'placeholder' => 'Ulica, PSČ, Mesto'
             ],
             'constraints' => [
                 new NotBlank()
@@ -118,7 +118,7 @@ final class HelpRequestType extends AbstractType
         ]);
 
         $builder->add('submit', SubmitType::class, [
-                'label' => 'ODOSLAť žiadosť', 'attr' => ['class' => 'btn-default']
+                'label' => 'Odoslať žiadosť', 'attr' => ['class' => 'btn-default']
             ]
         );
     }

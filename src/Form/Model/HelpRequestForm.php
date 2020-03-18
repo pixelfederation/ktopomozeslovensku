@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  *
  */
-final class HelpRequestForm
+final class HelpRequestForm implements ItemForm
 {
     /**
      * @var string|null
@@ -142,7 +142,7 @@ final class HelpRequestForm
     /**
      * @param array|null $items
      */
-    public function setItems(array $items): void
+    public function setItems(?array $items): void
     {
         $this->items = $items;
     }

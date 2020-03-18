@@ -9,12 +9,10 @@ declare(strict_types=1);
 
 namespace App\Form\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  *
  */
-final class DonationRequestForm
+final class DonationRequestForm implements ItemForm
 {
     /**
      * @var  string|null

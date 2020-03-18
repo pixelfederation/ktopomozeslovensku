@@ -61,7 +61,6 @@ final class HelpRequestService
         $this->entityManager->flush();
         $this->entityManager->clear();
 
-
         $this->mailer->sendMail(
             'Bola pridaná nová požiadavka o pomoc.',
                 "Názov nemocnice / zariadenia / organizácie: {$entity->getInstitutionName()}" . PHP_EOL
@@ -72,8 +71,6 @@ final class HelpRequestService
                 . 'Potrebujeme: ' . PHP_EOL
                 . $this->generateRequestedEmailText($entity) . PHP_EOL
         );
-
-        dump($this->generateRequestedEmailText($entity));
 
         $this->mailer->sendMailToRecipient(
             'KtoPomôžeSlovensku - žiadosť prijatá',
