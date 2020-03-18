@@ -182,5 +182,6 @@ easy_admin:
     actions: ['show', '-delete']
   list:
     actions: ['show', 'search', 'edit', '-delete']
+    max_results: 50
   show:
     actions: ['-edit', '-delete']
