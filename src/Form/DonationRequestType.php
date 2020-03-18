@@ -9,10 +9,8 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Entity\DonationItem;
 use App\Form\Model\DonationRequestForm;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -51,7 +49,7 @@ final class DonationRequestType extends AbstractType
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('contactPerson', TextType::class, [
             'required' => true,
