@@ -45,7 +45,7 @@ final class HelpRequestsItems
     /**
      * @var int|null
      *
-     * @ORM\Column(name="quantity", type="integer", length=64)
+     * @ORM\Column(name="quantity", type="integer", length=64, nullable=true)
      */
     private $quantity;
 
