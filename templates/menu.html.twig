@@ -1,0 +1,48 @@
+<div class="l-nav l-padding">
+  <a href="/">
+    <img src="/static/img/logo.svg" class="logo" alt="Kto pomôže Slovensku" />
+  </a>
+
+  <i class="icon-burger-big nav__trigger js-nav-trigger is-collapsed"></i>
+
+  <nav class="nav js-nav is-collapsed">
+    <a href="{{ path('about') }}" class="nav__item {% if app.request.get('_route') == 'about' %}is-active{% endif %}">O projekte</a>
+    <a href="{{ path('donation') }}" class="nav__item {% if app.request.get('_route') == 'donation' %}is-active{% endif %}">Darujem</a>
+    <a href="{{ path('help_request') }}" class="nav__item {% if app.request.get('_route') == 'help_request' %}is-active{% endif %}">Potrebujem pomoc</a>
+  </nav>
+</div>
+
+<div class="nav__content-separator"></div>
+
+<script>
+  var navTrigger = document.querySelector('.js-nav-trigger')
+  var nav = document.querySelector('.js-nav')
+
+  navTrigger.addEventListener('click', function() {
+    var isCollapsed = navTrigger.classList.contains('is-collapsed')
+
+    if (isCollapsed) {
+      navTrigger.classList.remove('is-collapsed', 'icon-burger-big')
+      navTrigger.classList.add('icon-close-big')
+
+      nav.classList.remove('is-collapsed')
+
+      document.body.classList.add('no-scroll')
+    } else {
+      navTrigger.classList.add('is-collapsed', 'icon-burger-big')
+      navTrigger.classList.remove('icon-close-big')
+
+      nav.classList.add('is-collapsed')
+
+      document.body.classList.remove('no-scroll')
+    }
+  })
+</script>
+
+
+{#<li{% if app.request.get('_route') == 'help_request' %} class="active"{% endif %}><a href="{{ path('help_request') }}">Potrebujem pomoc</a></li>
+          <li{% if app.request.get('_route') == 'donation' %} class="active"{% endif %}><a href="{{ path('donation') }}">Darujem</a></li>
+          <li{% if app.request.get('_route') == 'recipients' %} class="active"{% endif %}><a href="{{ path('recipients') }}">Komu sme pomohli</a></li>
+          <li{% if app.request.get('_route') == 'partners' %} class="active"{% endif %}><a href="{{ path('partners') }}">Garanti</a></li>
+          <li{% if app.request.get('_route') == 'team' %} class="active"{% endif %}><a href="{{ path('team') }}">Organizačný team</a></li>
+          <li{% if app.request.get('_route') == 'faq' %} class="active"{% endif %}><a href="{{ path('faq') }}">FAQ</a></li>#}

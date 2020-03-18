@@ -27,7 +27,7 @@ class DonationRequest
      *
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="id")
      */
     private $id;
 
@@ -247,6 +247,4 @@ class DonationRequest
     {
         $this->email = $email;
     }
-
-
 }

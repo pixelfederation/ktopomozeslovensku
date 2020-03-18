@@ -99,17 +99,6 @@ class HelpRequest
     }
 
     /**
-     * @param DonationItem $item
-     * @param int $quantity
-     *
-     * @return void
-     */
-    public static function addRequestItem(DonationItem $item, int $quantity)
-    {
-
-    }
-
-    /**
      *
      * @return void
      *

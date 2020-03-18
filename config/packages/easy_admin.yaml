@@ -81,6 +81,16 @@ easy_admin:
           - count
           - donatedAt
 
+    Partner:
+      class: App\Entity\Partner
+      label: 'Partneri'
+      list:
+        fields: ['id', 'name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt']
+        actions: ['edit', 'delete', '-show']
+      edit:
+        fields: ['name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt']
+        actions: ['delete', '-show']
+
     DonationRequestsItems:
       class: App\Entity\DonationRequestsItems
       label: Darovane Prostriedky
@@ -110,6 +120,9 @@ easy_admin:
       - { entity: 'HelpRequest', icon: 'hands-helping'}
       - { entity: 'DonationRequest', icon: 'people-carry'}
       - { entity: 'DonationItem', icon: 'cubes'}
+      - { entity: 'Recipient', icon: 'life-ring'}
+      - { entity: 'Donation', icon: 'people-carry'}
+      - { entity: 'Partner', icon: 'handshake'}
       - { entity: 'Recipient', icon: 'hands-helping'}
       - { entity: 'Donation', icon: 'hands-helping'}
       - { entity: 'DonationRequestsItems', icon: 'hands'}

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="danation_requests_items")
+ * @ORM\Table(name="donation_requests_items")
  */
 final class DonationRequestsItems
 {
@@ -31,6 +31,11 @@ final class DonationRequestsItems
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\DonationRequest", inversedBy="donatedItems")
      * @ORM\JoinColumn(name="donation_request_id", nullable=false)
+     * @var DonationRequest
+     *
+     * @ORM\Id()
+     * @ORM\ManyToOne(targetEntity="App\Entity\DonationRequest", inversedBy="donatedItems")
+     * @ORM\JoinColumn(name="donation_request_id")
      */
     private $donationRequest;
 
@@ -44,6 +49,7 @@ final class DonationRequestsItems
 
     /**
      * @var int|null
+     * @var int
      *
      * @ORM\Column(name="quantity", type="integer", length=64)
      */

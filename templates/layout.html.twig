@@ -44,7 +44,7 @@
 </head>
 <body>
 <header>
-  {% embed "partials/menu.html.twig" %}{% endembed %}
+  {% embed "menu.html.twig" %}{% endembed %}
 </header>
 <main>
   {% block main %}{% endblock %}
@@ -52,5 +52,9 @@
 <footer>
   {% embed "partials/footer.html.twig" %}{% endembed %}
 </footer>
+
+{#<script type="text/javascript" src="{{ asset('static/js/jquery-3.1.1.min.js') }}"></script>#}
+{#<script type="text/javascript" src="{{ asset('static/js/bootstrap.min.js') }}"></script>#}
+{#<script type="text/javascript" src="{{ asset('static/js/custom.js') }}"></script>#}
 </body>
 </html>

@@ -36,7 +36,17 @@ services:
             $donations: '@DonationsRepository'
         tags: ['controller.service_arguments']
 
+    App\Controller\AboutController:
+      arguments:
+        $partners: '@PartnersRepository'
+      tags: ['controller.service_arguments']
+
     DonationsRepository:
         class: 'Doctrine\ORM\EntityRepository'
         factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
         arguments: ['App\Entity\Donation']
+
+    PartnersRepository:
+      class: 'Doctrine\ORM\EntityRepository'
+      factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+      arguments: ['App\Entity\Partner']
