@@ -46,7 +46,7 @@ final class Partner
 
     /**
      * @var DateTimeImmutable
-     * @ORM\Column(type="date", name="helped_at")
+     * @ORM\Column(type="date_immutable", name="helped_at")
      */
     private $helpedAt;
 
