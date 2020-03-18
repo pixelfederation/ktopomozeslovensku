@@ -26,8 +26,6 @@ final class Version20200318164609 extends AbstractMigration
         $this->addSql('ALTER TABLE partner CHANGE helped_at helped_at DATE NOT NULL');
         $this->addSql('ALTER TABLE help_request ADD resolved TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE donation_requests_items CHANGE quantity quantity INT NOT NULL');
-        $this->addSql('ALTER TABLE donation_requests_items RENAME INDEX idx_dbad424de04907ed TO IDX_101F3ECDE04907ED');
-        $this->addSql('ALTER TABLE donation_requests_items RENAME INDEX idx_dbad424d126f525e TO IDX_101F3ECD126F525E');
         $this->addSql('ALTER TABLE help_requests_items CHANGE quantity quantity INT NOT NULL');
     }
 
@@ -38,8 +36,6 @@ final class Version20200318164609 extends AbstractMigration
 
         $this->addSql('ALTER TABLE donation_request DROP resolved');
         $this->addSql('ALTER TABLE donation_requests_items CHANGE quantity quantity INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE donation_requests_items RENAME INDEX idx_101f3ecd126f525e TO IDX_DBAD424D126F525E');
-        $this->addSql('ALTER TABLE donation_requests_items RENAME INDEX idx_101f3ecde04907ed TO IDX_DBAD424DE04907ED');
         $this->addSql('ALTER TABLE help_request DROP resolved');
         $this->addSql('ALTER TABLE help_requests_items CHANGE quantity quantity INT DEFAULT NULL');
         $this->addSql('ALTER TABLE partner CHANGE helped_at helped_at DATE DEFAULT \'2020-03-15\' NOT NULL');
