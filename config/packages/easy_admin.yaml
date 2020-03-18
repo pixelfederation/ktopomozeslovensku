@@ -1,17 +1,63 @@
 easy_admin:
   site_name: 'KtopomozeSlovensku'
   entities:
+
+    #
+    # HelpRequest
+    #
     HelpRequest:
       class: App\Entity\HelpRequest
       label: Potrebujem Pomoc
       list:
-        fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
+        fields: ['id', 'createdAt', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestedItems']
         sort: 'createdAt'
         actions: [{ name: 'export_dopyt', ask_confirm: false, type: 'route' }]
       show:
       search:
       new:
-        fields:  ['institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestText']
+        fields:  ['institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestedItems']
+
+    #
+    # HelpRequestsItems
+    #
+    HelpRequestsItems:
+      class: App\Entity\HelpRequestsItems
+      label: Ziadane Prostriedky
+      list:
+        fields:
+          - helpRequest
+          - item
+          - quantity
+          - other
+    #
+    # DonationRequest
+    #
+    DonationRequest:
+      label: Darujem
+      class: App\Entity\DonationRequest
+      list:
+        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address', 'donatedItems']
+        sort: 'createdAt'
+        actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
+      new:
+        fields: ['email','contactPerson', 'telephone', 'address']
+
+    #
+    # DonationRequestsItems
+    #
+    DonationRequestsItems:
+      class: App\Entity\DonationRequestsItems
+      label: Darovane Prostriedky
+      list:
+        fields:
+          - item
+          - donationRequest
+          - quantity
+          - other
+
+    #
+    # DonationItem
+    #
     DonationItem:
       class: App\Entity\DonationItem
       label: Typ pomôcky
@@ -21,14 +67,10 @@ easy_admin:
       edit:
         fields:
           - 'name'
-    DonationRequest:
-      label: Darujem
-      class: App\Entity\DonationRequest
-      list:
-        fields: ['id', 'createdAt', 'email', 'contactPerson', 'telephone', 'address']
-        actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
-      new:
-        fields: ['email','contactPerson', 'telephone', 'address']
+
+    #
+    # Recipient
+    #
     Recipient:
       class: App\Entity\Recipient
       label: 'Komu sme pomohli - prijemca'
@@ -43,16 +85,19 @@ easy_admin:
       edit:
         fields:
           - 'institutionName'
-##          - 'donations'
-#          - property: 'donations'
-#            label: 'Donations'
-#            type: 'collection'
-#            type_options:
-#              entry_type: 'App\Form\DonationType'
-#              allow_delete: true
-#              allow_add: true
-#              by_reference: false
+          - 'donations'
+          - property: 'donations'
+            label: 'Donations'
+            type: 'collection'
+            type_options:
+              entry_type: 'App\Form\DonationType'
+              allow_delete: true
+              allow_add: true
+              by_reference: false
 
+    #
+    # Donation
+    #
     Donation:
       class: App\Entity\Donation
       label: 'Komu sme pomohli - polozky'
@@ -81,6 +126,9 @@ easy_admin:
           - count
           - donatedAt
 
+    #
+    # Partner
+    #
     Partner:
       class: App\Entity\Partner
       label: 'Partneri'
@@ -91,42 +139,34 @@ easy_admin:
         fields: ['name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt']
         actions: ['delete', '-show']
 
-    DonationRequestsItems:
-      class: App\Entity\DonationRequestsItems
-      label: Darovane Prostriedky
-      list:
-        fields:
-          - id
-          - donationRequest
-          - item
-          - quantity
-      new:
-        fields:
-          - donationRequest
-          - item
-          - quantity
-
-    HelpRequestsItems:
-      class: App\Entity\HelpRequestsItems
-      label: Ziadane Prostriedky
-      list:
-        fields:
-          - helpRequest
-          - item
-          - quantity
-
   design:
     menu:
-      - { entity: 'HelpRequest', icon: 'hands-helping'}
-      - { entity: 'DonationRequest', icon: 'people-carry'}
-      - { entity: 'DonationItem', icon: 'cubes'}
-      - { entity: 'Recipient', icon: 'life-ring'}
-      - { entity: 'Donation', icon: 'people-carry'}
-      - { entity: 'Partner', icon: 'handshake'}
-      - { entity: 'Recipient', icon: 'hands-helping'}
-      - { entity: 'Donation', icon: 'hands-helping'}
-      - { entity: 'DonationRequestsItems', icon: 'hands'}
-      - { entity: 'HelpRequestsItems', icon: 'hands'}
+      - label: Žiadosti
+        icon: hands-helping
+        children:
+          - { label: 'Zoznam', entity: HelpRequest, icon: 'list' }
+          - { label: 'Žiadané prostriedky', entity: HelpRequestsItems, icon: 'cubes' }
+
+      - label: Dary
+        icon: people-carry
+        children:
+          - { label: 'Zoznam', entity: DonationRequest, icon: 'list' }
+          - { label: 'Darovné prostriedky', entity: DonationRequestsItems, icon: 'cubes' }
+
+      - label: 'Komu sme pomohli'
+        icon: helicopter
+        children:
+          - { label: 'Prijemcovia', entity: Recipient, icon: 'users' }
+          - { label: 'Polozky', entity: Donation, icon: 'cubes' }
+
+      - label: 'Web'
+        icon: globe-europe
+        children:
+          - { entity: Partner, icon: 'handshake'}
+
+      - label: 'Položky'
+        icon: medkit
+        entity: DonationItem
 
   user:
     display_name: true

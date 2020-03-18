@@ -149,6 +149,6 @@ final class DonationRequestsItems
 
         }
 
-        return sprintf('%s ,(%s) pcs', $this->item->getName(), $this->quantity ?? 0);
+        return sprintf('%s (%s) pcs', $this->item->getName(), $this->quantity ?? 0);
     }
 }

@@ -142,10 +142,10 @@ final class HelpRequestsItems
     public function __toString(): string
     {
         if ($this->item === null) {
-            return sprintf('ine: %s ,(%s) pcs', $this->other, $this->quantity ?? 0);
+            return sprintf('ine: %s (%s) pcs', $this->other, $this->quantity ?? 0);
 
         }
 
-        return sprintf('%s ,(%s) pcs', $this->item->getName(), $this->quantity ?? 0);
+        return sprintf('%s (%s) pcs', $this->item->getName(), $this->quantity ?? 0);
     }
 }
