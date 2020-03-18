@@ -62,11 +62,17 @@ easy_admin:
       class: App\Entity\DonationItem
       label: Typ pomôcky
       list:
-        fields: ['id', 'name', 'donations', 'donatedItems', 'requestedItems']
+        fields: ['id', 'name', 'donations', 'donatedItems', 'requestedItems', 'show']
         actions: ['new', 'show', 'edit', 'delete']
       edit:
         fields:
           - 'name'
+          - 'show'
+      new:
+        fields:
+          - 'name'
+          - 'show'
+
 
     #
     # Recipient

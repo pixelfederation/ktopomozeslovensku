@@ -50,7 +50,8 @@ trait ItemsFragment
         $builder->addEventListener(FormEvents::POST_SET_DATA, static function (FormEvent $event) use ($builder, $repository) {
             $form = $event->getForm();
             /** @var DonationItem $item */
-            foreach ($repository->findAll() as $item) {
+            $items = $repository->findBy(['show' => true], ['id' => 'ASC']);
+            foreach ($items as $item) {
                 $form->get('items')
                     ->add(
                         $builder->create(sprintf('%s', $item->getId()),

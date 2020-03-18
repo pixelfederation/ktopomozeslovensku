@@ -57,6 +57,13 @@ class DonationItem
     private $donations;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="show")
+     */
+    private $show = true;
+
+    /**
      *
      */
     public function __construct()
@@ -128,5 +135,13 @@ class DonationItem
     public function getRequestedItems(): Collection
     {
         return $this->requestedItems;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShow(): bool
+    {
+        return $this->show;
     }
 }
