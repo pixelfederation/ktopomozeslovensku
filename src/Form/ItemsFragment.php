@@ -97,7 +97,8 @@ trait ItemsFragment
                         [
                             'required' => false,
                             'attr' => [
-                                'class' => 'input--small'
+                                'class' => 'input--small',
+                                'placeholder' => 'Aké ?'
                             ]
                         ]
                     )

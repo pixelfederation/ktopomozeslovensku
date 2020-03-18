@@ -20,6 +20,7 @@
         {{ form_row(form.address) }}
         {{ form_row(form.telephone) }}
         {{ form_row(form.email) }}
+        <label class="label label--above">Typ a počet pomôcok, ktoré viem ponúknuť</label>
         {% for item in form.items %}
           <div class="form-container">
             {{ form_widget(item.item) }}
