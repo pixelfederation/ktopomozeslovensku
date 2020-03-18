@@ -274,7 +274,7 @@ class HelpRequest
     /**
      * @return string
      */
-    public function getRequestedText(): string
+    public function getRequestedText(): ?string
     {
         return $this->requestedText;
     }
