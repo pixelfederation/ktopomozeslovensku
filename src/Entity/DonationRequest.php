@@ -68,7 +68,7 @@ class DonationRequest
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="DonationRequestsItems", mappedBy="donationRequest")
+     * @ORM\OneToMany(targetEntity="App\Entity\DonationRequestsItems", mappedBy="donationRequest", cascade={"persist"})
      */
     private $donatedItems;
 
@@ -83,6 +83,22 @@ class DonationRequest
     public function __construct()
     {
         $this->donatedItems = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDonatedItems(): Collection
+    {
+        return $this->donatedItems;
+    }
+
+    /**
+     * @param Collection $donatedItems
+     */
+    public function setDonatedItems(Collection $donatedItems): void
+    {
+        $this->donatedItems = $donatedItems;
     }
 
     /**
@@ -198,7 +214,7 @@ class DonationRequest
      */
     public function __toString(): string
     {
-        return sprintf('[%s]', $this->getEmail());
+        return sprintf('(%s) %s [%s]', $this->getId(), $this->getContactPerson(), $this->getEmail());
     }
 
     /**
@@ -215,20 +231,5 @@ class DonationRequest
     public function setEmail(?string $email): void
     {
         $this->email = $email;
-    }
-
-    /**
-     * @param Item $item
-     * @param int $quantity
-     *
-     * @return void
-     */
-    public function addDonationItem(Item $item, int $quantity)
-    {
-        if ($this->donatedItems->contains($item)) {
-            return;
-        }
-
-        $this->donatedItems->add(DonationRequestsItems::fromRequest($this, $item, $quantity));
     }
 }

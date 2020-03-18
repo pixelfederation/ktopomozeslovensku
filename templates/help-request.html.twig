@@ -19,14 +19,16 @@
         {{ form_row(form.contactPerson) }}
         {{ form_row(form.telephone) }}
         {{ form_row(form.email) }}
-        {{ form_row(form.requestText) }}
+        {% for item in form.items %}
+          {{ form_row(item) }}
+        {% endfor %}
         {{ form_widget(form.policy) }}
             <p class="p4" style="margin-bottom: 32px">
-              Vyhlásenie: Zakliknutím potvrdzujem, že mám viac ako 18 rokov a dobrovoľne súhlasím s tým, aby fyzické osoby z iniciatívy "Ktopomozeslovensku.sk" spracúvali mnou poskytnuté osobné údaje (meno, priezvisko, email, telefonné čislo, adresu) pre účel pomoci s pandémiou Korona vírusu na Slovensku, ako je uvedené v našich  <a href="{{ path('policy') }}">Pravidlách ochrany osobných údajov.</a> Súhlasím s kontaktovaním za týmto účelom a s archiváciou osobných údajov počas nevyhnutne nutného obdobia maximálne však do 3 mesiacov po odvolaní súhlasu. Potvrdzujem, že všetky uvedené údaje sú pravdivé, aktuálne a kompletné. Svoj súhlas môžem kedykoľvek odvolať spôsobom uvedeným v Pravidlách ochrany osobných údajov.
+              Vyhlásenie: Zakliknutím potvrdzujem, že mám viac ako 18 rokov a dobrovoľne súhlasím s tým, aby fyzické osoby z iniciatívy "Ktopomozeslovensku.sk" spracúvali mnou poskytnuté osobné údaje (meno, priezvisko, email, telefonné čislo, adresu) pre účel pomoci s pandémiou Korona vírusu na Slovensku, ako je uvedené v našich Pravidlách ochrany osobných údajov. Súhlasím s kontaktovaním za týmto účelom a s archiváciou osobných údajov počas nevyhnutne nutného obdobia maximálne však do 3 mesiacov po odvolaní súhlasu. Potvrdzujem, že všetky uvedené údaje sú pravdivé, aktuálne a kompletné. Svoj súhlas môžem kedykoľvek odvolať spôsobom uvedeným v Pravidlách ochrany osobných údajov.
             </p>
         {{ form_end(form) }}
       </div>
-    </div>
+    </article>
   </div>
 {% endblock %}
 

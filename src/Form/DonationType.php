@@ -27,6 +27,12 @@ final class DonationType extends AbstractType
         ]);
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -38,6 +44,6 @@ final class DonationType extends AbstractType
             ])
             ->add('donationItem')
             ->add('count')
-            ->add('donatedAt');;
+            ->add('donatedAt');
     }
 }

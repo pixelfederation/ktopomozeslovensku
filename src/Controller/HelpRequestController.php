@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Entity\HelpRequest;
 use App\Form\HelpRequestType;
+use App\Form\Model\HelpRequestForm;
 use App\Service\HelpRequestService;
 use DateTimeImmutable;
 use Exception;
@@ -44,12 +45,12 @@ final class HelpRequestController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $helpRequest = new HelpRequest();
+        $helpRequest = new HelpRequestForm();
         $form = $this->createForm(HelpRequestType::class, $helpRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var HelpRequest $helpRequest */
+            /** @var HelpRequestForm $helpRequest */
             $helpRequest = $form->getData();
             $this->service->save($helpRequest);
 
