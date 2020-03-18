@@ -13,10 +13,9 @@
   <meta property="og:title" content="Kto pomôže Slovensku"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image"
-        content="{{ 'https://' ~ app.request.httpHost ~ asset('static/img/og_image.png') }}"/>
+        content="{{ 'https://' ~ app.request.httpHost ~ asset('static/img/og_image.jpg') }}"/>
   <meta property="og:description" content="Snažíme sa pomôcť slovenským zdravotníckym zariadeniam zvládnuť následky pandémie koronavírusu."/>
   <meta property="og:url" content="{{ 'https://' ~ app.request.httpHost }}">
-
   <!-- Twitter Card Meta Data -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="{{ 'https://' ~ app.request.httpHost }}">
@@ -44,7 +43,7 @@
 </head>
 <body>
 <header>
-  {% embed "menu.html.twig" %}{% endembed %}
+  {% embed "partials/menu.html.twig" %}{% endembed %}
 </header>
 <main>
   {% block main %}{% endblock %}
@@ -52,9 +51,5 @@
 <footer>
   {% embed "partials/footer.html.twig" %}{% endembed %}
 </footer>
-
-{#<script type="text/javascript" src="{{ asset('static/js/jquery-3.1.1.min.js') }}"></script>#}
-{#<script type="text/javascript" src="{{ asset('static/js/bootstrap.min.js') }}"></script>#}
-{#<script type="text/javascript" src="{{ asset('static/js/custom.js') }}"></script>#}
 </body>
 </html>
