@@ -59,7 +59,7 @@ class DonationItem
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean", name="show")
+     * @ORM\Column(type="boolean", name="`show`")
      */
     private $show = true;
 
@@ -143,5 +143,15 @@ class DonationItem
     public function isShow(): bool
     {
         return $this->show;
+    }
+
+    /**
+     * @param bool $show
+     *
+     * @return void
+     */
+    public function setShow(bool $show): void
+    {
+        $this->show = $show;
     }
 }
