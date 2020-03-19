@@ -46,14 +46,23 @@ final class ExportController
         $data = $this->entityManager->getRepository(HelpRequest::class)->findAll();
 
         $encoders = [new CsvEncoder()];
-        $normalizers = [new ObjectNormalizer()];
+        $defaultContext = [
+            AbstractNormalizer::IGNORED_ATTRIBUTES => ['createdAt', 'requests']
+        ];
+        $normalizers = [new ObjectNormalizer(null, null, null, null, null, null, $defaultContext)];
 
         $serializer = new Serializer($normalizers, $encoders);
-        $content = $serializer->serialize($data, 'csv',  [AbstractNormalizer::IGNORED_ATTRIBUTES => ['createdAt']]);
+        $content = $serializer->serialize($data, 'csv',  [AbstractNormalizer::IGNORED_ATTRIBUTES => [
+            'createdAt',
+            '__initializer__',
+            '__cloner__',
+            '__isInitialized__',
+            'requests',
+        ]]);
 
         return new Response("\xEF\xBB\xBF".$content, 200, array(
             'Content-Type' => 'application/force-download',
-            'Content-Disposition' => 'attachment; filename="' . sprintf('export-dopyt-%s.csv', date('Ymd_His')) . '"',
+            'Content-Disposition' => 'attachment; filename="' . sprintf('export-dopyt-%s.csv', date('md_His')) . '"',
             'Cache-Control' =>  'no-cache',
         ));
     }
