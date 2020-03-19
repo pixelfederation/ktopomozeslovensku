@@ -1,32 +1,47 @@
 @use '../config/colors' as colors
+@use '../layout/utils' as layout
 
 .form-container
   width: 100%
-  height: 3em
   display: flex
   align-items: baseline
+  flex-wrap: wrap
+  margin-bottom: 8px
+
+  @include layout.from(tablet)
+    flex-wrap: nowrap
+    height: 32px // = input height
 
   label
     align-items: center
-    margin-bottom: 24px
+
+    @include layout.from(tablet)
+      margin-right: 10px
 
   input:not(.checkbox)
     display: inline-block
     vertical-align: top
-    margin-left: auto
+    margin-top: 8px
+    margin-bottom: 16px
+
+    @include layout.from(tablet)
+      margin-left: auto
+      margin-top: 0
+      margin-bottom: 0
+
     &[type=text]
-      width: 70%
+      width: 100%
+      @include layout.from(tablet)
+        width: 70%
+
     &[type=number]
-      width: 25%
+      width: 100%
 
-.form-container .checkbox:not(:checked) ~ .input
-  display: none
+      @include layout.from(tablet)
+        width: 100px
 
-.form-container .checkbox:checked ~ label
-  flex: 1
-  white-space: nowrap
-  text-overflow: ellipsis
-  overflow: hidden
+  .checkbox
+    flex-shrink: 0
 
-.checkbox:checked ~ label
-  font-weight: bold
+    &:not(:checked) ~ .input
+      display: none
