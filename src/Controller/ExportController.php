@@ -94,7 +94,7 @@ final class ExportController
                 'email',
                 'telephone',
                 'address',
-                'donatedItems' => ['item' => ['name'], 'quantity'],
+                'donatedItems' => ['item' => ['name'], 'quantity', 'other'],
                 'resolved'
             ]
         ]);
