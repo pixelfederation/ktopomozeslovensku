@@ -1,7 +1,7 @@
 {% use 'form_div_layout.html.twig' %}
 
 {% block button_widget -%}
-  {%- set attr = attr|merge({class: (attr.class|default(' button--primary') ~ ' button')|trim}) -%}
+  {%- set attr = attr|merge({class: (attr.class|default(' button button--primary') ~ ' button button--primary')|trim}) -%}
   {{- parent() -}}
 {%- endblock button_widget %}
 
