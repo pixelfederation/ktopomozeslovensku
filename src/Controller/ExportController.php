@@ -50,11 +50,9 @@ final class ExportController
 
         $serializer = new Serializer($normalizers, $encoders);
         $content = $serializer->serialize($data, 'csv', [
-//            AbstractNormalizer::GROUPS => ['dopyt'],
             AbstractNormalizer::ATTRIBUTES => [
                 'id',
                 'telephone',
-//                'createdAt' => ['timezone' => ['transitions' => [1 => ['time']]]]
                 'institutionName',
                 'contactPerson',
                 'telephone',
@@ -68,7 +66,7 @@ final class ExportController
 
         return new Response("\xEF\xBB\xBF".$content, 200, array(
             'Content-Type' => 'application/force-download',
-            'Content-Disposition' => 'attachment; filename="' . sprintf('export-dopyt-%s.csv', date('Ymd_His')) . '"',
+            'Content-Disposition' => 'attachment; filename="' . sprintf('export-dopyt-%s.csv', date('md_His')) . '"',
             'Cache-Control' =>  'no-cache',
         ));
     }
@@ -90,19 +88,20 @@ final class ExportController
 
         $serializer = new Serializer($normalizers, $encoders);
         $content = $serializer->serialize($data, 'csv', [
-            AbstractNormalizer::IGNORED_ATTRIBUTES => [
-                'createdAt',
-                'requests',
-                '__initializer__',
-                '__cloner__',
-                '__isInitialized__',
-                'policy'
+            AbstractNormalizer::ATTRIBUTES => [
+                'id',
+                'contactPerson',
+                'email',
+                'telephone',
+                'address',
+                'donatedItems' => ['item' => ['name'], 'quantity'],
+                'resolved'
             ]
         ]);
 
         return new Response("\xEF\xBB\xBF".$content, 200, array(
             'Content-Type' => 'application/force-download',
-            'Content-Disposition' => 'attachment; filename="' . sprintf('export-ponuka-%s.csv', date('Ymd_His')) . '"',
+            'Content-Disposition' => 'attachment; filename="' . sprintf('export-ponuka-%s.csv', date('md_His')) . '"',
             'Cache-Control' =>  'no-cache'
         ));
     }

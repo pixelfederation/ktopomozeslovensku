@@ -136,7 +136,6 @@ class HelpRequest
 
     /**
      * @return string
-     * @Groups({"dopyt"})
      */
     public function getInstitutionName(): ?string
     {
@@ -153,7 +152,6 @@ class HelpRequest
 
     /**
      * @return string
-     *  @Groups({"dopyt"})
      */
     public function getContactPerson(): ?string
     {
@@ -170,7 +168,6 @@ class HelpRequest
 
     /**
      * @return string
-     * @Groups({"dopyt"})
      */
     public function getTelephone(): ?string
     {
