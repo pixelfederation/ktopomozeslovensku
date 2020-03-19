@@ -92,15 +92,6 @@ easy_admin:
         fields:
           - 'institutionName'
           - 'donations'
-          - property: 'donations'
-            label: 'Donations'
-            type: 'collection'
-            type_options:
-              entry_type: 'App\Form\DonationType'
-              allow_delete: true
-              allow_add: true
-              by_reference: false
-
     #
     # Donation
     #
