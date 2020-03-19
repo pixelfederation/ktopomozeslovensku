@@ -13,6 +13,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
@@ -135,6 +136,7 @@ class HelpRequest
 
     /**
      * @return string
+     * @Groups({"dopyt"})
      */
     public function getInstitutionName(): ?string
     {
@@ -151,6 +153,7 @@ class HelpRequest
 
     /**
      * @return string
+     *  @Groups({"dopyt"})
      */
     public function getContactPerson(): ?string
     {
@@ -167,6 +170,7 @@ class HelpRequest
 
     /**
      * @return string
+     * @Groups({"dopyt"})
      */
     public function getTelephone(): ?string
     {

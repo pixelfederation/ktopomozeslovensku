@@ -12,6 +12,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
@@ -30,6 +31,7 @@ class DonationItem
 
     /**
      * @var string|null
+     * @Groups({"dopyt"})
      *
      * @ORM\Column(type="string", length=255, name="value", unique=true)
      */
@@ -44,6 +46,7 @@ class DonationItem
 
     /**
      * @var Collection
+     * @Groups({"dopyt"})
      *
      * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="item")
      */

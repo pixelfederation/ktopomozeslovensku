@@ -49,7 +49,30 @@ final class ExportController
         $normalizers = [new ObjectNormalizer()];
 
         $serializer = new Serializer($normalizers, $encoders);
-        $content = $serializer->serialize($data, 'csv',  [AbstractNormalizer::IGNORED_ATTRIBUTES => ['createdAt']]);
+        $content = $serializer->serialize($data, 'csv', [
+//            AbstractNormalizer::GROUPS => ['dopyt'],
+//            AbstractNormalizer::IGNORED_ATTRIBUTES => [
+//                'createdAt',
+//                'requests',
+//                '__initializer__',
+//                '__cloner__',
+//                '__isInitialized__',
+//                'policy'
+//            ],
+            AbstractNormalizer::ATTRIBUTES => [
+                'id',
+                'telephone',
+//                'createdAt' => ['timezone' => ['transitions' => [1 => ['time']]]]
+                'institutionName',
+                'contactPerson',
+                'telephone',
+                'email',
+                'address',
+                'requestedItems' => ['item' => ['name'], 'quantity'],
+                'requestedText',
+                'resolved'
+                ]
+        ]);
 
         return new Response("\xEF\xBB\xBF".$content, 200, array(
             'Content-Type' => 'application/force-download',
