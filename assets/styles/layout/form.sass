@@ -5,10 +5,10 @@
   height: 3em
   display: flex
   align-items: baseline
+  flex-wrap: nowrap
 
   label
     align-items: center
-    margin-bottom: 24px
 
   input:not(.checkbox)
     display: inline-block
@@ -17,16 +17,15 @@
     &[type=text]
       width: 70%
     &[type=number]
-      width: 25%
+      max-width: 100px
 
-.form-container .checkbox:not(:checked) ~ .input
-  display: none
+  .checkbox
+    flex-shrink: 0
 
-.form-container .checkbox:checked ~ label
-  flex: 1
-  white-space: nowrap
-  text-overflow: ellipsis
-  overflow: hidden
+    &:not(:checked) ~ .input
+      display: none
 
-.checkbox:checked ~ label
-  font-weight: bold
+    &:checked ~ label
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden

@@ -4,7 +4,7 @@
 .checkbox
   width: 20px
   height: 20px
-  margin: 2px 10px 2px 2px
+  margin: 2px 10px 7px 2px
 
   appearance: none
   -moz-appearance: none
@@ -13,9 +13,13 @@
   background: url('/static/img/checkbox-off.svg') no-repeat
   cursor: pointer
   border-radius: radius.$normal
+  vertical-align: middle
 
   &:checked
     background-image: url('/static/img/checkbox-on.svg')
+
+    & ~ label
+      font-weight: bold
 
   &:focus
     box-shadow: 0 0 0 3px rgba(20, 170, 245, 0.5)
