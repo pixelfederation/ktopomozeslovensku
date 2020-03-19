@@ -34,6 +34,7 @@ jobs:
       - run: echo export APP_DEBUG=1 >> $BASH_ENV
       - run: echo export DATABASE_URL="${DEV_DATABASE_URL}" >> $BASH_ENV
       - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
+      - run: echo export SENTRY_DSN="${DEV_SENTRY_DSN}" >> $BASH_ENV
       - run: source $BASH_ENV
 
       - run: echo APP_ENV=dev >> .env
@@ -41,6 +42,7 @@ jobs:
       - run: echo DATABASE_URL="${DEV_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${DEV_APP_SECRET}" >> .env
       - run: echo ADMIN_PWD="'${DEV_ADMIN_PWD}'" >> .env
+      - run: echo SENTRY_DSN="'${DEV_SENTRY_DSN}'" >> .env
 
       - run: composer install -n --prefer-dist
       - run: ./bin/console doctrine:migrations:migrate -n --env=dev
@@ -83,6 +85,7 @@ jobs:
       - run: echo export APP_DEBUG=0 >> $BASH_ENV
       - run: echo export DATABASE_URL="${PROD_DATABASE_URL}" >> $BASH_ENV
       - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
+      - run: echo export SENTRY_DSN="${PROD_SENTRY_DSN}" >> $BASH_ENV
       - run: source $BASH_ENV
 
       - run: echo APP_ENV=prod >> .env
@@ -90,6 +93,7 @@ jobs:
       - run: echo DATABASE_URL="${PROD_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${PROD_APP_SECRET}" >> .env
       - run: echo ADMIN_PWD="'${PROD_ADMIN_PWD}'" >> .env
+      - run: echo SENTRY_DSN="'${PROD_SENTRY_DSN}'" >> .env
 
       - run: composer install -n --prefer-dist
       - run: ./bin/console doctrine:migrations:migrate -n --env=prod

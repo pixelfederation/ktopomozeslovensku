@@ -42,7 +42,7 @@ final class TransparentAccountReporterService
         $doc->loadHTML($content);
 
         $xpath = new DOMXPath($doc);
-        $query = "//table[contains(@class, 'table')]/tbody/tr/td[3]";
+        $query = "//table[contains(@class, 'table')]/tbody/tr/td[2]";
 
         $entries = $xpath->query($query);
 
