@@ -51,14 +51,6 @@ final class ExportController
         $serializer = new Serializer($normalizers, $encoders);
         $content = $serializer->serialize($data, 'csv', [
 //            AbstractNormalizer::GROUPS => ['dopyt'],
-//            AbstractNormalizer::IGNORED_ATTRIBUTES => [
-//                'createdAt',
-//                'requests',
-//                '__initializer__',
-//                '__cloner__',
-//                '__isInitialized__',
-//                'policy'
-//            ],
             AbstractNormalizer::ATTRIBUTES => [
                 'id',
                 'telephone',
