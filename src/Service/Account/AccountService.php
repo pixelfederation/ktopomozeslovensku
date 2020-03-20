@@ -126,7 +126,7 @@ final class AccountService
      *
      * @return void
      */
-    public function calculateBalanceForDate(DateTimeImmutable $date)
+    public function calculateBalanceForDate(DateTimeImmutable $date): void
     {
         $aggregateTransactionBalanceForDate = $this->accountTransactionRepository->getAggregatedBalanceForDate($date);
 
@@ -135,7 +135,7 @@ final class AccountService
         }
 
         /** @var AggregatedBalance|null $aggregatedBalance */
-        $aggregatedBalance = $this->accountBalanceRepository->findOneBy(['date' => $date]);
+        $aggregatedBalance = $this->accountBalanceRepository->findOneBy(['date' => $date->setTime(0, 0, 0)]);
 
         // Crete new one
         if ($aggregatedBalance === null) {
