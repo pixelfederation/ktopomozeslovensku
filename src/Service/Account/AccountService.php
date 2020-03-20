@@ -135,7 +135,7 @@ final class AccountService
         }
 
         /** @var AggregatedBalance|null $aggregatedBalance */
-        $aggregatedBalance = $this->accountBalanceRepository->findOneBy(['date' => $date->setTime(0, 0, 0)]);
+        $aggregatedBalance = $this->accountBalanceRepository->findOneBy(['date' => $date]);
 
         // Crete new one
         if ($aggregatedBalance === null) {
@@ -186,7 +186,7 @@ final class AccountService
         $downloadedDates = [];
         foreach ($transactions as $transaction) {
             if (!array_keys($downloadedDates, $transaction->getDate())) {
-                $downloadedDates[] = $transaction->getDate();
+                $downloadedDates[] = $transaction->getDate()->setTime(0, 0, 0);
             }
 
             $accountTransaction = new AccountTransaction(
