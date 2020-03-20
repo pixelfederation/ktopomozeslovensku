@@ -26,15 +26,11 @@ final class AccountTransactionRepository extends EntityRepository
      */
     public function getAggregatedBalanceForDate(DateTimeImmutable $date): ?AggregatedTransactionBalance
     {
-        dump($date);
-
         $result =  $this->createAggregatedBalanceQuery()
             ->where('at.date = :date')
             ->setParameter('date', $date->setTime(0,0,0))
             ->getQuery()
             ->getResult();
-
-        dump($result);
 
         if (!isset($result[0])) {
             return null;
