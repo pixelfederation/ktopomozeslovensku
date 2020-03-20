@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Entity\AccountActualBalance;
+use App\Repository\AccountActualBalanceRepository;
 use DOMDocument;
 use DOMXPath;
 use Symfony\Component\HttpClient\HttpClient;
@@ -22,15 +24,29 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
  */
 final class TransparentAccountReporterService
 {
+    /**
+     * @var AccountActualBalanceRepository
+     */
+    private $repository;
 
     /**
+     * @param AccountActualBalanceRepository $repository
+     */
+    public function __construct(AccountActualBalanceRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * //todo remove this method when all data is populated
      * @return string
-     * @throws TransportExceptionInterface
+     *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      */
-    public function getDonatedAmount(): string
+    private function fallbackToWebCrawler(): string
     {
         $client = HttpClient::create();
         $response = $client->request('GET', 'https://ib.fio.sk/ib/transparent?a=2901467117');
@@ -51,5 +67,32 @@ final class TransparentAccountReporterService
         }
 
         return trim($entries->item(0)->nodeValue);
+    }
+
+    /**
+     * @return string
+     * @throws TransportExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     */
+    public function getDonatedAmount(): string
+    {
+        /** @var AccountActualBalance|null $result */
+        $result = $this->repository->findOneBy([]);
+
+        if ($result === null) {
+            return $this->fallbackToWebCrawler();
+        }
+
+        return sprintf(
+            '%s EUR',
+            number_format(
+                $result->getCredit(),
+                2,
+                ',',
+                ' '
+            )
+        );
     }
 }

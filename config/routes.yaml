@@ -77,3 +77,11 @@ export_ponuka:
   methods: GET
   path: /export/ponuka
   controller: App\Controller\ExportController::ponuka
+
+
+update_account_balance:
+  methods: GET
+  path: /update-account-balance/{cronToken}
+  controller: App\Controller\UpdateAccountBalanceController::index
+  requirements:
+    cronToken: ^[0-9a-zA-Z]{64}

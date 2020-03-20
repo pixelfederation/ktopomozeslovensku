@@ -73,7 +73,6 @@ easy_admin:
           - 'name'
           - 'show'
 
-
     #
     # Recipient
     #
@@ -136,6 +135,36 @@ easy_admin:
         fields: ['name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt']
         actions: ['delete', '-show']
 
+    AccountActualBalance:
+      class: App\Entity\AccountActualBalance
+      label: 'Aktuálny stav'
+      list:
+        fields: ['credit', 'debit', 'creditCount', 'debitCount', 'balance', 'balanceCount', 'updatedAt']
+        actions: ['-new', '-edit', '-delete', 'show']
+      show:
+        fields: ['credit', 'debit', 'creditCount', 'debitCount', 'balance', 'balanceCount', 'updatedAt']
+        actions: ['-new', '-edit', '-delete']
+
+    AccountBalance:
+      class: App\Entity\AccountBalance
+      label: 'Po dňoch'
+      list:
+        fields: ['date', 'credit', 'debit', 'creditCount', 'debitCount', 'balance', 'balanceCount', 'createdAt', 'updatedAt']
+        actions: ['-new', '-edit', '-delete', 'show']
+      show:
+        fields: ['date', 'credit', 'debit', 'creditCount', 'debitCount',  'balance', 'balanceCount', 'createdAt', 'updatedAt']
+        actions: ['-new', '-edit', '-delete']
+
+    AccountTransaction:
+      class: App\Entity\AccountTransaction
+      label: 'Transakcie'
+      list:
+        fields: ['id', 'date', 'credit', 'debit', 'transactionId', 'executionId', 'createdAt']
+        actions: ['-new', '-edit', '-delete', 'show']
+      show:
+        fields: ['id', 'date', 'credit', 'debit', 'transactionId', 'executionId', 'createdAt']
+        actions: ['-new', '-edit', '-delete']
+
   design:
     menu:
       - label: Žiadosti
@@ -164,6 +193,13 @@ easy_admin:
       - label: 'Položky'
         icon: medkit
         entity: DonationItem
+
+      - label: 'Príjmy/Výdaje'
+        icon: 'money-bill'
+        children:
+          - { label: 'Aktuálny stav', entity: AccountActualBalance, icon: 'balance-scale' }
+          - { label: 'Po dňoch', entity: AccountBalance, icon: 'calendar-alt' }
+          - { label: 'Transakcie', entity: AccountTransaction, icon: 'list' }
 
   user:
     display_name: true
