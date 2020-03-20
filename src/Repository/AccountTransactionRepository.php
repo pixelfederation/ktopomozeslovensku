@@ -28,7 +28,7 @@ final class AccountTransactionRepository extends EntityRepository
     {
         $result =  $this->createAggregatedBalanceQuery()
             ->where('at.date = :date')
-            ->setParameter('date', $date->setTime(0,0,0))
+            ->setParameter('date', $date)
             ->getQuery()
             ->getResult();
 

@@ -126,7 +126,7 @@ final class AccountService
      *
      * @return void
      */
-    public function calculateBalanceForDate(DateTimeImmutable $date)
+    public function calculateBalanceForDate(DateTimeImmutable $date): void
     {
         $aggregateTransactionBalanceForDate = $this->accountTransactionRepository->getAggregatedBalanceForDate($date);
 
@@ -186,7 +186,7 @@ final class AccountService
         $downloadedDates = [];
         foreach ($transactions as $transaction) {
             if (!array_keys($downloadedDates, $transaction->getDate())) {
-                $downloadedDates[] = $transaction->getDate();
+                $downloadedDates[] = $transaction->getDate()->setTime(0, 0, 0);
             }
 
             $accountTransaction = new AccountTransaction(
