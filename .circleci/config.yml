@@ -13,8 +13,7 @@ jobs:
     steps:
       ## SLACK
       - slack/notify:
-          color: '#42f4ad'
-          channel: '#dev-web'
+          channel: '#devops'
           message: Ktopomozeslovensku.sk DEV Build Start
       ## START GENERIC
       - checkout
@@ -33,8 +32,8 @@ jobs:
       - run: echo export APP_ENV=dev >> $BASH_ENV
       - run: echo export APP_DEBUG=1 >> $BASH_ENV
       - run: echo export DATABASE_URL="${DEV_DATABASE_URL}" >> $BASH_ENV
+      - run: echo export CRON_TOKEN="${DEV_CRON_TOKEN}" >> $BASH_ENV
       - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
-      - run: echo export SENTRY_DSN="${DEV_SENTRY_DSN}" >> $BASH_ENV
       - run: source $BASH_ENV
 
       - run: echo APP_ENV=dev >> .env
@@ -42,7 +41,10 @@ jobs:
       - run: echo DATABASE_URL="${DEV_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${DEV_APP_SECRET}" >> .env
       - run: echo ADMIN_PWD="'${DEV_ADMIN_PWD}'" >> .env
-      - run: echo SENTRY_DSN="'${DEV_SENTRY_DSN}'" >> .env
+      - run: echo SENTRY_DSN="'${SENTRY_DSN}'" >> .env
+      - run: echo CRON_TOKEN="'${CRON_TOKEN}'" >> .env
+      - run: echo FIO_API_TOKEN="'${FIO_API_TOKEN}'" >> .env
+      - run: echo FIO_API_URL="'${FIO_API_URL}'" >> .env
 
       - run: composer install -n --prefer-dist
       - run: ./bin/console doctrine:migrations:migrate -n --env=dev
@@ -51,7 +53,7 @@ jobs:
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/dev ~/${HOST_PATH}/var/cache/dev_old;rm -rf ~/${HOST_PATH}/var/cache/dev_old"
 
       - slack/status:
-          channel: '#dev-web'
+          channel: '#devops'
 
   prod:
     docker:
@@ -63,8 +65,7 @@ jobs:
     steps:
       ## SLACK
       - slack/notify:
-          color: '#f45442'
-          channel: '#dev-web'
+          channel: '#devops'
           message: Ktopomozeslovensku.sk PROD Build Start
 
       ## START GENERIC
@@ -84,8 +85,8 @@ jobs:
       - run: echo export APP_ENV=prod >> $BASH_ENV
       - run: echo export APP_DEBUG=0 >> $BASH_ENV
       - run: echo export DATABASE_URL="${PROD_DATABASE_URL}" >> $BASH_ENV
+      - run: echo export CRON_TOKEN="${PROD_CRON_TOKEN}" >> $BASH_ENV
       - run: echo export APP_SECRET="${DEV_APP_SECRET}" >> $BASH_ENV
-      - run: echo export SENTRY_DSN="${PROD_SENTRY_DSN}" >> $BASH_ENV
       - run: source $BASH_ENV
 
       - run: echo APP_ENV=prod >> .env
@@ -93,7 +94,10 @@ jobs:
       - run: echo DATABASE_URL="${PROD_DATABASE_URL}" >> .env
       - run: echo APP_SECRET="${PROD_APP_SECRET}" >> .env
       - run: echo ADMIN_PWD="'${PROD_ADMIN_PWD}'" >> .env
-      - run: echo SENTRY_DSN="'${PROD_SENTRY_DSN}'" >> .env
+      - run: echo SENTRY_DSN="'${SENTRY_DSN}'" >> .env
+      - run: echo CRON_TOKEN="'${CRON_TOKEN}'" >> .env
+      - run: echo FIO_API_TOKEN="'${FIO_API_TOKEN}'" >> .env
+      - run: echo FIO_API_URL="'${FIO_API_URL}'" >> .env
 
       - run: composer install -n --prefer-dist
       - run: ./bin/console doctrine:migrations:migrate -n --env=prod
@@ -102,7 +106,7 @@ jobs:
       - run: ssh -p13322 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null uid1953480@shellserver-3.websupport.sk "mv ~/${HOST_PATH}/var/cache/prod ~/${HOST_PATH}/var/cache/prod_old;rm -rf ~/${HOST_PATH}/var/cache/prod_old"
 
       - slack/status:
-          channel: '#dev-web'
+          channel: '#devops'
 
 workflows:
   version: 2
