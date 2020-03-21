@@ -75,9 +75,9 @@ trait ItemsFragment
                                 [
                                     'required' => false,
                                     'attr' => [
+                                        'placeholder' => 'Koľko ?',
                                         'class' => 'input--small'
                                     ],
-                                    'data' => 0,
                                     'html5' => true
                                 ]
                             )

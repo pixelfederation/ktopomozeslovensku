@@ -1,0 +1,27 @@
+{# Validation is dependent on form input order #}
+<h3 style="margin-bottom: 32px">Typ pomôcok, ktoré potrebujete</h3>
+{% for item in form.items %}
+  <div class="item-container requested__item">
+    {{ form_widget(item.item) }}
+    {% if item.quantity is defined %}
+      {{ form_widget(item.quantity) }}
+    {% endif %}
+    {% if item.description is defined %}
+      {{ form_widget(item.description) }}
+    {% endif %}
+  </div>
+{% endfor %}
+<script>
+  const wrappers = document.getElementsByClassName('item-container');
+  for (let i = 0; i < wrappers.length; i++) {
+    let checkbox;
+    let quantity;
+    if(wrappers[i].hasChildNodes()) {
+      checkbox = wrappers[i].children[0];
+      quantity = wrappers[i].children[2];
+      checkbox.addEventListener("change", function(){
+        quantity.required = !!checkbox.checked;
+      }, false);
+    }
+  }
+</script>
