@@ -84,13 +84,34 @@ easy_admin:
           - 'id'
           - 'institutionName'
           - 'donations'
+          - 'recipientGroup'
         actions: ['show', 'edit', 'delete']
       show:
-        fields: ['institutionName', 'donations']
+        fields: ['institutionName', 'donations', 'recipientGroup']
       edit:
         fields:
           - 'institutionName'
           - 'donations'
+          - 'recipientGroup'
+
+    #
+    # Recipient Groups
+    #
+    RecipientGroup:
+      class: App\Entity\RecipientGroup
+      label: 'Komu sme pomohli - skupiny prijemcov'
+      list:
+        fields:
+          - id
+          - recipients
+          - name
+        actions: ['show', 'edit', 'delete']
+      show:
+        fields: ['recipients', 'name']
+      edit:
+        fields:
+          - recipients
+          - name
     #
     # Donation
     #
@@ -183,6 +204,7 @@ easy_admin:
         icon: helicopter
         children:
           - { label: 'Prijemcovia', entity: Recipient, icon: 'users' }
+          - { label: 'Skupiny príjemcov', entity: RecipientGroup, icon: 'tag' }
           - { label: 'Polozky', entity: Donation, icon: 'cubes' }
 
       - label: 'Web'

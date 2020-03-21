@@ -13,6 +13,7 @@ use App\Form\Model\HelpRequestForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -103,6 +104,16 @@ final class HelpRequestType extends AbstractType
             ],
             'constraints' => [
                 new Email()
+            ]
+        ]);
+
+        $builder->add('recipientGroup', ChoiceType::class, [
+            'required' => true,
+            'label' => 'Typ inštitúcie',
+            'attr' => [
+            ],
+            'constraints' => [
+                new NotBlank()
             ]
         ]);
 

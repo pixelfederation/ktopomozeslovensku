@@ -42,6 +42,13 @@ class Recipient
     private $donations;
 
     /**
+     * @var RecipientGroup|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\RecipientGroup", inversedBy="recipients")
+     * @ORM\JoinColumn(name="recipient_group_id", referencedColumnName="id")
+     */
+    private $recipientGroup;
+
+    /**
      */
     public function __construct()
     {
@@ -88,8 +95,29 @@ class Recipient
         $this->donations = $donations;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->institutionName;
+    }
+
+    /**
+     * @return RecipientGroup|null
+     */
+    public function getRecipientGroup()
+    {
+        return $this->recipientGroup;
+    }
+
+    /**
+     * @param RecipientGroup $recipientGroup
+     *
+     * @return void
+     */
+    public function setRecipientGroup(RecipientGroup $recipientGroup): void
+    {
+        $this->recipientGroup = $recipientGroup;
     }
 }

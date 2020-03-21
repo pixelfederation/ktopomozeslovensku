@@ -46,7 +46,6 @@ class DonationItem
 
     /**
      * @var Collection
-     * @Groups({"dopyt"})
      *
      * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="item")
      */
