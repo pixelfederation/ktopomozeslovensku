@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace App\Form\Model;
 
+use App\Entity\RecipientGroup;
+
 /**
  *
  */
@@ -38,6 +40,11 @@ final class HelpRequestForm implements ItemForm
      * @var string|null
      */
     private $email;
+
+    /**
+     * @var RecipientGroup|null
+     */
+    private $recipientGroup;
 
     /**
      * @var array|null
@@ -159,5 +166,23 @@ final class HelpRequestForm implements ItemForm
     public function setPolicy(?bool $policy): void
     {
         $this->policy = $policy;
+    }
+
+    /**
+     * @return RecipientGroup|null
+     */
+    public function getRecipientGroup(): ?RecipientGroup
+    {
+        return $this->recipientGroup;
+    }
+
+    /**
+     * @param RecipientGroup|null $recipientGroup
+     *
+     * @return void
+     */
+    public function setRecipientGroup(?RecipientGroup $recipientGroup): void
+    {
+        $this->recipientGroup = $recipientGroup;
     }
 }

@@ -9,11 +9,15 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Entity\RecipientGroup;
 use App\Form\Model\HelpRequestForm;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\Collection\RecipientGroupType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -107,14 +111,14 @@ final class HelpRequestType extends AbstractType
             ]
         ]);
 
-        $builder->add('recipientGroup', ChoiceType::class, [
+        $builder->add('recipientGroup', EntityType::class, [
             'required' => true,
             'label' => 'Typ inštitúcie',
-            'attr' => [
-            ],
-            'constraints' => [
-                new NotBlank()
-            ]
+            'class' => RecipientGroup::class,
+            'choice_label' => function (RecipientGroup $recipient) {
+                return $recipient->getName();
+            },
+            'placeholder' => 'Vybrať typ ...',
         ]);
 
         $this->renderItemsFragment($builder, $this->entityManager);
