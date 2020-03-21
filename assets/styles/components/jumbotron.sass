@@ -22,7 +22,7 @@
     color: colors.$gray-100
     margin-bottom: 32px
 
-  &__sharing
+  &__content
     display: flex
     justify-content: center
     flex-direction: column
@@ -43,3 +43,17 @@
 
       &:last-child
         margin-right: 0
+
+  &--grey
+    background-color: colors.$gray-93
+    margin: 0 0 70px
+    padding: 32px 0
+
+    &__heading
+      @include typo.h4
+      color: colors.$gray-0
+      margin-bottom: 25px
+
+    @include layout.from(desktop)
+      margin: 0 0 96px
+      padding: 32px 0
