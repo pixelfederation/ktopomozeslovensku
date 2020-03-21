@@ -110,7 +110,6 @@ easy_admin:
         fields: ['recipients', 'name']
       edit:
         fields:
-          - recipients
           - name
     #
     # Donation
