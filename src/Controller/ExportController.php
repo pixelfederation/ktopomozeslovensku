@@ -58,7 +58,7 @@ final class ExportController
                 'telephone',
                 'email',
                 'address',
-                'requestedItems' => ['item' => ['name'], 'quantity'],
+                'requestedItems' => ['item' => ['name'], 'quantity', 'other'],
                 'requestedText',
                 'resolved'
                 ]
