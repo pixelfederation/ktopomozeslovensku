@@ -180,8 +180,6 @@ final class AccountService
      */
     public function downloadTransactions(): array
     {
-        $this->downloader->resetReportMark('2020-03-13');
-
         $statement = $this->downloader->downloadReport();
         $transactions = $statement->getTransactionList()->getTransaction();
 
