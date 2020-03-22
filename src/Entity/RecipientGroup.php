@@ -37,7 +37,7 @@ class RecipientGroup
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Recipient", mappedBy="recipientGroup", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\HelpRequest", mappedBy="recipientGroup", cascade={"persist","remove"})
      */
     private $helpRequests;
 

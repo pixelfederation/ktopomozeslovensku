@@ -190,10 +190,10 @@ easy_admin:
       class: App\Entity\AccountTransaction
       label: 'Transakcie'
       list:
-        fields: ['id', 'date', 'credit', 'debit', 'transactionId', 'executionId', 'createdAt']
+        fields: ['id', 'date', 'credit', 'debit', 'offsetAccountName', 'offsetAccountNumber', 'transactionId', 'executionId', 'createdAt']
         actions: ['-new', '-edit', '-delete', 'show']
       show:
-        fields: ['id', 'date', 'credit', 'debit', 'transactionId', 'executionId', 'createdAt']
+        fields: ['id', 'date', 'credit', 'debit', 'offsetAccountName', 'offsetAccountNumber', 'transactionId', 'executionId', 'createdAt']
         actions: ['-new', '-edit', '-delete']
 
   design:

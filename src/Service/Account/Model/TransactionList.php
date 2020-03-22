@@ -17,7 +17,7 @@ use JMS\Serializer\Annotation as Serializer;
 final class TransactionList
 {
     /**
-     * @var array<string>
+     * @var array<Transaction>
      *
      * @Serializer\Type(name="array<Transaction>")
      * @Serializer\SerializedName("transaction")
