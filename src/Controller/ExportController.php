@@ -60,7 +60,8 @@ final class ExportController
                 'address',
                 'requestedItems' => ['item' => ['name'], 'quantity', 'other'],
                 'requestedText',
-                'resolved'
+                'resolved',
+                'recipientGroup'
                 ]
         ]);
 

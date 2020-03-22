@@ -14,7 +14,7 @@ final class Version20200321193055 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return 'added recipients groups';
+        return '';
     }
 
     public function up(Schema $schema) : void

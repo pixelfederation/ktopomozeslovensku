@@ -95,6 +95,7 @@ Vopred ďakujeme za Vašu trpezlivosť.',
         $newHelpRequest->setEmail($form->getEmail());
         $newHelpRequest->setPolicy($form->getPolicy());
         $newHelpRequest->setRequestedItems($this->buildRequestedItems($newHelpRequest, $form));
+        $newHelpRequest->setRecipientGroup($form->getRecipientGroup());
 
 
         return $newHelpRequest;
