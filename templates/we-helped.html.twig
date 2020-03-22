@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+{% block main %}
+  <div class="l-container">
+    <h1 class="hero__heading-standalone">Komu sme pomohli</h1>
+
+    <article class="article">
+      <div class="article__body">
+        <ul>
+          {% for donation in donations %}
+            <li class="l-log">
+              <span class="l-log__date">{{ donation.donatedAt|date("d. m. Y") }}</span>
+              <span class="l-log__desc">
+              <strong>{{ donation.recipient.institutionName }}.</strong>
+                {{ donation.donationItem.name }}, {{ donation.count }} ks
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <a href="{{ path('recipients') }}">Zobraziť všetko ({{ donationsCount }})</a>
+      </div>
+    </article>
+
+    {% include "partials/need-help.html.twig" %}
+  </div>
+{% endblock %}

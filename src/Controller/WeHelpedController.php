@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /*
- * @author tmihalicka
+ * @author pbrecska
  * @copyright PIXEL FEDERATION
  * @license Internal use only
  */
@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Service\Presenter\ItemState\ItemStatePresenter;
 use App\Service\TransparentAccountReporterService;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -24,7 +25,7 @@ use Twig\Error\SyntaxError;
 /**
  *
  */
-final class HomeController
+final class WeHelpedController
 {
     /**
      * @var Twig
@@ -40,22 +41,28 @@ final class HomeController
      * @var ItemStatePresenter
      */
     private $itemStatePresenter;
+    /**
+     * @var EntityRepository
+     */
+    private $donations;
 
     /**
-     * @param Twig                              $twig
+     * @param Twig $twig
      * @param TransparentAccountReporterService $reporterService
      * @param ItemStatePresenter $itemStatePresenter
+     * @param EntityRepository $donations
      */
     public function __construct(
         Twig $twig,
         TransparentAccountReporterService $reporterService,
-        ItemStatePresenter $itemStatePresenter
+        ItemStatePresenter $itemStatePresenter,
+        EntityRepository $donations
     ) {
         $this->twig = $twig;
         $this->reporterService = $reporterService;
         $this->itemStatePresenter = $itemStatePresenter;
+        $this->donations = $donations;
     }
-
 
     /**
      * @return Response
@@ -71,12 +78,16 @@ final class HomeController
     public function index(): Response
     {
         $donatedAmount = $this->reporterService->getDonatedAmount();
+        $donations = $this->donations->findBy([], ['donatedAt' => 'DESC'], 10);
+        $donationsCount = $this->donations->count([]);
 
         return new Response($this->twig->render(
-            'home.html.twig',
+            'we-helped.html.twig',
             [
                 'donatedAmount' => $donatedAmount,
-                'itemState' => $this->itemStatePresenter->present(),
+                'donations' => $donations,
+                'donationsCount' => $donationsCount,
+                'presenter' => $this->itemStatePresenter
             ]
         ));
     }

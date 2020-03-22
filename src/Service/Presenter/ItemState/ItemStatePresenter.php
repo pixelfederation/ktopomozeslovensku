@@ -34,10 +34,17 @@ final class ItemStatePresenter
     }
 
     /**
+     * @param int|null $limit
+     *
      * @return Collection
      */
-    public function present(): Collection
+    public function present(int $limit = null): Collection
     {
+        if ($limit !== null){
+            //todo: change orderBy to relation field - somehow sum of all helpRequestItem.quantity
+            return ItemStates::createFromDonationItems($this->repository->findBy([], ['name' => 'DESC'], $limit));
+        }
+
         return ItemStates::createFromDonationItems($this->repository->findAll());
     }
 }

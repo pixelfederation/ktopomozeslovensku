@@ -37,12 +37,15 @@ final class ItemState
     private $name;
 
     /**
-     * @param DonationItem $item
+     * @param DonationItem|null $item
      */
-    public function __construct(DonationItem $item)
+    public function __construct(?DonationItem $item)
     {
         $this->requested = $item->getRequestedItems()->count();
-        $this->donated = array_reduce($item->getDonations()->toArray(), function(Donation $donation) {
+        $this->donated = array_reduce($item->getDonations()->toArray(), function(?Donation $donation) {
+            if ($donation === null){
+                return 0;
+            }
             return $donation->getCount();
         });
         $this->sub = $this->requested - $this->donated;
