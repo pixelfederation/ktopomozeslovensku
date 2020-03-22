@@ -14,8 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="recipient_group",
- *     uniqueConstraints={@ORM\UniqueConstraint(name="recipient_group", columns={"name"})})
+ * @ORM\Table(name="recipient_group")
  */
 class RecipientGroup
 {
