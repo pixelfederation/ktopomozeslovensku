@@ -61,8 +61,7 @@ final class ExportController
                 'requestedItems' => ['item' => ['name'], 'quantity', 'other'],
                 'requestedText',
                 'resolved',
-                'recipientGroup'
-                ]
+            ]
         ]);
 
         return new Response("\xEF\xBB\xBF".$content, 200, array(
