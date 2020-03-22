@@ -106,7 +106,7 @@ final class AccountService
         }
 
         if (
-            $maybeActualAccount->getCreditCount() === $aggregatedBalance->getCreditCount() &&
+            $maybeActualAccount->getCreditCount() === $aggregatedBalance->getCreditCount() ||
             $maybeActualAccount->getDebitCount() === $aggregatedBalance->getDebitCount()) {
             return;
         }
@@ -155,7 +155,7 @@ final class AccountService
 
         // Update old one only if neccesary
         if (
-            $aggregateTransactionBalanceForDate->getDebitCount() === $aggregatedBalance->getDebitCount() &&
+            $aggregateTransactionBalanceForDate->getDebitCount() === $aggregatedBalance->getDebitCount() ||
             $aggregateTransactionBalanceForDate->getCreditCount() === $aggregatedBalance->getCreditCount()
         ) {
             return;
@@ -180,6 +180,8 @@ final class AccountService
      */
     public function downloadTransactions(): array
     {
+        $this->downloader->resetReportMark('2020-03-13');
+
         $statement = $this->downloader->downloadReport();
         $transactions = $statement->getTransactionList()->getTransaction();
 
@@ -194,7 +196,12 @@ final class AccountService
                 $transaction->getAmount() >= 0 ? $transaction->getAmount() : 0,
                 $transaction->getAmount() < 0 ? ($transaction->getAmount() * -1) : 0,
                 $transaction->getTransactionId(),
-                $transaction->getExecutionId()
+                $transaction->getExecutionId(),
+                $transaction->getOffsetAccountNumber(),
+                $transaction->getOffsetAccountName(),
+                $transaction->getBankName(),
+                $transaction->getUserIdentification(),
+                $transaction->getMessage()
             );
             $this->entityManager->persist($accountTransaction);
         }

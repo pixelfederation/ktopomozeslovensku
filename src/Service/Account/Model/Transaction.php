@@ -26,6 +26,46 @@ final class Transaction
     private $date;
 
     /**
+     * @var string
+     *
+     * @Serializer\Type(name="string")
+     * @Serializer\SerializedName("offsetAccountNumber")
+     */
+    private $offsetAccountNumber;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Type(name="string")
+     * @Serializer\SerializedName("offsetAccountName")
+     */
+    private $offsetAccountName;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Type(name="string")
+     * @Serializer\SerializedName("bankName")
+     */
+    private $bankName;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Type(name="string")
+     * @Serializer\SerializedName("userIdentification")
+     */
+    private $userIdentification;
+
+    /**
+     * @var string
+     *
+     * @Serializer\Type(name="string")
+     * @Serializer\SerializedName("message")
+     */
+    private $message;
+
+    /**
      * @var float
      *
      * @Serializer\Type(name="float")
@@ -55,6 +95,46 @@ final class Transaction
     public function getDate(): DateTimeImmutable
     {
         return $this->date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOffsetAccountNumber(): ?string
+    {
+        return $this->offsetAccountNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOffsetAccountName(): ?string
+    {
+        return $this->offsetAccountName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBankName(): ?string
+    {
+        return $this->bankName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserIdentification(): ?string
+    {
+        return $this->userIdentification;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage(): ?string
+    {
+        return $this->message;
     }
 
     /**

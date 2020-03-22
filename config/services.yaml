@@ -94,3 +94,7 @@ services:
 
   App\Service\TransparentAccountReporterService:
     arguments: ['@AccountActualBalanceRepository']
+
+
+  Monolog\Processor\PsrLogMessageProcessor:
+    tags: { name: monolog.processor, handler: sentry }

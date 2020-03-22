@@ -23,6 +23,11 @@ final class TransactionType implements SubscribingHandlerInterface
     /** @var array  */
     private const COLUMN_MAPPING = [
         'column0' => 'date',
+        'column2' => 'offsetAccountNumber',
+        'column10' => 'offsetAccountName',
+        'column12' => 'bankName',
+        'column7' => 'userIdentification',
+        'column16' => 'message',
         'column1' => 'amount',
         'column17' => 'executionId',
         'column22' => 'transactionId'
