@@ -28,11 +28,6 @@ contact:
   path: /kontakt
   controller: App\Controller\ContactController::index
 
-team:
-  methods: GET
-  path: /organizacny-team
-  controller: App\Controller\TeamController::index
-
 faq:
   methods: GET
   path: /faq
