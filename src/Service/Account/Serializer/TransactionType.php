@@ -65,7 +65,7 @@ final class TransactionType implements SubscribingHandlerInterface
         $normalizedItems = [];
         foreach ($filteredItems ?: [] as $key => $item) {
             $fieldName = self::COLUMN_MAPPING[$key];
-            $normalizedItems[$fieldName] = $item['value'];
+            $normalizedItems[$fieldName] = $item['value'] ?? null;
         }
 
         /** @var Transaction $result */
