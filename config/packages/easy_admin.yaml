@@ -9,7 +9,18 @@ easy_admin:
       class: App\Entity\HelpRequest
       label: Potrebujem Pomoc
       list:
-        fields: ['id', 'createdAt', 'resolved', 'institutionName', 'contactPerson', 'telephone', 'email', 'address', 'requestedText', 'requestedItems']
+        fields:
+          - 'id'
+          - 'createdAt'
+          - 'resolved'
+          - 'institutionName'
+          - 'recipientGroup'
+          - 'contactPerson'
+          - 'telephone'
+          - 'email'
+          - 'address'
+          - 'requestedText'
+          - 'requestedItems'
         sort: 'createdAt'
         actions: [{ name: 'export_dopyt', ask_confirm: false, type: 'route' }]
       show:
@@ -38,7 +49,7 @@ easy_admin:
       list:
         fields: ['id', 'createdAt', 'resolved', 'email', 'contactPerson', 'telephone', 'address', 'donatedItems']
         sort: 'createdAt'
-        actions: [{ name: 'export_ponuka', ask_confirm: false,type: 'route' }]
+        actions: [{ name: 'export_ponuka', ask_confirm: false, type: 'route' }]
       new:
         fields: ['email','contactPerson', 'telephone', 'address']
 

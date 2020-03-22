@@ -73,6 +73,13 @@ class HelpRequest
     private $address;
 
     /**
+     * @var RecipientGroup|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\RecipientGroup", inversedBy="helpRequests")
+     * @ORM\JoinColumn(name="recipient_group_id", referencedColumnName="id")
+     */
+    private $recipientGroup;
+
+    /**
      * @var Collection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\HelpRequestsItems", mappedBy="helpRequest", cascade={"persist"})
@@ -286,5 +293,23 @@ class HelpRequest
     public function setRequestedText(string $requestedText): void
     {
         $this->requestedText = $requestedText;
+    }
+
+    /**
+     * @return RecipientGroup|null
+     */
+    public function getRecipientGroup(): ?RecipientGroup
+    {
+        return $this->recipientGroup;
+    }
+
+    /**
+     * @param RecipientGroup|null $recipientGroup
+     *
+     * @return void
+     */
+    public function setRecipientGroup(?RecipientGroup $recipientGroup): void
+    {
+        $this->recipientGroup = $recipientGroup;
     }
 }

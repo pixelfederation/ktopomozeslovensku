@@ -36,6 +36,13 @@ class RecipientGroup
     private $recipients;
 
     /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Recipient", mappedBy="recipientGroup", cascade={"persist","remove"})
+     */
+    private $helpRequests;
+
+    /**
      * @var String
      * @ORM\Column(type="string", length=250, name="name")
      */
@@ -96,5 +103,23 @@ class RecipientGroup
     public function setName(String $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getHelpRequests(): Collection
+    {
+        return $this->helpRequests;
+    }
+
+    /**
+     * @param Collection $helpRequests
+     *
+     * @return void
+     */
+    public function setHelpRequests(Collection $helpRequests): void
+    {
+        $this->helpRequests = $helpRequests;
     }
 }
