@@ -106,7 +106,7 @@ final class AccountService
         }
 
         if (
-            $maybeActualAccount->getCreditCount() === $aggregatedBalance->getCreditCount() ||
+            $maybeActualAccount->getCreditCount() === $aggregatedBalance->getCreditCount() &&
             $maybeActualAccount->getDebitCount() === $aggregatedBalance->getDebitCount()) {
             return;
         }
@@ -155,7 +155,7 @@ final class AccountService
 
         // Update old one only if neccesary
         if (
-            $aggregateTransactionBalanceForDate->getDebitCount() === $aggregatedBalance->getDebitCount() ||
+            $aggregateTransactionBalanceForDate->getDebitCount() === $aggregatedBalance->getDebitCount() &&
             $aggregateTransactionBalanceForDate->getCreditCount() === $aggregatedBalance->getCreditCount()
         ) {
             return;
