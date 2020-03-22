@@ -12,15 +12,15 @@ easy_admin:
         fields:
           - 'id'
           - 'createdAt'
-          - 'resolved'
+#          - 'resolved'
           - 'institutionName'
-          - 'recipientGroup'
+#          - 'recipientGroup'
           - 'contactPerson'
           - 'telephone'
           - 'email'
           - 'address'
-          - 'requestedText'
-          - 'requestedItems'
+#          - 'requestedText'
+#          - 'requestedItems'
         sort: 'createdAt'
         actions: [{ name: 'export_dopyt', ask_confirm: false, type: 'route' }]
       show:
