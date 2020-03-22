@@ -14,7 +14,7 @@ easy_admin:
           - 'createdAt'
 #          - 'resolved'
           - 'institutionName'
-#          - 'recipientGroup'
+          - 'recipientGroup'
           - 'contactPerson'
           - 'telephone'
           - 'email'
