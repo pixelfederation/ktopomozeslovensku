@@ -25,7 +25,7 @@ final class Version20200321193055 extends AbstractMigration
         $this->addSql('ALTER TABLE recipient ADD recipient_group_id INT DEFAULT NULL;');
          $this->addSql('ALTER TABLE recipient ADD CONSTRAINT FK_6804FB49104C8843 FOREIGN KEY (recipient_group_id) REFERENCES recipient_group (id);');
 
-        $this->addSql('ALTER TABLE recipient RENAME INDEX fk_6804fb49104c8843 TO IDX_6804FB49104C8843');
+//        $this->addSql('ALTER TABLE recipient RENAME INDEX fk_6804fb49104c8843 TO IDX_6804FB49104C8843');
         $this->addSql('DROP INDEX recipient_group ON recipient_group');
         $this->addSql('ALTER TABLE donation ADD CONSTRAINT FK_31E581A0E92F8F78 FOREIGN KEY (recipient_id) REFERENCES recipient (id)');
     }
@@ -38,7 +38,8 @@ final class Version20200321193055 extends AbstractMigration
         $this->addSql('ALTER TABLE recipient RENAME INDEX idx_6804fb49104c8843 TO FK_6804FB49104C8843');
         $this->addSql('CREATE UNIQUE INDEX recipient_group ON recipient_group (name)');
 
-        $this->addSql('ALTER TABLE recipient DROP FOREIGN KEY FK_6804FB49104C8843;');
+//        $this->addSql('ALTER TABLE recipient DROP FOREIGN KEY FK_6804FB49104C8843;');
+        $this->addSql('ALTER TABLE recipient DROP FOREIGN KEY fk_6804fb49104c8843;');
         $this->addSql('ALTER TABLE recipient DROP COLUMN recipient_group_id;');
         $this->addSql('DROP TABLE recipient_group;');
     }
