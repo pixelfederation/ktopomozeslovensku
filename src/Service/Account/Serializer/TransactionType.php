@@ -23,6 +23,11 @@ final class TransactionType implements SubscribingHandlerInterface
     /** @var array  */
     private const COLUMN_MAPPING = [
         'column0' => 'date',
+        'column2' => 'offsetAccountNumber',
+        'column10' => 'offsetAccountName',
+        'column12' => 'bankName',
+        'column7' => 'userIdentification',
+        'column16' => 'message',
         'column1' => 'amount',
         'column17' => 'executionId',
         'column22' => 'transactionId'
@@ -60,7 +65,7 @@ final class TransactionType implements SubscribingHandlerInterface
         $normalizedItems = [];
         foreach ($filteredItems ?: [] as $key => $item) {
             $fieldName = self::COLUMN_MAPPING[$key];
-            $normalizedItems[$fieldName] = $item['value'];
+            $normalizedItems[$fieldName] = $item['value'] ?? null;
         }
 
         /** @var Transaction $result */

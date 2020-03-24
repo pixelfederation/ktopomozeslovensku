@@ -8,6 +8,7 @@ security:
         memory:
           users:
             admin: { password: '%env(resolve:ADMIN_PWD)%', roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN'] }
+            admin2: { password: '%env(resolve:ADMIN_PWD)%', roles: ['ROLE_ADMIN'] }
 
     firewalls:
         dev:

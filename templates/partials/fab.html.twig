@@ -1,0 +1,15 @@
+<script>
+  function hideFab() {
+    const fab = document.getElementById("fab");
+    fab.style.display = "none";
+  }
+</script>
+<div class="fab" id="fab">
+  <div class="fab__text">
+    <a href="{{ path('speak-about-it') }}">Máte obavy z budúcnosti?</a><br/>
+    <a href="{{ path('speak-about-it') }}">Hľadáte pomoc psychológa?</a>
+  </div>
+  <div class="fab__x" onclick="hideFab()">
+    <i class="icon-close-big"></i>
+  </div>
+</div>

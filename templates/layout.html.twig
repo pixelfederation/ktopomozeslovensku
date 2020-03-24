@@ -32,6 +32,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('static/css/public.css') }}">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta name="google-site-verification" content="GNZJcGcEP32Lfr96IpFg70GRf3QpJ-cofikAstxu7sg"/>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160668441-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -63,6 +64,9 @@
   {% embed "partials/menu.html.twig" %}{% endembed %}
 </header>
 <main>
+  {% if app.request.get('_route') != 'speak-about-it' %}
+    {% embed "partials/fab.html.twig" %}{% endembed %}
+  {% endif %}
   {% block main %}{% endblock %}
 </main>
 <footer>

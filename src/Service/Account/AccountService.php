@@ -194,7 +194,12 @@ final class AccountService
                 $transaction->getAmount() >= 0 ? $transaction->getAmount() : 0,
                 $transaction->getAmount() < 0 ? ($transaction->getAmount() * -1) : 0,
                 $transaction->getTransactionId(),
-                $transaction->getExecutionId()
+                $transaction->getExecutionId(),
+                $transaction->getOffsetAccountNumber(),
+                $transaction->getOffsetAccountName(),
+                $transaction->getBankName(),
+                $transaction->getUserIdentification(),
+                $transaction->getMessage()
             );
             $this->entityManager->persist($accountTransaction);
         }

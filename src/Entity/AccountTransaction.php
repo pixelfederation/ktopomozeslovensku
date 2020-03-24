@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AccountTransactionRepository")
- * @ORM\Table(name="account_transaction", indexes={@ORM\Index(name="search_idx", columns={"date"})})
+ * @ORM\Table(name="account_transaction", indexes={@ORM\Index(name="search_idx", columns={"date"}), @ORM\Index(name="name_idx", columns={"offset_account_name"})})
  * @ORM\HasLifecycleCallbacks()
  */
 final class AccountTransaction
@@ -57,9 +57,44 @@ final class AccountTransaction
     private $transactionId;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", name="offset_account_number", nullable=true)
+     */
+    private $offsetAccountNumber;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", name="offset_account_name", nullable=true)
+     */
+    private $offsetAccountName;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", name="bank_name", nullable=true)
+     */
+    private $bankName;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", name="user_identification", nullable=true)
+     */
+    private $userIdentification;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", name="message", nullable=true)
+     */
+    private $message;
+
+    /**
      * @var string
      *
-     * @ORM\Column(type="bigint", name="execution_id")
+     * @ORM\Column(type="string", name="execution_id", nullable=true)
      */
     private $executionId;
 
@@ -75,6 +110,11 @@ final class AccountTransaction
      * @param float $credit
      * @param float $debit
      * @param string $transactionId
+     * @param string|null $offsetAccountNumber
+     * @param string|null $offsetAccountName
+     * @param string|null $bankName
+     * @param string|null $userIdentification
+     * @param string|null $message
      * @param string $executionId
      */
     public function __construct(
@@ -82,14 +122,23 @@ final class AccountTransaction
         float $credit,
         float $debit,
         string $transactionId,
-        string $executionId
+        string $executionId,
+        ?string $offsetAccountNumber,
+        ?string $offsetAccountName,
+        ?string $bankName,
+        ?string $userIdentification,
+        ?string $message
     ) {
-
         $this->date = $date;
         $this->credit = $credit;
         $this->debit = $debit;
         $this->transactionId = $transactionId;
         $this->executionId = $executionId;
+        $this->offsetAccountNumber = $offsetAccountNumber;
+        $this->offsetAccountName = $offsetAccountName;
+        $this->bankName = $bankName;
+        $this->userIdentification = $userIdentification;
+        $this->message = $message;
     }
 
     /**
@@ -154,5 +203,45 @@ final class AccountTransaction
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOffsetAccountNumber(): ?string
+    {
+        return $this->offsetAccountNumber;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOffsetAccountName(): ?string
+    {
+        return $this->offsetAccountName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBankName(): ?string
+    {
+        return $this->bankName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUserIdentification(): ?string
+    {
+        return $this->userIdentification;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMessage(): ?string
+    {
+        return $this->message;
     }
 }

@@ -112,11 +112,20 @@ workflows:
   version: 2
   ci-cd-deploy:
     jobs:
-      - dev
+      - dev:
+          filters:
+            branches:
+              only:
+                - dev
+                - master
       - hold:
           type: approval
           requires:
             - dev
       - prod:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - hold
