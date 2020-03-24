@@ -64,7 +64,9 @@
   {% embed "partials/menu.html.twig" %}{% endembed %}
 </header>
 <main>
-  {% embed "partials/fab.html.twig" %}{% endembed %}
+  {% if app.request.get('_route') != 'speak-about-it' %}
+    {% embed "partials/fab.html.twig" %}{% endembed %}
+  {% endif %}
   {% block main %}{% endblock %}
 </main>
 <footer>
