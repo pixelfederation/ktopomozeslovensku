@@ -1,12 +1,6 @@
 <?php
 declare(strict_types=1);
 
-/*
- * @author tmihalicka
- * @copyright PIXEL FEDERATION
- * @license Internal use only
- */
-
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +10,9 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- *
+ * renders a page
  */
-final class FaqController
+final class SpeakAboutItController
 {
     /**
      * @var Twig
@@ -42,6 +36,6 @@ final class FaqController
      */
     public function index(): Response
     {
-        return new Response($this->twig->render('faq.html.twig'));
+        return new Response($this->twig->render('speak-about-it.html.twig', []));
     }
 }

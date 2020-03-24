@@ -8,35 +8,10 @@ about:
   path: /o-projekte
   controller: App\Controller\AboutController::index
 
-help_request:
-  methods: GET|POST
-  path: /ziadost-o-pomoc
-  controller: App\Controller\HelpRequestController::index
-
-help_request_success:
-  methods: GET
-  path: /ziadost-o-pomoc/dakujeme
-  controller: App\Controller\HelpRequestController::success
-
-recipients:
-  methods: GET
-  path: /komu-sme-pomohli
-  controller: App\Controller\RecipientsController::index
-
 contact:
   methods: GET
   path: /kontakt
   controller: App\Controller\ContactController::index
-
-faq:
-  methods: GET
-  path: /faq
-  controller: App\Controller\FaqController::index
-
-partners:
-  methods: GET
-  path: /garanti
-  controller: App\Controller\PartnersController::index
 
 donation:
   methods: GET
@@ -58,11 +33,6 @@ donation_success:
   path: /darujem/dakujeme
   controller: App\Controller\DonationController::success
 
-policy:
-  methods: GET
-  path: /pravidla-ochrany-osobnych-udajov
-  controller: App\Controller\PolicyController::index
-
 export_dopyt:
   methods: GET
   path: /export/dopyt
@@ -73,6 +43,35 @@ export_ponuka:
   path: /export/ponuka
   controller: App\Controller\ExportController::ponuka
 
+help_request:
+  methods: GET|POST
+  path: /ziadost-o-pomoc
+  controller: App\Controller\HelpRequestController::index
+
+help_request_success:
+  methods: GET
+  path: /ziadost-o-pomoc/dakujeme
+  controller: App\Controller\HelpRequestController::success
+
+partners:
+  methods: GET
+  path: /garanti
+  controller: App\Controller\PartnersController::index
+
+policy:
+  methods: GET
+  path: /pravidla-ochrany-osobnych-udajov
+  controller: App\Controller\PolicyController::index
+
+recipients:
+  methods: GET
+  path: /komu-sme-pomohli
+  controller: App\Controller\RecipientsController::index
+
+speak-about-it:
+  methods: GET
+  path: /hovorme-o-tom
+  controller: App\Controller\SpeakAboutItController::index
 
 update_account_balance:
   methods: GET
