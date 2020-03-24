@@ -19,12 +19,12 @@ final class ItemState
     /**
      * @var int
      */
-    private $requested;
+    private $requested = 0;
 
     /**
      * @var int
      */
-    private $donated;
+    private $donated = 0;
 
     /**
      * @var int
@@ -39,15 +39,17 @@ final class ItemState
     /**
      * @param DonationItem|null $item
      */
-    public function __construct(?DonationItem $item)
+    public function __construct(DonationItem $item)
     {
         $this->requested = $item->getRequestedItems()->count();
-        $this->donated = array_reduce($item->getDonations()->toArray(), function(?Donation $donation) {
-            if ($donation === null){
-                return 0;
-            }
-            return $donation->getCount();
-        });
+        if ($item->getDonations()->isEmpty()) {
+            $this->donated = 0;
+        }
+        if (!$item->getDonations()->isEmpty()) {
+            $this->donated = array_reduce($item->getDonations()->toArray(), function($result, Donation $donation) {
+                return $result + $donation->getCount();
+            });
+        }
         $this->sub = $this->requested - $this->donated;
         $this->name = $item->getName();
     }

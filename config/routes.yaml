@@ -8,6 +8,16 @@ about:
   path: /o-projekte
   controller: App\Controller\AboutController::index
 
+export_dopyt:
+  methods: GET
+  path: /export/dopyt
+  controller: App\Controller\ExportController::dopyt
+
+export_ponuka:
+  methods: GET
+  path: /export/ponuka
+  controller: App\Controller\ExportController::ponuka
+
 help_request:
   methods: GET|POST
   path: /ziadost-o-pomoc
@@ -20,7 +30,7 @@ help_request_success:
 
 recipients:
   methods: GET
-  path: /komu-sme-pomohli
+  path: /obdarovany
   controller: App\Controller\RecipientsController::index
 
 contact:
@@ -63,16 +73,10 @@ policy:
   path: /pravidla-ochrany-osobnych-udajov
   controller: App\Controller\PolicyController::index
 
-export_dopyt:
+we-helped:
   methods: GET
-  path: /export/dopyt
-  controller: App\Controller\ExportController::dopyt
-
-export_ponuka:
-  methods: GET
-  path: /export/ponuka
-  controller: App\Controller\ExportController::ponuka
-
+  path: /komu-sme-pomohli
+  controller: App\Controller\WeHelpedController::index
 
 update_account_balance:
   methods: GET

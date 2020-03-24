@@ -87,7 +87,7 @@ final class WeHelpedController
                 'donatedAmount' => $donatedAmount,
                 'donations' => $donations,
                 'donationsCount' => $donationsCount,
-                'presenter' => $this->itemStatePresenter
+                'itemState' => $this->itemStatePresenter->present(),
             ]
         ));
     }

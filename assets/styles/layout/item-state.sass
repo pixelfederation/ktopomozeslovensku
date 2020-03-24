@@ -1,0 +1,40 @@
+@use '../layout/utils' as layout
+@use '../config/colors' as colors
+
+.item-box
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  justify-content: flex-start
+  padding: 0
+  margin: 0
+
+  &:not(:last-of-type)
+    border-bottom: 1px colors.$gray-90 solid
+
+  @include layout.from(tablet)
+    justify-content: space-between
+    flex-direction: row
+    align-items: center
+
+  &__name
+    font-weight: bold
+    margin: 12px 0
+
+  &__numbers
+    display: flex
+    align-self: flex-end
+    flex-direction: column
+    margin: 6px 0
+
+    @include layout.from(tablet)
+      align-self: center
+
+  &__number
+    margin: 4px 0
+    text-align: right
+
+    &--red
+      color: colors.$red-50
+    &--green
+      color: colors.$green-50

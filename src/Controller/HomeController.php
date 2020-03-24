@@ -76,7 +76,7 @@ final class HomeController
             'home.html.twig',
             [
                 'donatedAmount' => $donatedAmount,
-                'itemState' => $this->itemStatePresenter->present(),
+                'itemState' => $this->itemStatePresenter->present(5),
             ]
         ));
     }

@@ -20,15 +20,8 @@
     {% include "partials/need-help.html.twig" %}
 
     <article class="article">
-      <header>
-        <h1 class="article__heading">Súčasný stav pomoci</h1>
-      </header>
-
-      <div class="article__body">
-{{ dump() }}
-
-        Čo subjekty potrebovali (čiernou), koľko toho od nás dostali (zelenou) a koľko stále chýba (červenou). Tieto dáta sú z našej databázy žiadanej pomoci, ktorú pravidelne aktualizujeme.
-      </div>
+      {% include "partials/item-status.html.twig" %}
+      <a href="{{ path('we-helped') }}">Zobraziť celý prehľad</a>
     </article>
 
     <article class="article">

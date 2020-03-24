@@ -1,0 +1,25 @@
+<header>
+  <h1 class="article__heading">Súčasný stav pomoci</h1>
+</header>
+
+<div class="article__body">
+  <p class="margin-bottom-large">
+    Čo subjekty potrebovali (čiernou), koľko toho od nás dostali (<span class="green">zelenou</span>)
+    a koľko stále chýba (<span class="red">červenou</span>).
+    Tieto dáta sú z našej databázy žiadanej pomoci, ktorú pravidelne aktualizujeme.
+  </p>
+</div>
+<div class="article__body">
+  {% for state in itemState %}
+    <div class="item-box">
+      <div class="item-box__name">
+        {{ state.name }}
+      </div>
+      <div class="item-box__numbers">
+        <div class="item-box__number">{{ state.requested|number_format(0, '.', ' ') }} ks</div>
+        <div class="item-box__number item-box__number--green">{{ state.donated|number_format(0, '.', ' ') }} ks</div>
+        <div class="item-box__number item-box__number--red">{{ state.sub|number_format(0, '.', ' ') }} ks</div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

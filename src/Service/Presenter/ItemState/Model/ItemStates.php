@@ -84,7 +84,7 @@ final class ItemStates implements Collection
      */
     public static function createFromDonationItems(array $donationItems)
     {
-        array_map(
+        $donationItems = array_map(
             function($donationItem) {
                return new ItemState($donationItem);
             },
