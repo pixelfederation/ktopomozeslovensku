@@ -166,6 +166,9 @@ easy_admin:
         fields: ['name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt']
         actions: ['delete', '-show']
 
+    #
+    # AccountActualBalance
+    #
     AccountActualBalance:
       class: App\Entity\AccountActualBalance
       label: 'Aktuálny stav'
@@ -176,6 +179,9 @@ easy_admin:
         fields: ['credit', 'debit', 'creditCount', 'debitCount', 'balance', 'balanceCount', 'updatedAt']
         actions: ['-new', '-edit', '-delete']
 
+    #
+    # AccountActualBalance
+    #
     AccountBalance:
       class: App\Entity\AccountBalance
       label: 'Po dňoch'
@@ -186,6 +192,9 @@ easy_admin:
         fields: ['date', 'credit', 'debit', 'creditCount', 'debitCount',  'balance', 'balanceCount', 'createdAt', 'updatedAt']
         actions: ['-new', '-edit', '-delete']
 
+    #
+    # AccountTransaction
+    #
     AccountTransaction:
       class: App\Entity\AccountTransaction
       label: 'Transakcie'
@@ -196,7 +205,23 @@ easy_admin:
         fields: ['id', 'date', 'credit', 'debit', 'offsetAccountName', 'offsetAccountNumber', 'transactionId', 'executionId', 'createdAt']
         actions: ['-new', '-edit', '-delete']
 
+    FormEmail:
+      class: App\Entity\FormEmail
+      label: 'Prijemcovia'
+      list:
+        fields: ['id', 'email']
+        actions: ['edit', 'delete']
+      show:
+        fields: ['id', 'email']
+        actions: ['edit', 'delete', 'new']
+      new:
+        fields: ['email']
+
+
   design:
+    brand_color: '#940000'
+    assets:
+      favicon: '/static/img/favicon.png'
     menu:
       - label: Žiadosti
         icon: hands-helping
@@ -220,7 +245,8 @@ easy_admin:
       - label: 'Web'
         icon: globe-europe
         children:
-          - { entity: Partner, icon: 'handshake'}
+          - { label: 'Zoznam partnerov', entity: Partner, icon: 'handshake'}
+          - { labels: 'Prijemcovia', entity: FormEmail, icon: 'at'}
 
       - label: 'Položky'
         icon: medkit

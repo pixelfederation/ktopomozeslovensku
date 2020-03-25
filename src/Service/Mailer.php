@@ -8,20 +8,25 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Entity\FormEmail;
+use Doctrine\ORM\EntityRepository;
+
 /**
  */
 final class Mailer
 {
+    /**
+     * @var EntityRepository
+     */
+    private $repository;
 
     /**
-     * @var array<string>
+     * @param EntityRepository $repository
      */
-    private static $emails = [
-        'simon@ktopomozeslovensku.sk',
-        'zuzana@ktopomozeslovensku.sk',
-        'podpora@ktopomozeslovensku.sk',
-        'lucia@ktopomozeslovensku.sk',
-    ];
+    public function __construct(EntityRepository $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      * @param string $subject
@@ -29,7 +34,12 @@ final class Mailer
      */
     public function sendMail(string $subject, string $message): void
     {
-        foreach (self::$emails as $email) {
+        /** @var array<string> $emails */
+        $emails = array_map(static function (FormEmail $formEmail) {
+            return $formEmail->getEmail();
+        }, $this->repository->findAll());
+
+        foreach ($emails as $email) {
             mail($email, $subject, $message, 'From: web@ktopomozeslovensku.sk');
         }
     }
