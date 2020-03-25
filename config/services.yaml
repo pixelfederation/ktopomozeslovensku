@@ -59,6 +59,11 @@ services:
     factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
     arguments: ['App\Entity\Partner']
 
+  FormEmailRepository:
+    class: 'Doctrine\ORM\EntityRepository'
+    factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+    arguments: ['App\Entity\FormEmail']
+
   App\Service\Account\AccountApiService:
     arguments:
       $fioApiToken: '%env(FIO_API_TOKEN)%'
@@ -94,3 +99,6 @@ services:
 
   App\Service\TransparentAccountReporterService:
     arguments: ['@AccountActualBalanceRepository']
+
+  App\Service\Mailer:
+    arguments: ['@FormEmailRepository']
