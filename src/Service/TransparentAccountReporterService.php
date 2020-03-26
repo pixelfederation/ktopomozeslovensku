@@ -78,6 +78,43 @@ final class TransparentAccountReporterService
      */
     public function getDonatedAmount(): string
     {
+        return $this->_getResult('getCredit');
+    }
+
+    /**
+     * @return string
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getSpentAmount(): string
+    {
+        return $this->_getResult('getDebit');
+    }
+
+    /**
+     * @return string
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getCurrentBalance(): string
+    {
+        return $this->_getResult('getBalance');
+    }
+
+    /**
+     * @param $method
+     * @return string
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    private function _getResult($method)
+    {
         /** @var AccountActualBalance|null $result */
         $result = $this->repository->findOneBy([]);
 
@@ -85,10 +122,25 @@ final class TransparentAccountReporterService
             return $this->fallbackToWebCrawler();
         }
 
+        if (method_exists($result, $method)) {
+            return $this->_formatAmount(
+                $result->$method()
+            );
+        }
+
+        return '';
+    }
+
+    /**
+     * @param $amount
+     * @return string
+     */
+    private function _formatAmount($amount): string
+    {
         return sprintf(
             '%s EUR',
             number_format(
-                $result->getCredit(),
+                $amount,
                 2,
                 ',',
                 ' '

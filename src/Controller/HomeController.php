@@ -68,6 +68,8 @@ final class HomeController
     public function index(): Response
     {
         $donatedAmount = $this->reporterService->getDonatedAmount();
+        $spentAmount = $this->reporterService->getSpentAmount();
+        $currentBalance = $this->reporterService->getCurrentBalance();
         $donations = $this->donations->findBy([], ['donatedAt' => 'DESC'], 3);
         $donationsCount = $this->donations->count([]);
 
@@ -75,6 +77,8 @@ final class HomeController
             'home.html.twig',
             [
                 'donatedAmount' => $donatedAmount,
+                'spentAmount' => $spentAmount,
+                'currentBalance' => $currentBalance,
                 'donations' => $donations,
                 'donationsCount' => $donationsCount,
             ]
