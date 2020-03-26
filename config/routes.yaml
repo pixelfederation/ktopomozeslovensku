@@ -79,3 +79,11 @@ update_account_balance:
   controller: App\Controller\UpdateAccountBalanceController::index
   requirements:
     cronToken: ^[0-9a-zA-Z]{64}
+
+faq:
+  methods: GET
+  path: /faq
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+  defaults:
+    route: about
+    permanent: true
