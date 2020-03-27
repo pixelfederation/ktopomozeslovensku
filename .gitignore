@@ -32,4 +32,5 @@ logs
 
 public/static/css
 !public/static/css/.gitkeep
+public/manifest.json
 node_modules/*

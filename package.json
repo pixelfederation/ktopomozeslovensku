@@ -11,12 +11,16 @@
     "autoprefixer": "^9.7.4",
     "cssnano": "^4.1.10",
     "postcss-cli": "^7.1.0",
+    "postcss-hash": "^2.0.0",
     "sass": "^1.26.3"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006 -s ./public",
     "storybook-build": "build-storybook",
-    "styles-build": "sass --no-source-map assets/styles/index.sass public/static/css/public.css && postcss public/static/css/public.css -r --no-map --use autoprefixer --use cssnano ",
+    "clean": "rm -f public/manifest.json && find public/static/css ! -name '.gitkeep' -type f -exec rm -f {} +",
+    "styles-build": "yarn run clean && sass --no-source-map assets/styles/index.sass public/static/css/public.css && postcss public/static/css/public.css --config ./postcss.config.js -r --no-map",
     "styles-watch": "sass assets/styles/index.sass public/static/css/public.css --watch"
   }
 }
+
+
