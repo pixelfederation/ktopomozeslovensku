@@ -56,20 +56,15 @@ final class DonationController extends AbstractController
 
     /**
      * @return Response
-     *
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      */
     public function index(): Response
     {
-        $donatedAmount = $this->reporterService->getDonatedAmount();
+        $accountAmounts = $this->reporterService->getAmounts();
 
         return $this->render(
             'donation.html.twig',
             [
-                'donatedAmount' => $donatedAmount
+                'accountAmounts' => $accountAmounts
             ]
         );
     }
@@ -85,12 +80,7 @@ final class DonationController extends AbstractController
     /**
      * @param Request $request
      *
-     * @return Response'
-     *
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
+     * @return Response
      */
     public function nonFinance(Request $request): Response
     {
@@ -106,13 +96,13 @@ final class DonationController extends AbstractController
             return $this->redirectToRoute('donation_success');
         }
 
-        $donatedAmount = $this->reporterService->getDonatedAmount();
+        $accountAmounts = $this->reporterService->getAmounts();
 
         return $this->render(
             'donation-nonfinance.html.twig',
             [
                 'form' => $form->createView(),
-                'donatedAmount' => $donatedAmount
+                'accountAmounts' => $accountAmounts
             ]
         );
     }
