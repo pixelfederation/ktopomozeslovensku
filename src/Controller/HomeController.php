@@ -56,29 +56,21 @@ final class HomeController
 
     /**
      * @return Response
-     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      */
     public function index(): Response
     {
-        $donatedAmount = $this->reporterService->getDonatedAmount();
-        $spentAmount = $this->reporterService->getSpentAmount();
-        $currentBalance = $this->reporterService->getCurrentBalance();
+        $accountAmounts = $this->reporterService->getAmounts();
+
         $donations = $this->donations->findBy([], ['donatedAt' => 'DESC'], 3);
         $donationsCount = $this->donations->count([]);
 
         return new Response($this->twig->render(
             'home.html.twig',
             [
-                'donatedAmount' => $donatedAmount,
-                'spentAmount' => $spentAmount,
-                'currentBalance' => $currentBalance,
+                'accountAmounts' => $accountAmounts,
                 'donations' => $donations,
                 'donationsCount' => $donationsCount,
             ]
