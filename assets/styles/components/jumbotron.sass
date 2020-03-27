@@ -43,11 +43,12 @@
 
       &:last-child
         margin-right: 0
+        margin-bottom: 0
 
-  &--grey
+  &--grey, &--support
     background-color: colors.$gray-93
     margin: 0 0 70px
-    padding: 32px 0
+    padding: 32px 24px
 
     &__heading
       @include typo.h4
@@ -58,7 +59,20 @@
       margin: 0 0 96px
       padding: 32px 0
 
+  &--support
+    padding: 48px 24px
+    margin-bottom: 0
+
+    &__heading
+      @include typo.h3
+
+    @include layout.from(desktop)
+      padding: 64px 0
+
   .vertical-list
     display: flex
     flex-direction: column
-    align-items: normal
+    align-items: flex-start
+
+    @include layout.from(tablet)
+      align-items: center
