@@ -106,3 +106,8 @@ services:
 
   App\Service\Mailer:
     arguments: ['@FormEmailRepository']
+
+  App\EventListener\NotFoundRedirectListener:
+    arguments: ['@router.default']
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
