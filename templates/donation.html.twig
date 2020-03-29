@@ -1,6 +1,16 @@
 {% extends "layout.html.twig" %}
 {% block main %}
   <div class="l-container">
+    <h1 class="hero__heading h2">Pomôcť môžete aj vy</h1>
+
+    <article class="article article--tight">
+      <div class="article__body">
+        <p>
+          Vaše príspevky sa využijú na kúpu zdravotníckych pomôcok. Respirátory, rúška, dezinfekcie, čističky vzduchu, skrátka všetko, čo bude potrebné.
+        </p>
+      </div>
+    </article>
+
     {% include "partials/donated.html.twig" with { 'upper': true } %}
 
     {% include 'partials/faq.html.twig' %}
