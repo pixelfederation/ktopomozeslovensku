@@ -116,12 +116,14 @@ easy_admin:
           - id
           - recipients
           - name
+          - abbreviation
         actions: ['show', 'edit', 'delete']
       show:
         fields: ['recipients', 'name']
       edit:
         fields:
           - name
+          - abbreviation
     #
     # Donation
     #
@@ -152,6 +154,31 @@ easy_admin:
           - donationItem
           - count
           - donatedAt
+
+    #
+    # Donation
+    #
+    DonationImport:
+      class: App\Entity\DonationImport
+      label: 'Import'
+      list:
+        fields:
+          - 'id'
+          - donationItem
+          - donatedAt
+          - { property: 'import', template: 'donation-import/import.html.twig', base_path: '%app.path.user_contracts%' }
+          - 'wasSuccessful'
+          - 'errorMessage'
+        actions: ['show', 'new']
+      show:
+        fields: ['donationItem', 'donatedAt', 'import', 'wasSuccessful', 'errorMessage']
+        actions: []
+      new:
+        fields:
+          - donationItem
+          - donatedAt
+          - { property: 'importFile', type: 'vich_file' }
+        form_options: { validation_groups: ['default'] }
 
     #
     # Partner
@@ -241,6 +268,7 @@ easy_admin:
           - { label: 'Prijemcovia', entity: Recipient, icon: 'users' }
           - { label: 'Skupiny príjemcov', entity: RecipientGroup, icon: 'tag' }
           - { label: 'Polozky', entity: Donation, icon: 'cubes' }
+          - { label: 'Import', entity: DonationImport, icon: 'file-excel' }
 
       - label: 'Web'
         icon: globe-europe

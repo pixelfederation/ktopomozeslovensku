@@ -42,18 +42,26 @@ class RecipientGroup
     private $helpRequests;
 
     /**
-     * @var String
+     * @var string
      * @ORM\Column(type="string", length=250, name="name")
      */
     private $name = '';
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=3, name="abbreviation", nullable=true)
+     */
+    private $abbreviation;
+
+    /**
+     */
     public function __construct()
     {
         $this->recipients = new ArrayCollection();
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function __toString()
     {
@@ -77,9 +85,9 @@ class RecipientGroup
     }
 
     /**
-     * @return String
+     * @return string
      */
-    public function getName(): String
+    public function getName(): string
     {
         return $this->name;
     }
@@ -95,11 +103,11 @@ class RecipientGroup
     }
 
     /**
-     * @param String $name
+     * @param string $name
      *
      * @return void
      */
-    public function setName(String $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -120,5 +128,21 @@ class RecipientGroup
     public function setHelpRequests(Collection $helpRequests): void
     {
         $this->helpRequests = $helpRequests;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbbreviation(): ?string
+    {
+        return $this->abbreviation;
+    }
+
+    /**
+     * @param string $abbreviation
+     */
+    public function setAbbreviation(?string $abbreviation): void
+    {
+        $this->abbreviation = $abbreviation;
     }
 }
