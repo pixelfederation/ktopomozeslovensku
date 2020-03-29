@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\Presenter\helpRequestGroup;
 use App\Service\Presenter\ItemState\ItemStatePresenter;
 use App\Service\TransparentAccountReporterService;
 use Doctrine\ORM\EntityRepository;
@@ -45,23 +46,30 @@ final class WeHelpedController
      * @var EntityRepository
      */
     private $donations;
+    /**
+     * @var helpRequestGroup
+     */
+    private $helpRequestGroupPresenter;
 
     /**
      * @param Twig $twig
      * @param TransparentAccountReporterService $reporterService
      * @param ItemStatePresenter $itemStatePresenter
+     * @param helpRequestGroup $helpRequestGroupPresenter
      * @param EntityRepository $donations
      */
     public function __construct(
         Twig $twig,
         TransparentAccountReporterService $reporterService,
         ItemStatePresenter $itemStatePresenter,
+        helpRequestGroup $helpRequestGroupPresenter,
         EntityRepository $donations
     ) {
         $this->twig = $twig;
         $this->reporterService = $reporterService;
         $this->itemStatePresenter = $itemStatePresenter;
         $this->donations = $donations;
+        $this->helpRequestGroupPresenter = $helpRequestGroupPresenter;
     }
 
     /**
@@ -86,6 +94,7 @@ final class WeHelpedController
                 'donations' => $donations,
                 'donationsCount' => $donationsCount,
                 'itemState' => $this->itemStatePresenter->present(),
+                'helpRequestGroups' => $this->helpRequestGroupPresenter->present(),
             ]
         ));
     }

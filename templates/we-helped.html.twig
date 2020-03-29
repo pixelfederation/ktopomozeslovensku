@@ -4,6 +4,23 @@
     <h1 class="hero__heading-standalone">Komu sme pomohli</h1>
 
     <article class="article">
+      <header>
+        <h1 class="article__heading">Čo o nás povedali</h1>
+      </header>
+
+      {% for group in helpRequestGroups %}
+        <div class="item-box">
+          <div class="item-box__name">
+            {{ group.name }}
+          </div>
+          <div class="item-box__numbers">
+            <div class="item-box__number">{{ group.count|number_format(0, '.', ' ') }}</div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </article>
+    <article class="article">
       {% include "partials/item-status.html.twig" %}
     </article>
 
