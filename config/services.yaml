@@ -60,6 +60,11 @@ services:
     factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
     arguments: ['App\Entity\Partner']
 
+  HelpRequestItemsRepository:
+    class: 'Doctrine\ORM\EntityRepository'
+    factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+    arguments: ['App\Entity\HelpRequestItems']
+
   FormEmailRepository:
     class: 'Doctrine\ORM\EntityRepository'
     factory: ['@doctrine.orm.default_entity_manager', 'getRepository']

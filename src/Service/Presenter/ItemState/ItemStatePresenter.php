@@ -5,11 +5,12 @@ declare(strict_types=1);
  * @copyright PIXEL FEDERATION
  * @license Internal use only
  */
+
 namespace App\Service\Presenter\ItemState;
 
 use App\Entity\DonationItem;
-use App\Service\Mailer;
-use App\Service\Presenter\ItemState\Model\ItemStates;
+use App\Entity\HelpRequestsItems;
+use App\Service\Presenter\ItemState\Model\ItemState;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,14 +24,20 @@ final class ItemStatePresenter
     /**
      * @var ObjectRepository
      */
-    private $repository;
+    private $Donationrepository;
+
+    /**
+     * @var ObjectRepository
+     */
+    private $HelpRreqItemrepository;
 
     /**
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->repository = $entityManager->getRepository(DonationItem::class);
+        $this->Donationrepository = $entityManager->getRepository(DonationItem::class);
+        $this->HelpRreqItemrepository = $entityManager->getRepository(HelpRequestsItems::class);
     }
 
     /**
@@ -40,11 +47,23 @@ final class ItemStatePresenter
      */
     public function present(int $limit = null): Collection
     {
-        if ($limit !== null){
+        if ($limit !== null) {
             //todo: change orderBy to relation field - somehow sum of all helpRequestItem.quantity
-            return ItemStates::createFromDonationItems($this->repository->findBy([], ['name' => 'DESC'], $limit));
+            $result = new ArrayCollection($this->Donationrepository->findBy([], ['name' => 'DESC'], $limit));
+            return $result->map(function (DonationItem $don) {
+                $state = new ItemState($don);
+                $rqeuests = $this->HelpRreqItemrepository->getItemCounts($state->getItemId());
+                $state->setRequested($rqeuests);
+                return $state;
+            });
         }
 
-        return ItemStates::createFromDonationItems($this->repository->findAll());
+        $result = new ArrayCollection($this->Donationrepository->findBy([], ['name' => 'DESC']));
+        return $result->map(function (DonationItem $don) {
+            $state = new ItemState($don);
+            $rqeuests = $this->HelpRreqItemrepository->getItemCounts($state->getItemId());
+            $state->setRequested($rqeuests);
+            return $state;
+        });
     }
 }

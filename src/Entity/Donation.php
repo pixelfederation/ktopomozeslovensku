@@ -27,7 +27,7 @@ class Donation
 
     /**
      * @var Recipient
-     * @ORM\ManyToOne(targetEntity="App\Entity\Recipient", inversedBy="donations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Recipient", inversedBy="donations",)
      * @ORM\JoinColumn(name="recipient_id", referencedColumnName="id", nullable=false)
      */
     private $recipient;

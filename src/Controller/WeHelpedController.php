@@ -77,14 +77,12 @@ final class WeHelpedController
      */
     public function index(): Response
     {
-        $donatedAmount = $this->reporterService->getDonatedAmount();
         $donations = $this->donations->findBy([], ['donatedAt' => 'DESC'], 10);
         $donationsCount = $this->donations->count([]);
 
         return new Response($this->twig->render(
             'we-helped.html.twig',
             [
-                'donatedAmount' => $donatedAmount,
                 'donations' => $donations,
                 'donationsCount' => $donationsCount,
                 'itemState' => $this->itemStatePresenter->present(),
