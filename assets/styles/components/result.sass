@@ -11,14 +11,17 @@
 
   .separator
     max-width: 300px
-    margin: 100px auto
+    margin: 48px auto
 
   @include layout.from(desktop)
     max-width: 600px
     padding: 0 0 80px 0
 
   &__stats
-    margin-bottom: 30px
+    margin-bottom: 25px
+
+    &:last-child
+      margin-bottom: 0
 
     .p1
       margin-bottom: 8px
