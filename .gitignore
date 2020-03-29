@@ -34,3 +34,6 @@ public/static/css
 !public/static/css/.gitkeep
 public/manifest.json
 node_modules/*
+data/donations
+!data/donations/.gitkeep
+!/var/tmp/xlsx/.gitkeep

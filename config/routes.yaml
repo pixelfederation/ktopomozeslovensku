@@ -126,3 +126,12 @@ security_logout:
   options:
     hide_in_sitemap: true
 
+admin_download_donation_import_file:
+  methods: GET
+  path: '%app.path.user_contracts%/{id}'
+  controller: App\Controller\Admin\DonationImportController::downloadImportAction
+  options:
+    hide_in_sitemap: true
+  requirements:
+    cronToken: '[0-9]+'
+

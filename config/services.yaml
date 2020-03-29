@@ -111,3 +111,17 @@ services:
     arguments: ['@router.default']
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+  App\Service\DonationsImport\NewImportListener:
+    tags:
+      - { name: kernel.event_listener, event: easy_admin.post_persist }
+
+  Aspera\Spreadsheet\XLSX\Reader:
+    arguments:
+      $options:
+          TempDir: '%kernel.project_dir%/var/tmp/xlsx'
+          SkipEmptyCells: false
+          ReturnDateTimeObjects: true
+          SharedStringsConfiguration: '@Aspera\Spreadsheet\XLSX\SharedStringsConfiguration'
+
+  Aspera\Spreadsheet\XLSX\SharedStringsConfiguration:

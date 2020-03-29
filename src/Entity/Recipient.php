@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Service\AccentsRemover;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -33,6 +34,12 @@ class Recipient
      * @ORM\Column(type="string", length=255, name="institution_name")
      */
     private $institutionName = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, name="institution_name_searchable")
+     */
+    private $institutionNameSearchable = '';
 
     /**
      * @var Collection
@@ -77,6 +84,7 @@ class Recipient
     public function setInstitutionName(string $institutionName): void
     {
         $this->institutionName = $institutionName;
+        $this->institutionNameSearchable = AccentsRemover::removeAccents(($institutionName));
     }
 
     /**
