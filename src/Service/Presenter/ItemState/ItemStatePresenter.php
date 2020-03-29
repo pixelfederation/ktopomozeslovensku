@@ -54,6 +54,8 @@ final class ItemStatePresenter
                 $state = new ItemState($don);
                 $rqeuests = $this->HelpRreqItemrepository->getItemCounts($state->getItemId());
                 $state->setRequested($rqeuests);
+                $state->setSub($state->getRequested() - $state->getDonated());
+
                 return $state;
             });
         }
@@ -63,6 +65,8 @@ final class ItemStatePresenter
             $state = new ItemState($don);
             $rqeuests = $this->HelpRreqItemrepository->getItemCounts($state->getItemId());
             $state->setRequested($rqeuests);
+            $state->setSub($state->getRequested() - $state->getDonated());
+
             return $state;
         });
     }

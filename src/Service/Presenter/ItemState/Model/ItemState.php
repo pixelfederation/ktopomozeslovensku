@@ -28,6 +28,11 @@ final class ItemState
     private $donated = 0;
 
     /**
+     * @var int
+     */
+    private $sub = 0;
+
+    /**
      * @var string|null
      */
     private $name;
@@ -68,6 +73,14 @@ final class ItemState
     }
 
     /**
+     * @return int
+     */
+    public function getSub(): int
+    {
+        return $this->sub;
+    }
+
+    /**
      * @return string|null
      */
     public function getName(): ?string
@@ -91,5 +104,15 @@ final class ItemState
     public function setRequested(int $requested): void
     {
         $this->requested = $requested;
+    }
+
+    /**
+     * @param int $sub
+     *
+     * @return void
+     */
+    public function setSub(int $sub): void
+    {
+        $this->sub = $sub;
     }
 }
