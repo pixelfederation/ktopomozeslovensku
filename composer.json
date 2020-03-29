@@ -6,6 +6,7 @@
     "ext-ctype": "*",
     "ext-dom": "*",
     "ext-iconv": "*",
+    "ext-json": "*",
     "easycorp/easyadmin-bundle": "^2.3",
     "jms/serializer-bundle": "^3.5",
     "sensio/framework-extra-bundle": "^5.5",

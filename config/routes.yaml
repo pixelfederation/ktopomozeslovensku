@@ -37,11 +37,15 @@ export_dopyt:
   methods: GET
   path: /export/dopyt
   controller: App\Controller\ExportController::dopyt
+  options:
+    hide_in_sitemap: true
 
 export_ponuka:
   methods: GET
   path: /export/ponuka
   controller: App\Controller\ExportController::ponuka
+  options:
+    hide_in_sitemap: true
 
 help_request:
   methods: GET|POST
@@ -52,6 +56,8 @@ help_request_success:
   methods: GET
   path: /ziadost-o-pomoc/dakujeme
   controller: App\Controller\HelpRequestController::success
+  options:
+    hide_in_sitemap: true
 
 partners:
   methods: GET
@@ -78,9 +84,48 @@ we-helped:
   path: /komu-sme-pomohli
   controller: App\Controller\WeHelpedController::index
 
+#
+# Hidden from Sitemap
+#
+faq:
+  methods: GET
+  path: /faq
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+  options:
+    hide_in_sitemap: true
+  defaults:
+    route: about
+    permanent: true
+
 update_account_balance:
   methods: GET
   path: /update-account-balance/{cronToken}
   controller: App\Controller\UpdateAccountBalanceController::index
+  options:
+    hide_in_sitemap: true
   requirements:
     cronToken: ^[0-9a-zA-Z]{64}
+
+sitemap:
+  methods: GET
+  path: /sitemap.{format}
+  controller: App\Controller\SitemapController::index
+  options:
+    hide_in_sitemap: true
+  requirements:
+    format: xml
+
+security_login:
+  methods: GET|POST
+  path: /login
+  controller: App\Controller\SecurityController::login
+  options:
+    hide_in_sitemap: true
+
+security_logout:
+  methods: GET
+  path: /logout
+  controller: App\Controller\SecurityController::logout
+  options:
+    hide_in_sitemap: true
+

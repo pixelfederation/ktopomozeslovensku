@@ -7,6 +7,7 @@ parameters:
   'env(FIO_API_TOKEN)': ''
   'env(FIO_API_URL)': ''
   'env(CRON_TOKEN)': ''
+  'env(CSS_MANIFEST_FILE)': 'public/manifest.json'
 
 services:
   # default configuration for services in *this* file
@@ -59,11 +60,19 @@ services:
     factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
     arguments: ['App\Entity\Partner']
 
+  FormEmailRepository:
+    class: 'Doctrine\ORM\EntityRepository'
+    factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+    arguments: ['App\Entity\FormEmail']
+
   App\Service\Account\AccountApiService:
     arguments:
       $fioApiToken: '%env(FIO_API_TOKEN)%'
       $fioApiUrl: '%env(FIO_API_URL)%'
 
+  App\Service\CssManifestReader:
+    arguments:
+      - '%kernel.project_dir%/%env(CSS_MANIFEST_FILE)%'
 
 
   App\Service\Account\Serializer\TransactionType:
@@ -94,3 +103,11 @@ services:
 
   App\Service\TransparentAccountReporterService:
     arguments: ['@AccountActualBalanceRepository']
+
+  App\Service\Mailer:
+    arguments: ['@FormEmailRepository']
+
+  App\EventListener\NotFoundRedirectListener:
+    arguments: ['@router.default']
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

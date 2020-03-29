@@ -59,23 +59,18 @@ final class HomeController
 
     /**
      * @return Response
-     *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      */
     public function index(): Response
     {
-        $donatedAmount = $this->reporterService->getDonatedAmount();
+        $accountAmounts = $this->reporterService->getAmounts();
 
         return new Response($this->twig->render(
             'home.html.twig',
             [
-                'donatedAmount' => $donatedAmount,
+                'accountAmounts' => $accountAmounts,
                 'itemState' => $this->itemStatePresenter->present(5),
             ]
         ));
