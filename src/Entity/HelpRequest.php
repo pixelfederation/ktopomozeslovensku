@@ -16,7 +16,7 @@ use Exception;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\HelpRequesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\HelpRequestRepository")
  * @ORM\Table(name="help_request")
  * @ORM\HasLifecycleCallbacks()
  */

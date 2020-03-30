@@ -41,7 +41,7 @@ final class helpRequestGroup
      */
     public function present(): Collection
     {
-            return new ArrayCollection($this->HelpRreqItemrepository->getCounts());
+            return new ArrayCollection($this->HelpRreqItemrepository->getStatistics());
     }
 
 }

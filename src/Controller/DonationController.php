@@ -37,36 +37,19 @@ final class DonationController extends AbstractController
     private $service;
 
     /**
-     * @var TransparentAccountReporterService
-     */
-    private $reporterService;
-
-    /**
      * @param DonationRequestService $service
-     * @param TransparentAccountReporterService $reporterService
      */
-    public function __construct(
-        DonationRequestService $service,
-        TransparentAccountReporterService $reporterService
-    ) {
+    public function __construct(DonationRequestService $service)
+    {
         $this->service = $service;
-        $this->reporterService = $reporterService;
     }
-
 
     /**
      * @return Response
      */
     public function index(): Response
     {
-        $accountAmounts = $this->reporterService->getAmounts();
-
-        return $this->render(
-            'donation.html.twig',
-            [
-                'accountAmounts' => $accountAmounts
-            ]
-        );
+        return $this->render('donation.html.twig');
     }
 
     /**
@@ -96,13 +79,10 @@ final class DonationController extends AbstractController
             return $this->redirectToRoute('donation_success');
         }
 
-        $accountAmounts = $this->reporterService->getAmounts();
-
         return $this->render(
             'donation-nonfinance.html.twig',
             [
-                'form' => $form->createView(),
-                'accountAmounts' => $accountAmounts
+                'form' => $form->createView()
             ]
         );
     }

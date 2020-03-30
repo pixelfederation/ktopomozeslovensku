@@ -18,7 +18,7 @@
       <div class="item-box__numbers">
         <div class="item-box__number">{{ state.requested|number_format(0, '.', ' ') }} ks</div>
         <div class="item-box__number item-box__number--green">{{ state.donated|number_format(0, '.', ' ') }} ks</div>
-        <div class="item-box__number item-box__number--red">{{ state.sub|number_format(0, '.', ' ') }} ks</div>
+        <div class="item-box__number item-box__number--red">{{ state.difference|number_format(0, '.', ' ') }} ks</div>
       </div>
     </div>
   {% endfor %}
