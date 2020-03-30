@@ -60,15 +60,20 @@ services:
     factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
     arguments: ['App\Entity\Partner']
 
-  HelpRequestItemsRepository:
-    class: 'Doctrine\ORM\EntityRepository'
-    factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
-    arguments: ['App\Entity\HelpRequestItems']
-
   FormEmailRepository:
     class: 'Doctrine\ORM\EntityRepository'
     factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
     arguments: ['App\Entity\FormEmail']
+
+  DonationItemRepository:
+    class: App\Repository\DonationItemRepository
+    factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+    arguments: ['App\Entity\DonationItem']
+
+  HelpRequestRepository:
+    class: App\Repository\HelpRequestRepository
+    factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+    arguments: ['App\Entity\HelpRequest']
 
   App\Service\Account\AccountApiService:
     arguments:
@@ -79,6 +84,13 @@ services:
     arguments:
       - '%kernel.project_dir%/%env(CSS_MANIFEST_FILE)%'
 
+  App\Service\RequestGroupsStatisticService:
+    arguments:
+      - '@HelpRequestRepository'
+
+  App\Service\DonationItemsStatisticService:
+    arguments:
+      - '@DonationItemRepository'
 
   App\Service\Account\Serializer\TransactionType:
     tags:

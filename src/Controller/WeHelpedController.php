@@ -9,15 +9,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Service\Presenter\helpRequestGroup;
-use App\Service\Presenter\ItemState\ItemStatePresenter;
-use App\Service\TransparentAccountReporterService;
+use App\Service\DonationItemsStatisticService;
+use App\Service\RequestGroupsStatisticService;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Twig\Environment as Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -34,42 +29,36 @@ final class WeHelpedController
     private $twig;
 
     /**
-     * @var TransparentAccountReporterService
+     * @var DonationItemsStatisticService
      */
-    private $reporterService;
+    private $itemsStatisticService;
 
     /**
-     * @var ItemStatePresenter
+     * @var RequestGroupsStatisticService
      */
-    private $itemStatePresenter;
+    private $requestGroupsStatistic;
+
     /**
      * @var EntityRepository
      */
     private $donations;
-    /**
-     * @var helpRequestGroup
-     */
-    private $helpRequestGroupPresenter;
 
     /**
      * @param Twig $twig
-     * @param TransparentAccountReporterService $reporterService
-     * @param ItemStatePresenter $itemStatePresenter
-     * @param helpRequestGroup $helpRequestGroupPresenter
+     * @param DonationItemsStatisticService $itemsStatisticService
+     * @param RequestGroupsStatisticService $requestGroupsStatistic
      * @param EntityRepository $donations
      */
     public function __construct(
         Twig $twig,
-        TransparentAccountReporterService $reporterService,
-        ItemStatePresenter $itemStatePresenter,
-        helpRequestGroup $helpRequestGroupPresenter,
+        DonationItemsStatisticService $itemsStatisticService,
+        RequestGroupsStatisticService $requestGroupsStatistic,
         EntityRepository $donations
     ) {
         $this->twig = $twig;
-        $this->reporterService = $reporterService;
-        $this->itemStatePresenter = $itemStatePresenter;
+        $this->itemsStatisticService = $itemsStatisticService;
+        $this->requestGroupsStatistic = $requestGroupsStatistic;
         $this->donations = $donations;
-        $this->helpRequestGroupPresenter = $helpRequestGroupPresenter;
     }
 
     /**
@@ -78,10 +67,6 @@ final class WeHelpedController
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
      */
     public function index(): Response
     {
@@ -93,8 +78,8 @@ final class WeHelpedController
             [
                 'donations' => $donations,
                 'donationsCount' => $donationsCount,
-                'itemState' => $this->itemStatePresenter->present(),
-                'helpRequestGroups' => $this->helpRequestGroupPresenter->present(),
+                'itemState' => $this->itemsStatisticService->getStatistics(),
+                'helpRequestGroups' => $this->requestGroupsStatistic->getStatistics()
             ]
         ));
     }

@@ -8,17 +8,17 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Model\RequestGroupStatistic;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * {comment what interface or class does. This comment is not specifically necessary, but it is recommended.}
  */
-final class HelpRequesRepository extends EntityRepository
+final class HelpRequestRepository extends EntityRepository
 {
     /**
      */
-    public function getCounts(): ?array
+    public function getStatistics(): array
     {
         $result = $this->createQueryBuilder('request')
             ->select(['count(request.recipientGroup) as count', 'rg.name'])
@@ -28,11 +28,14 @@ final class HelpRequesRepository extends EntityRepository
             ->getResult();
 
         if (!isset($result[0])) {
-            return null;
+            return [];
         }
 
-        return $result;
+        return array_map(static function (array $result) {
+            return new RequestGroupStatistic(
+                (string) $result['name'],
+                (int) $result['count']
+            );
+        }, $result);
     }
-
-
 }

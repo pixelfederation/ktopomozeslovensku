@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\AccountActualBalance;
+use App\Model\AccountReport;
 use App\Repository\AccountActualBalanceRepository;
 
 /**
@@ -31,17 +32,21 @@ final class TransparentAccountReporterService
     }
 
     /**
-     * @return array
+     * @return AccountReport
      */
-    public function getAmounts(): array
+    public function getAccountReport(): AccountReport
     {
         /** @var AccountActualBalance|null $result */
         $result = $this->repository->findOneBy([]);
 
-        return [
-            'credit' => $result->getCredit(),
-            'debit' => $result->getDebit(),
-            'balance' => $result->getBalance(),
-        ];
+        if ($result ===  null) {
+            return AccountReport::emptyAccount();
+        }
+
+        return new AccountReport(
+            $result->getCredit(),
+            $result->getDebit(),
+            $result->getBalance()
+        );
     }
 }
