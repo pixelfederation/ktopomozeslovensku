@@ -18,25 +18,8 @@
     {% include "partials/need-help.html.twig" %}
 
     <article class="article">
-      <header>
-        <h1 class="article__heading">Komu sme pomohli</h1>
-      </header>
-
-      <div class="article__body">
-        <ul>
-          {% for donation in donations %}
-          <li class="l-log">
-            <span class="l-log__date">{{ donation.donatedAt|date("d. m. Y") }}</span>
-            <span class="l-log__desc">
-            <strong>{{ donation.recipient.institutionName }}.</strong>
-              {{ donation.donationItem.name }}, {{ donation.count }} ks
-            </span>
-          </li>
-          {% endfor %}
-        </ul>
-
-        <a href="{{ path('recipients') }}">Zobraziť všetko ({{ donationsCount }})</a>
-      </div>
+      {% include "partials/item-status.html.twig" %}
+      <a href="{{ path('we-helped') }}">Zobraziť celý prehľad</a>
     </article>
 
     <article class="article">

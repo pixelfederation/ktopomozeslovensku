@@ -12,7 +12,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\HelpRequesItemsRepository")
  * @ORM\Table(name="help_requests_items")
  */
 final class HelpRequestsItems

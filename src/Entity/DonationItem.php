@@ -31,7 +31,6 @@ class DonationItem
 
     /**
      * @var string|null
-     * @Groups({"dopyt"})
      *
      * @ORM\Column(type="string", length=255, name="value", unique=true)
      */

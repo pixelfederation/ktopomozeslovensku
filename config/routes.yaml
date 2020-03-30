@@ -28,66 +28,10 @@ donation_nonfinance:
   path: /darujem-nefinancnu-pomoc
   controller: App\Controller\DonationController::nonFinance
 
-help_request:
-  methods: GET|POST
-  path: /ziadost-o-pomoc
-  controller: App\Controller\HelpRequestController::index
-
-partners:
-  methods: GET
-  path: /garanti
-  controller: App\Controller\PartnersController::index
-
-policy:
-  methods: GET
-  path: /pravidla-ochrany-osobnych-udajov
-  controller: App\Controller\PolicyController::index
-
-recipients:
-  methods: GET
-  path: /komu-sme-pomohli
-  controller: App\Controller\RecipientsController::index
-
-speak-about-it:
-  methods: GET
-  path: /hovorme-o-tom
-  controller: App\Controller\SpeakAboutItController::index
-
-#
-# Hidden from Sitemap
-#
-faq:
-  methods: GET
-  path: /faq
-  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
-  options:
-    hide_in_sitemap: true
-  defaults:
-    route: about
-    permanent: true
-
-help_request_success:
-  methods: GET
-  path: /ziadost-o-pomoc/dakujeme
-  controller: App\Controller\HelpRequestController::success
-  options:
-    hide_in_sitemap: true
-
-update_account_balance:
-  methods: GET
-  path: /update-account-balance/{cronToken}
-  controller: App\Controller\UpdateAccountBalanceController::index
-  options:
-    hide_in_sitemap: true
-  requirements:
-    cronToken: ^[0-9a-zA-Z]{64}
-
 donation_success:
   methods: GET|POST
   path: /darujem/dakujeme
   controller: App\Controller\DonationController::success
-  options:
-    hide_in_sitemap: true
 
 export_dopyt:
   methods: GET
@@ -102,6 +46,65 @@ export_ponuka:
   controller: App\Controller\ExportController::ponuka
   options:
     hide_in_sitemap: true
+
+help_request:
+  methods: GET|POST
+  path: /ziadost-o-pomoc
+  controller: App\Controller\HelpRequestController::index
+
+help_request_success:
+  methods: GET
+  path: /ziadost-o-pomoc/dakujeme
+  controller: App\Controller\HelpRequestController::success
+  options:
+    hide_in_sitemap: true
+
+partners:
+  methods: GET
+  path: /garanti
+  controller: App\Controller\PartnersController::index
+
+policy:
+  methods: GET
+  path: /pravidla-ochrany-osobnych-udajov
+  controller: App\Controller\PolicyController::index
+
+recipients:
+  methods: GET
+  path: /obdarovani
+  controller: App\Controller\RecipientsController::index
+
+speak-about-it:
+  methods: GET
+  path: /hovorme-o-tom
+  controller: App\Controller\SpeakAboutItController::index
+
+we-helped:
+  methods: GET
+  path: /komu-sme-pomohli
+  controller: App\Controller\WeHelpedController::index
+
+#
+# Hidden from Sitemap
+#
+faq:
+  methods: GET
+  path: /faq
+  controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+  options:
+    hide_in_sitemap: true
+  defaults:
+    route: about
+    permanent: true
+
+update_account_balance:
+  methods: GET
+  path: /update-account-balance/{cronToken}
+  controller: App\Controller\UpdateAccountBalanceController::index
+  options:
+    hide_in_sitemap: true
+  requirements:
+    cronToken: ^[0-9a-zA-Z]{64}
 
 sitemap:
   methods: GET

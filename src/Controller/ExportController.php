@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * {comment what interface or class does. This comment is not specifically necessary, but it is recommended.}
+ * Handles serialization of database to csv and posting it to output
  */
 final class ExportController
 {
