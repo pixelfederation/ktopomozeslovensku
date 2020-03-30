@@ -94,7 +94,8 @@ final class Importer
     private function importRows(DonationImport $import): void
     {
         foreach ($this->reader as $row) {
-            $recipient = $this->resolveRecipient($row[1], $row[0]);
+            $recipientName = sprintf("%s, %s", trim($row[1]), trim($row[2]));
+            $recipient = $this->resolveRecipient($recipientName, $row[0]);
 
             $donation = new Donation();
             $donation->setRecipient($recipient);
