@@ -1,0 +1,18 @@
+<header>
+  <h1 class="article__heading">História pomoci</h1>
+</header>
+<div class="article__body">
+  <ul>
+    {% for donation in donations %}
+      <li class="l-log">
+        <span class="l-log__date">{{ donation.donatedAt|date("d. m. Y") }}</span>
+        <span class="l-log__desc">
+              <strong>{{ donation.recipient.institutionName }}.</strong>
+                {{ donation.donationItem.name }}, {{ donation.count }} ks
+              </span>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ path('recipients') }}">Zobraziť všetko ({{ donationsCount }})</a>
+</div>

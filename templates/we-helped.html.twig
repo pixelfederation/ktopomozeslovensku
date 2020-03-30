@@ -8,82 +8,19 @@
         Všetky vaše príspevky boli, sú a budú využité na kúpu zdravotníckych pomôcok.
         Respirátory, rúška, dezinfekcie, čističky vzduchu, skrátka všetko, čo bude potrebné.
       </p>
-      <header>
-        <h1 class="article__heading">Kto žiada o pomoc</h1>
-      </header>
 
-      {% for group in helpRequestGroups %}
-        <div class="item-box">
-          <div class="item-box__name">
-            {{ group.name }}
-          </div>
-          <div class="item-box__numbers">
-            <div class="item-box__number">{{ group.count|number_format(0, '.', ' ') }}</div>
-          </div>
-        </div>
-      {% endfor %}
-
+      {% include "partials/who-asks-for-help.html.twig" %}
     </article>
     <article class="article">
       {% include "partials/item-status.html.twig" %}
     </article>
 
     <article class="article">
-      <header>
-        <h1 class="article__heading">Čo o nás povedali</h1>
-      </header>
-
-      <div class="article__body">
-       <div class="margin-bottom-large">
-         <blockquote>
-            „Veľmi veľmi ďakujeme, odkedy toto cele začalo, je to prvá pomoc zvonku. A dôležitá je nielen preto, čo došlo. Ale najmä preto, že znamená, že sa na našich ľudí nezabudlo. Mnohí vás držíme v modlitbách, iní posielajú objatie. Ďakujeme.“
-          </blockquote>
-          <cite>
-            OZ Barlička <br/><b>Lukáš Kvokačka</b>
-          </cite>
-        </div>
-
-       <div class="margin-bottom-large">
-         <blockquote>
-          „Bodaj by takýchto dobrých a empatických ľudí bolo na tomto svete viac, možno by nebolo toľko chudoby ani choroby. Pevne veríme, že sa s Vašim prístupom sa Vám podarí zohnať pre nás a našich starkých ešte ostatné položky zo žiadosti: rúška a bezdotykový teplomer. Slniečko a Vy ste nám dnes pripravili krásny deň. S úctou ďakujeme.“
-          </blockquote>
-          <cite>
-            <b>Zamestnanci a seniori</b> <br/>
-            ZPS – Domova Sv. Alžbety v Moldave nad Bodvou
-          </cite>
-        </div>
-
-       <div class="margin-bottom-large">
-         <blockquote>
-            „Dobrý deň, chcem sa veľmi pekne poďakovať darcom a iniciatíve Kto pomôže Slovensku. Všetky dary použijeme ako ochranné prostriedky. Pre nás to nie sú len dary, ale psychická podpora počas tejto mimoriadnej situácie.“
-          </blockquote>
-          <cite>
-            <b>Hana Feriancová</b><br/>
-            riaditeľka CSS - Jesienka Myjava
-          </cite>
-        </div>
-      </div>
+      {% include "partials/testimonails.html.twig" %}
     </article>
 
     <article class="article">
-      <header>
-        <h1 class="article__heading">História pomoci</h1>
-      </header>
-      <div class="article__body">
-        <ul>
-          {% for donation in donations %}
-            <li class="l-log">
-              <span class="l-log__date">{{ donation.donatedAt|date("d. m. Y") }}</span>
-              <span class="l-log__desc">
-              <strong>{{ donation.recipient.institutionName }}.</strong>
-                {{ donation.donationItem.name }}, {{ donation.count }} ks
-              </span>
-            </li>
-          {% endfor %}
-        </ul>
-
-        <a href="{{ path('recipients') }}">Zobraziť všetko ({{ donationsCount }})</a>
-      </div>
+      {% include "partials/donations-history.html.twig" %}
     </article>
 
     {% include "partials/need-help.html.twig" %}

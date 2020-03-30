@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\DonationItemsStatisticService;
+use App\Service\RequestGroupsStatisticService;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 use Twig\Error\LoaderError;
@@ -32,15 +34,32 @@ final class HomeController
     private $itemsStatistic;
 
     /**
+     * @var RequestGroupsStatisticService
+     */
+    private $requestGroupsStatistic;
+
+    /**
+     * @var EntityRepository
+     */
+    private $donations;
+
+    /**
+     * HomeController constructor.
      * @param Twig $twig
      * @param DonationItemsStatisticService $itemsStatistic
+     * @param RequestGroupsStatisticService $requestGroupsStatistic
+     * @param EntityRepository $donations
      */
     public function __construct(
         Twig $twig,
-        DonationItemsStatisticService $itemsStatistic
+        DonationItemsStatisticService $itemsStatistic,
+        RequestGroupsStatisticService $requestGroupsStatistic,
+        EntityRepository $donations
     ) {
         $this->twig = $twig;
         $this->itemsStatistic = $itemsStatistic;
+        $this->requestGroupsStatistic = $requestGroupsStatistic;
+        $this->donations = $donations;
     }
 
     /**
@@ -51,10 +70,16 @@ final class HomeController
      */
     public function index(): Response
     {
+        $donations = $this->donations->findBy([], ['donatedAt' => 'DESC'], 5);
+        $donationsCount = $this->donations->count([]);
+
         return new Response($this->twig->render(
             'home.html.twig',
             [
-                'itemState' => $this->itemsStatistic->getStatisticsLimited(5)
+                'donations' => $donations,
+                'donationsCount' => $donationsCount,
+                'itemState' => $this->itemsStatistic->getStatisticsLimited(5),
+                'helpRequestGroups' => $this->requestGroupsStatistic->getStatistics()
             ]
         ));
     }

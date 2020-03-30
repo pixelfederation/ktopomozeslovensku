@@ -18,8 +18,20 @@
     {% include "partials/need-help.html.twig" %}
 
     <article class="article">
+      {% include "partials/who-asks-for-help.html.twig" %}
+    </article>
+
+    <article class="article">
       {% include "partials/item-status.html.twig" %}
       <a href="{{ path('we-helped') }}">Zobraziť celý prehľad</a>
+    </article>
+
+    <article class="article">
+      {% include "partials/testimonails.html.twig" %}
+    </article>
+
+    <article class="article">
+      {% include "partials/donations-history.html.twig" %}
     </article>
 
     <article class="article">
