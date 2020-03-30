@@ -44,8 +44,8 @@ final class TransparentAccountReporterService
         }
 
         return new AccountReport(
-            $result->getCredit(),
             $result->getDebit(),
+            $result->getCredit(),
             $result->getBalance()
         );
     }
