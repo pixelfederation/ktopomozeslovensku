@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="donation_requests_items")
  */
-final class DonationRequestsItems
+/* final */class DonationRequestsItems
 {
     /**
      * @var int

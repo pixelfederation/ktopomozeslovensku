@@ -20,7 +20,7 @@ use Exception;
  * @ORM\Table(name="donation_request")
  * @ORM\HasLifecycleCallbacks()
  */
-class DonationRequest
+/* final */class DonationRequest
 {
     /**
      * @var int|null

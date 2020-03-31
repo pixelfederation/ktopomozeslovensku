@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="help_request")
  * @ORM\HasLifecycleCallbacks()
  */
-class HelpRequest
+/* final */class HelpRequest
 {
     /**
      * @var int

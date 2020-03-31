@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="recipient",uniqueConstraints={@ORM\UniqueConstraint(name="institution_name_idx", columns={"institution_name"})})
  */
-class Recipient
+/* final */class Recipient
 {
 
     /**

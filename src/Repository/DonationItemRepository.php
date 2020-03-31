@@ -52,20 +52,23 @@ final class DonationItemRepository extends EntityRepository
 
         //Todo refactor this to DQL!!!
         $query = '
-                select d.value,
-                   ri.requested,
-                   di.donated,
-                   ri.requested - di.donated as difference
-                from donation_item d
-                     left join (select hri.item_id as item_id, sum(hri.quantity) as requested
-                                from help_requests_items hri
-                                where hri.other is null
-                                group by hri.item_id) ri on ri.item_id = d.id
-                     left join (select d.donation_item_id, sum(d.item_count) as donated
-                                from donation d
-                                group by d.donation_item_id) di on di.donation_item_id = d.id
-                where ri.requested is not null
-                order by di.donated DESC
+            select dig.value,
+                sum(ri.requested)                   as requested,
+                sum(di.donated)                     as donated,
+                sum(ri.requested) - sum(di.donated) as difference
+            from donation_item d
+                left join (select hri.item_id as item_id, sum(hri.quantity) as requested
+                    from help_requests_items hri
+                    where hri.other is null
+                    group by hri.item_id) ri on ri.item_id = d.id
+                left join (select d.donation_item_id, sum(d.item_count) as donated
+                    from donation d
+                    group by d.donation_item_id) di on di.donation_item_id = d.id
+                    left join donation_item_group dig on d.group_id = dig.id
+            where ri.requested is not null
+              and d.group_id is not null
+            group by d.group_id
+            order by di.donated DESC
         ';
 
         if ($limit !== null) {
@@ -74,7 +77,6 @@ final class DonationItemRepository extends EntityRepository
 
         $nativeQuery = $this->getEntityManager()
             ->createNativeQuery(sprintf('%s;', $query), $resultSetMapping);
-
 
         return array_map(static function (array $result) {
             return new ItemStatistic(

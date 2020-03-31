@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="account_transaction", indexes={@ORM\Index(name="search_idx", columns={"date"}), @ORM\Index(name="name_idx", columns={"offset_account_name"})})
  * @ORM\HasLifecycleCallbacks()
  */
-final class AccountTransaction
+/* final */class AccountTransaction
 {
     /**
      * @var int

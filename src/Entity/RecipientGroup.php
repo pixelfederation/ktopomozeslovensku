@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="recipient_group")
  */
-class RecipientGroup
+/* final */class RecipientGroup
 {
     /**
      * @var int

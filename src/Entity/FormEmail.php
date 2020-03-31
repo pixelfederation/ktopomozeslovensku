@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="form_email")*
  */
-final class FormEmail
+/* final */class FormEmail
 {
     /**
      * @var int
