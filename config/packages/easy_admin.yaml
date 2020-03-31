@@ -201,10 +201,10 @@ easy_admin:
       class: App\Entity\Partner
       label: 'Partneri'
       list:
-        fields: ['id', 'name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt']
+        fields: ['id', 'name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt', 'priority']
         actions: ['edit', 'delete', '-show']
       edit:
-        fields: ['name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt']
+        fields: ['name', 'donatedAmount', 'nonFinacialHelp', 'helpedAt', 'priority']
         actions: ['delete', '-show']
 
     #

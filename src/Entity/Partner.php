@@ -51,6 +51,29 @@ use Doctrine\ORM\Mapping as ORM;
     private $helpedAt;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", name="priority")
+     */
+    private $priority = 0;
+
+    /**
+     * @return int
+     */
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param int $priority
+     */
+    public function setPriority(int $priority): void
+    {
+        $this->priority = $priority;
+    }
+
+    /**
      * @return int
      */
     public function getId()

@@ -59,11 +59,6 @@ help_request_success:
   options:
     hide_in_sitemap: true
 
-partners:
-  methods: GET
-  path: /garanti
-  controller: App\Controller\PartnersController::index
-
 policy:
   methods: GET
   path: /pravidla-ochrany-osobnych-udajov

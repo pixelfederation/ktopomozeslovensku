@@ -40,7 +40,7 @@ final class AboutController
 
     public function index(): Response
     {
-        $partners = $this->partners->findBy([], ['donatedAmount' => 'DESC', 'helpedAt' => 'DESC', 'name' => 'ASC']);
+        $partners = $this->partners->findBy([], ['priority' => 'DESC', 'donatedAmount' => 'DESC', 'helpedAt' => 'DESC', 'name' => 'ASC']);
 
         return new Response($this->twig->render(
             'about.html.twig',
