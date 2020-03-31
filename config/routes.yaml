@@ -71,7 +71,7 @@ policy:
 
 recipients:
   methods: GET
-  path: /obdarovani
+  path: /historia-pomoci
   controller: App\Controller\RecipientsController::index
 
 speak-about-it:
