@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\HelpRequesItemsRepository")
  * @ORM\Table(name="help_requests_items")
  */
-final class HelpRequestsItems
+/* final */class HelpRequestsItems
 {
     /**
      * @var int

@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\DonationItemRepository")
  * @ORM\Table(name="donation_item")
  */
-class DonationItem
+/* final */class DonationItem
 {
     /**
      * @var int
@@ -58,6 +58,14 @@ class DonationItem
     private $donations;
 
     /**
+     * @var DonationItemGroup|null
+
+     * @ORM\ManyToOne(targetEntity="App\Entity\DonationItemGroup", inversedBy="items")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=true)
+     */
+    private $group;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", name="`show`")
@@ -72,6 +80,22 @@ class DonationItem
         $this->donatedItems = new ArrayCollection();
         $this->requestedItems = new ArrayCollection();
         $this->donations = new ArrayCollection();
+    }
+
+    /**
+     * @param DonationItemGroup $group
+     */
+    public function setGroup(DonationItemGroup $group): void
+    {
+        $this->group = $group;
+    }
+
+    /**
+     * @return DonationItemGroup
+     */
+    public function getGroup(): ?DonationItemGroup
+    {
+        return $this->group;
     }
 
     /**

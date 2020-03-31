@@ -18,7 +18,7 @@ use DateTimeImmutable;
  * @ORM\Table(name="account_actual_balance")
  * @ORM\HasLifecycleCallbacks()
  */
-final class AccountActualBalance
+/* final */class AccountActualBalance
 {
     /**
      * @ORM\Id()

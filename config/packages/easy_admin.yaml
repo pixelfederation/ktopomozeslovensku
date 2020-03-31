@@ -73,16 +73,30 @@ easy_admin:
       class: App\Entity\DonationItem
       label: Typ pomôcky
       list:
-        fields: ['id', 'name', 'donations', 'donatedItems', 'requestedItems', 'show']
+        fields: ['id', 'name', 'group', 'donations', 'donatedItems', 'requestedItems', 'show']
         actions: ['new', 'show', 'edit', 'delete']
       edit:
         fields:
+          - 'group'
           - 'name'
           - 'show'
       new:
         fields:
+          - 'group'
           - 'name'
           - 'show'
+
+    DonationItemGroup:
+      class: App\Entity\DonationItemGroup
+      label: 'Skupiny pomôcok'
+      list:
+        sort: 'id'
+        fields: ['id', 'groupName', 'items']
+        actions: ['new', 'show', 'edit', 'delete']
+      edit:
+        fields: ['groupName', 'items']
+      new:
+        fields: ['groupName', 'items']
 
     #
     # Recipient
@@ -274,10 +288,14 @@ easy_admin:
         icon: globe-europe
         children:
           - { label: 'Zoznam partnerov', entity: Partner, icon: 'handshake'}
-          - { labels: 'Prijemcovia', entity: FormEmail, icon: 'at'}
+          - { label: 'Prijemcovia', entity: FormEmail, icon: 'at'}
 
       - label: 'Položky'
         icon: medkit
+        children:
+          - { entity: DonationItem, icon: 'shopping-basket' }
+          - { entity: DonationItemGroup, icon: 'layer-group' }
+
         entity: DonationItem
 
       - label: 'Príjmy/Výdaje'

@@ -19,7 +19,7 @@ use DateTimeImmutable;
  * @ORM\Table(name="donation_import",uniqueConstraints={@ORM\UniqueConstraint(name="import_idx", columns={"import"})})
  * @Vich\Uploadable()
  */
-final class DonationImport
+/* final */class DonationImport
 {
     /**
      * @var int
