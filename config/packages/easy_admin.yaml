@@ -118,6 +118,11 @@ easy_admin:
           - 'institutionName'
           - 'donations'
           - 'recipientGroup'
+      new:
+        fields:
+          - 'institutionName'
+          - 'donations'
+          - 'recipientGroup'
 
     #
     # Recipient Groups
