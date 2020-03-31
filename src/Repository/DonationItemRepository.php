@@ -68,7 +68,7 @@ final class DonationItemRepository extends EntityRepository
             where ri.requested is not null
               and d.group_id is not null
             group by d.group_id
-            order by di.donated DESC
+            order by sum(di.donated) DESC
         ';
 
         if ($limit !== null) {
@@ -83,12 +83,15 @@ final class DonationItemRepository extends EntityRepository
                 (string) $result['name'],
                 (int) ($result['requested'] ?? 0),
                 (int) ($result['donated'] ?? 0),
-                (int) ($result['difference'] ?? 0)
+                (static function (array $result): int {
+                    if (!isset($result['difference'])) {
+                        return 0;
+                    }
+                    return $result['difference'] > 0 ? $result['difference'] : 0;
+                })($result)
             );
         }, $nativeQuery->getArrayResult());
     }
-
-
 }
 
 
