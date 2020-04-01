@@ -91,6 +91,7 @@ final class DonationRequestType extends AbstractType
                 'placeholder' => '@'
             ],
             'constraints' => [
+                new NotBlank(),
                 new Email()
             ]
         ]);

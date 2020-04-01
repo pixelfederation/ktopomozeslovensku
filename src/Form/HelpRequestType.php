@@ -12,12 +12,9 @@ namespace App\Form;
 use App\Entity\RecipientGroup;
 use App\Form\Model\HelpRequestForm;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Form\Collection\RecipientGroupType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -26,6 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -63,7 +61,8 @@ final class HelpRequestType extends AbstractType
                 'placeholder' => 'Názov'
             ],
             'constraints' => [
-
+                new NotBlank(),
+                new Length(['max' => 50, 'allowEmptyString' => false])
             ]
         ]);
 
@@ -107,6 +106,7 @@ final class HelpRequestType extends AbstractType
                 'placeholder' => '@'
             ],
             'constraints' => [
+                new NotBlank(),
                 new Email()
             ]
         ]);
@@ -119,6 +119,9 @@ final class HelpRequestType extends AbstractType
                 return $recipient->getName();
             },
             'placeholder' => 'Vybrať typ ...',
+            'constraints' => [
+                new NotBlank(),
+            ]
         ]);
 
         $this->renderItemsFragment($builder, $this->entityManager);
