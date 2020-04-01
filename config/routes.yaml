@@ -32,6 +32,8 @@ donation_success:
   methods: GET|POST
   path: /darujem/dakujeme
   controller: App\Controller\DonationController::success
+  options:
+    hide_in_sitemap: true
 
 export_dopyt:
   methods: GET
